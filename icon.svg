@@ -1,17 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#6E4E36"/>
-      <stop offset="50%" stop-color="#482B29"/>
-      <stop offset="100%" stop-color="#2C2323"/>
-    </linearGradient>
-    <linearGradient id="glass" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="rgba(240, 227, 180, 0.35)"/>
-      <stop offset="100%" stop-color="rgba(240, 227, 180, 0.05)"/>
+      <stop offset="0%" stop-color="#181818"/>
+      <stop offset="100%" stop-color="#0d0d0d"/>
     </linearGradient>
   </defs>
   <rect width="512" height="512" rx="128" fill="url(#bg)"/>
-  <rect x="24" y="24" width="464" height="464" rx="108" fill="url(#glass)" stroke="rgba(240, 227, 180, 0.3)" stroke-width="4"/>
-  <text x="256" y="290" font-family="-apple-system, system-ui, sans-serif" font-size="210" font-weight="900" fill="#F0E3B4" text-anchor="middle" dominant-baseline="middle" letter-spacing="-6">SC</text>
-  <text x="256" y="405" font-family="-apple-system, system-ui, sans-serif" font-size="44" font-weight="800" fill="#d4b382" text-anchor="middle" letter-spacing="6">RICOH</text>
+  <rect x="24" y="24" width="464" height="464" rx="108" fill="none" stroke="#333" stroke-width="3"/>
+  <text x="256" y="280" font-family="system-ui, sans-serif" font-size="200" font-weight="900" fill="#e68e0d" text-anchor="middle" dominant-baseline="middle" letter-spacing="-8">SC</text>
+  <text x="256" y="400" font-family="system-ui, sans-serif" font-size="42" font-weight="800" fill="#8a8a8a" text-anchor="middle" letter-spacing="8">RICOH</text>
 </svg>

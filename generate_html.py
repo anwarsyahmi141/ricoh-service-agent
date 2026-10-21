@@ -7,125 +7,84 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     sp_json = json.dumps(SP_MODE_PROCEDURES)
 
     html_content = f"""<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="matte-black">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Ricoh SC Diagnostics | iOS Glass UI</title>
+<title>Ricoh SC Diagnostics | Omarchy Matte Black</title>
 
 <!-- PWA Meta Tags -->
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#060810">
+<meta name="theme-color" content="#0d0d0d">
+<meta name="color-scheme" content="dark">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Ricoh SC">
 <link rel="apple-touch-icon" href="icon.svg">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
 
-<!-- Google Fonts: Plus Jakarta Sans, JetBrains Mono, & Icons -->
+<!-- Omarchy OS Fonts: Geist & JetBrains Mono -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 <style>
-  /* ================= Pure Coffee Color Scheme ================= */
-  /* Palette: #6E4E36 (Coffee), #F0E3B4 (Cream), #724444 (Mocha), #603B39 (Roast), #482B29 (Dark Roast), #2C2323 (Espresso) */
-  :root[data-theme="dark"] {{
-    --bg-base: #1e1717;
-    --text-primary: #F0E3B4;
-    --text-secondary: rgba(240, 227, 180, 0.76);
-    --text-tertiary: rgba(240, 227, 180, 0.48);
+  /* ================= Omarchy OS Matte Black Theme ================= */
+  :root, [data-theme="matte-black"] {{
+    --t-bg-deep: #0d0d0d;
+    --t-bg: #121212;
+    --t-surface: #181818;
+    --t-surface-2: #1e1e1e;
+    --t-border-subtle: #1e1e1e;
+    --t-border-strong: #333333;
+    --t-text: #eaeaea;
+    --t-text-secondary: #bebebe;
+    --t-text-muted: #8a8a8a;
+    --t-brand: #e68e0d;
+    --t-brand-soft: rgba(230, 142, 13, 0.12);
+    --t-brand-ink: #0c0e10;
+    --t-elevation: 0 0 0 1px rgba(255, 255, 255, 0.07);
+    --t-elevation-hover: 0 0 0 1px rgba(255, 255, 255, 0.13), 0 8px 24px rgba(0, 0, 0, 0.6);
+    --t-selection: #2a2a2a;
+    --t-field-bg: #090909;
+    --t-field-dim: #4b310a;
+    --t-field-mid: #925b0b;
+    --t-field-lit: #e68e0d;
+    --t-field-hover: #eeb056;
+    --t-field-crest: #f6d4a3;
+    --t-hdr-text: #f3f3f3;
+    --t-hdr-text-2: #c7c7c7;
+    --t-hdr-brand: #ef9716;
+    --t-hdr-surface: #181818;
+    --t-hdr-surface-2: #212121;
     
-    --glass-bg: rgba(44, 35, 35, 0.58);
-    --glass-bg-hover: rgba(72, 43, 41, 0.75);
-    --glass-card: rgba(44, 35, 35, 0.68);
-    --glass-border: rgba(240, 227, 180, 0.14);
-    --glass-border-highlight: rgba(240, 227, 180, 0.32);
-    --glass-specular: inset 0 1px 1px 0 rgba(240, 227, 180, 0.22);
-    --glass-blur: blur(28px) saturate(190%);
-    
-    --ios-blue: #F0E3B4;
-    --ios-blue-glass: rgba(240, 227, 180, 0.18);
-    --ios-blue-border: rgba(240, 227, 180, 0.45);
-    
-    --ios-red: #e05353;
-    --ios-red-glass: rgba(224, 83, 83, 0.22);
-    --ios-red-border: rgba(224, 83, 83, 0.5);
+    --t-danger: #ef4444;
+    --t-danger-soft: rgba(239, 68, 68, 0.15);
+    --t-danger-border: rgba(239, 68, 68, 0.35);
 
-    --ios-amber: #e8a355;
-    --ios-amber-glass: rgba(232, 163, 85, 0.22);
-    --ios-amber-border: rgba(232, 163, 85, 0.45);
-
-    --ios-green: #59b87a;
-    --segmented-bg: rgba(240, 227, 180, 0.08);
-    --orb-1: radial-gradient(circle at 15% 20%, rgba(110, 78, 54, 0.4) 0%, transparent 45%);
-    --orb-2: radial-gradient(circle at 85% 15%, rgba(114, 68, 68, 0.38) 0%, transparent 45%);
-    --orb-3: radial-gradient(circle at 50% 80%, rgba(240, 227, 180, 0.16) 0%, transparent 50%);
-  }}
-
-  :root[data-theme="light"] {{
-    --bg-base: #f9f6f0;
-    --text-primary: #2C2323;
-    --text-secondary: #603B39;
-    --text-tertiary: #6E4E36;
-
-    --glass-bg: rgba(240, 227, 180, 0.55);
-    --glass-bg-hover: rgba(240, 227, 180, 0.85);
-    --glass-card: rgba(255, 255, 255, 0.76);
-    --glass-border: rgba(110, 78, 54, 0.18);
-    --glass-border-highlight: rgba(110, 78, 54, 0.38);
-    --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
-    --glass-blur: blur(28px) saturate(180%);
-
-    --ios-blue: #6E4E36;
-    --ios-blue-glass: rgba(110, 78, 54, 0.15);
-    --ios-blue-border: rgba(110, 78, 54, 0.35);
-
-    --ios-red: #c93434;
-    --ios-red-glass: rgba(201, 52, 52, 0.14);
-    --ios-red-border: rgba(201, 52, 52, 0.35);
-
-    --ios-amber: #b86e1e;
-    --ios-amber-glass: rgba(184, 110, 30, 0.14);
-    --ios-amber-border: rgba(184, 110, 30, 0.35);
-
-    --ios-green: #2d8a4e;
-    --segmented-bg: rgba(44, 35, 35, 0.06);
-    --orb-1: radial-gradient(circle at 10% 20%, rgba(240, 227, 180, 0.55) 0%, transparent 45%);
-    --orb-2: radial-gradient(circle at 85% 20%, rgba(114, 68, 68, 0.18) 0%, transparent 45%);
-    --orb-3: radial-gradient(circle at 50% 85%, rgba(110, 78, 54, 0.18) 0%, transparent 50%);
+    --default-font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --default-mono-font-family: "JetBrains Mono", monospace;
+    color-scheme: dark;
   }}
 
   * {{ box-sizing: border-box; margin: 0; padding: 0; }}
 
   body {{
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", 'Plus Jakarta Sans', "Helvetica Neue", sans-serif;
-    background-color: var(--bg-base);
-    color: var(--text-primary);
-    line-height: 1.45;
+    font-family: var(--default-font-family);
+    background-color: var(--t-bg-deep);
+    color: var(--t-text);
+    line-height: 1.5;
     padding-bottom: 80px;
-    position: relative;
     min-height: 100vh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    transition: background-color 0.3s ease;
+    letter-spacing: -0.01em;
   }}
 
-  /* Ambient Glass Lighting Mesh */
-  .ambient-glow {{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 0;
-    background-image: var(--orb-1), var(--orb-2), var(--orb-3);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    filter: blur(40px);
-    transition: all 0.4s ease;
+  ::selection {{
+    background: var(--t-selection);
+    color: var(--t-brand);
   }}
 
   .container {{
@@ -136,18 +95,15 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     z-index: 1;
   }}
 
-  /* iOS Frosted Header */
-  .ios-header {{
+  /* Omarchy Matte Header */
+  .omarchy-header {{
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border-bottom: 1px solid var(--glass-border);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), var(--glass-specular);
+    background: var(--t-bg);
+    border-bottom: 1px solid var(--t-border-subtle);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
     padding: 14px 0;
-    transition: all 0.3s ease;
   }}
 
   .header-content {{
@@ -164,32 +120,33 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     gap: 12px;
   }}
 
-  .ios-app-icon {{
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    background: linear-gradient(145deg, #6E4E36, #482B29);
+  .brand-icon {{
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: var(--t-surface-2);
+    border: 1px solid var(--t-border-strong);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #F0E3B4;
+    color: var(--t-brand);
     font-weight: 800;
     font-size: 1.15rem;
-    box-shadow: 0 8px 16px rgba(44, 35, 35, 0.45), inset 0 1px 1px rgba(240, 227, 180, 0.5);
-    letter-spacing: -0.05em;
+    font-family: var(--default-mono-font-family);
+    box-shadow: var(--t-elevation);
   }}
 
   .brand-title h1 {{
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 700;
-    letter-spacing: -0.03em;
-    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    color: var(--t-hdr-text);
   }}
 
   .brand-title p {{
-    font-size: 0.76rem;
-    color: var(--text-secondary);
-    font-weight: 500;
+    font-size: 0.75rem;
+    color: var(--t-text-muted);
+    font-weight: 400;
   }}
 
   .header-actions {{
@@ -198,103 +155,106 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     gap: 8px;
   }}
 
-  .ios-glass-btn {{
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    color: var(--text-primary);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-specular);
-    border-radius: 9999px;
-    padding: 7px 14px;
-    font-size: 0.82rem;
-    font-weight: 600;
+  .omarchy-badge {{
+    background: var(--t-surface-2);
+    border: 1px solid var(--t-border-subtle);
+    color: var(--t-text-secondary);
+    font-size: 0.75rem;
+    font-family: var(--default-mono-font-family);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }}
+
+  .omarchy-btn {{
+    background: var(--t-surface-2);
+    color: var(--t-text);
+    border: 1px solid var(--t-border-strong);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 500;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 6px;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.15s ease;
   }}
 
-  .ios-glass-btn:hover {{
-    background: var(--glass-bg-hover);
-    border-color: var(--glass-border-highlight);
-    transform: scale(1.02);
+  .omarchy-btn:hover {{
+    background: var(--t-surface);
+    border-color: var(--t-brand);
+    color: var(--t-brand);
   }}
 
-  /* iOS Search Bar (Glass Pill) */
+  /* Omarchy Matte Search Box */
   .search-area {{
-    margin: 22px 0 12px 0;
+    margin: 24px 0 16px 0;
   }}
 
-  .ios-search-bar {{
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12), var(--glass-specular);
-    border-radius: 9999px;
-    padding: 6px 16px 6px 18px;
+  .omarchy-search-bar {{
+    background: var(--t-field-bg);
+    border: 1px solid var(--t-border-strong);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+    border-radius: 8px;
+    padding: 8px 16px;
     display: flex;
     align-items: center;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: border-color 0.2s, box-shadow 0.2s;
   }}
 
-  .ios-search-bar:focus-within {{
-    border-color: var(--ios-blue);
-    background: var(--glass-bg-hover);
-    box-shadow: 0 12px 36px rgba(10, 132, 255, 0.25), var(--glass-specular);
-    transform: translateY(-1px);
+  .omarchy-search-bar:focus-within {{
+    border-color: var(--t-brand);
+    box-shadow: 0 0 0 1px var(--t-brand), inset 0 2px 4px rgba(0,0,0,0.5);
   }}
 
   .search-icon {{
-    color: var(--ios-blue);
-    font-size: 24px;
+    color: var(--t-brand);
+    font-size: 22px;
     margin-right: 12px;
   }}
 
-  .ios-search-input {{
+  .omarchy-search-input {{
     flex: 1;
     background: transparent;
     border: none;
     outline: none;
-    font-size: 1.05rem;
-    font-family: inherit;
-    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-family: var(--default-font-family);
+    color: var(--t-text);
   }}
 
-  .ios-search-input::placeholder {{
-    color: var(--text-tertiary);
-    font-weight: 400;
+  .omarchy-search-input::placeholder {{
+    color: var(--t-text-muted);
   }}
 
   .clear-btn {{
-    background: var(--segmented-bg);
-    border: none;
-    color: var(--text-secondary);
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
+    background: var(--t-surface-2);
+    border: 1px solid var(--t-border-subtle);
+    color: var(--t-text-muted);
+    border-radius: 4px;
+    width: 22px;
+    height: 22px;
     display: none;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 16px;
-    transition: background 0.2s;
+    font-size: 14px;
   }}
 
   .clear-btn:hover {{
-    color: var(--text-primary);
+    color: var(--t-text);
+    border-color: var(--t-border-strong);
   }}
 
-  /* Filter Bars (Model Filter + Category Filter) */
+  /* Filter Bars */
   .filter-section-title {{
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--text-tertiary);
-    margin: 12px 0 6px 4px;
+    color: var(--t-text-muted);
+    font-family: var(--default-mono-font-family);
+    margin: 14px 0 6px 2px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -302,99 +262,93 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
 
   .segmented-scroll {{
     display: flex;
-    gap: 8px;
+    gap: 6px;
     overflow-x: auto;
     padding: 2px 2px 10px 2px;
-    scrollbar-width: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--t-border-strong) transparent;
   }}
 
-  .segmented-scroll::-webkit-scrollbar {{
-    display: none;
-  }}
-
-  .ios-pill {{
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-specular);
-    color: var(--text-secondary);
-    padding: 7px 14px;
-    border-radius: 9999px;
-    font-size: 0.82rem;
-    font-weight: 600;
+  .omarchy-pill {{
+    background: var(--t-surface);
+    border: 1px solid var(--t-border-subtle);
+    color: var(--t-text-secondary);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
     white-space: nowrap;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 6px;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.15s ease;
+    user-select: none;
   }}
 
-  .ios-pill:hover {{
-    color: var(--text-primary);
-    background: var(--glass-bg-hover);
-    border-color: var(--glass-border-highlight);
+  .omarchy-pill:hover {{
+    color: var(--t-text);
+    background: var(--t-surface-2);
+    border-color: var(--t-border-strong);
   }}
 
-  .ios-pill.active {{
-    background: #6E4E36;
-    color: #F0E3B4;
-    border-color: rgba(240, 227, 180, 0.45);
-    box-shadow: 0 4px 14px rgba(110, 78, 54, 0.45), inset 0 1px 1px rgba(240, 227, 180, 0.4);
+  .omarchy-pill.active {{
+    background: var(--t-brand);
+    color: var(--t-brand-ink);
+    border-color: var(--t-brand);
+    font-weight: 700;
+    box-shadow: 0 0 12px rgba(230, 142, 13, 0.3);
   }}
 
-  .ios-pill-model.active {{
-    background: #724444;
-    color: #F0E3B4;
-    border-color: rgba(240, 227, 180, 0.45);
-    box-shadow: 0 4px 14px rgba(114, 68, 68, 0.45), inset 0 1px 1px rgba(240, 227, 180, 0.4);
+  .omarchy-pill-model.active {{
+    background: #ffaa33;
+    color: #0d0d0d;
+    border-color: #ffaa33;
+    font-weight: 700;
   }}
 
-  .ios-pill-danger.active {{
-    background: #603B39;
-    color: #F0E3B4;
-    border-color: rgba(240, 227, 180, 0.45);
-    box-shadow: 0 4px 14px rgba(96, 59, 57, 0.45), inset 0 1px 1px rgba(240, 227, 180, 0.4);
+  .omarchy-pill-danger.active {{
+    background: var(--t-danger);
+    color: #ffffff;
+    border-color: var(--t-danger);
+    font-weight: 700;
   }}
 
   /* SP Mode Keypad Simulator Section */
-  .sp-card-glass {{
-    background: var(--glass-card);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), var(--glass-specular);
-    border-radius: 22px;
+  .sp-card-omarchy {{
+    background: var(--t-surface);
+    border: 1px solid var(--t-border-subtle);
+    box-shadow: var(--t-elevation);
+    border-radius: 10px;
     margin: 14px 0 24px 0;
     overflow: hidden;
-    transition: all 0.3s ease;
   }}
 
   .sp-header {{
-    padding: 16px 20px;
+    padding: 14px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
     user-select: none;
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--t-bg);
+    border-bottom: 1px solid var(--t-border-subtle);
   }}
 
   .sp-header h2 {{
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--ios-blue);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--t-brand);
     display: flex;
     align-items: center;
     gap: 8px;
   }}
 
   .sp-grid {{
-    padding: 20px;
+    padding: 18px;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
   }}
 
   @media(min-width: 900px) {{
@@ -402,10 +356,10 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   }}
 
   .simulator-panel {{
-    background: rgba(0, 0, 0, 0.28);
-    border: 1px solid var(--glass-border);
-    border-radius: 18px;
-    padding: 16px;
+    background: var(--t-bg-deep);
+    border: 1px solid var(--t-border-subtle);
+    border-radius: 8px;
+    padding: 14px;
   }}
 
   .sim-title {{
@@ -416,130 +370,115 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   }}
 
   .sim-title h3 {{
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--t-text);
   }}
 
   .sim-screen {{
-    background: #000;
-    color: #30d158;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
+    background: #050505;
+    color: var(--t-brand);
+    font-family: var(--default-mono-font-family);
+    font-size: 0.82rem;
     padding: 10px 14px;
-    border-radius: 10px;
-    border: 1px solid #1c2b1e;
+    border-radius: 6px;
+    border: 1px solid var(--t-border-strong);
     margin-bottom: 14px;
-    min-height: 44px;
+    min-height: 42px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
   }}
 
   .keypad-grid {{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    max-width: 240px;
+    gap: 6px;
+    max-width: 230px;
     margin: 0 auto 12px auto;
   }}
 
   .kp-btn {{
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    color: var(--text-primary);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.15rem;
-    font-weight: 700;
-    border-radius: 12px;
-    padding: 12px 0;
+    background: var(--t-surface);
+    border: 1px solid var(--t-border-subtle);
+    color: var(--t-text);
+    font-family: var(--default-mono-font-family);
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 10px 0;
     cursor: pointer;
-    box-shadow: var(--glass-specular);
-    transition: all 0.15s ease;
+    transition: all 0.1s ease;
     user-select: none;
   }}
 
   .kp-btn:active, .kp-btn.active {{
-    background: var(--ios-blue);
-    color: white;
-    transform: scale(0.94);
-    box-shadow: 0 0 16px var(--ios-blue);
+    background: var(--t-brand);
+    color: var(--t-brand-ink);
+    border-color: var(--t-brand);
+    transform: scale(0.96);
   }}
 
   .kp-btn-yellow {{
-    background: rgba(234, 179, 8, 0.25);
-    color: #fde047;
-    border-color: rgba(234, 179, 8, 0.5);
-    font-size: 0.82rem;
-  }}
-  .kp-btn-yellow.active {{
-    background: #eab308 !important;
-    color: black !important;
-    box-shadow: 0 0 16px #eab308 !important;
+    background: rgba(230, 142, 13, 0.15);
+    color: var(--t-brand);
+    border-color: rgba(230, 142, 13, 0.4);
+    font-size: 0.75rem;
   }}
 
   .kp-btn-red {{
-    background: rgba(239, 68, 68, 0.25);
-    color: #fca5a5;
-    border-color: rgba(239, 68, 68, 0.5);
-    font-size: 0.82rem;
-  }}
-  .kp-btn-red.active {{
-    background: #ef4444 !important;
-    color: white !important;
-    box-shadow: 0 0 16px #ef4444 !important;
+    background: var(--t-danger-soft);
+    color: var(--t-danger);
+    border-color: var(--t-danger-border);
+    font-size: 0.75rem;
   }}
 
   .sim-controls {{
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
   }}
 
   .sim-action-btn {{
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--glass-border);
-    color: var(--text-primary);
-    padding: 6px 14px;
-    border-radius: 9999px;
-    font-size: 0.78rem;
-    font-weight: 600;
+    background: var(--t-surface);
+    border: 1px solid var(--t-border-subtle);
+    color: var(--t-text-secondary);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-family: var(--default-mono-font-family);
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 6px;
-    transition: all 0.2s;
+    gap: 4px;
+    transition: all 0.15s;
   }}
 
   .sim-action-btn:hover {{
-    background: var(--glass-bg-hover);
-    transform: scale(1.02);
+    background: var(--t-surface-2);
+    border-color: var(--t-border-strong);
+    color: var(--t-text);
   }}
 
-  /* Glass Cards Grid */
+  /* Cards Grid */
   .cards-grid {{
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
   }}
 
-  .ios-glass-card {{
-    background: var(--glass-card);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1), var(--glass-specular);
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s, border-color 0.25s;
-    position: relative;
+  .omarchy-card {{
+    background: var(--t-surface);
+    border: 1px solid var(--t-border-subtle);
+    border-radius: 10px;
+    padding: 22px;
+    box-shadow: var(--t-elevation);
+    transition: border-color 0.15s, box-shadow 0.15s;
   }}
 
-  .ios-glass-card:hover {{
-    transform: translateY(-2px);
-    border-color: var(--glass-border-highlight);
-    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16), var(--glass-specular);
+  .omarchy-card:hover {{
+    border-color: var(--t-border-strong);
+    box-shadow: var(--t-elevation-hover);
   }}
 
   .card-top {{
@@ -547,34 +486,33 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     justify-content: space-between;
     align-items: flex-start;
     gap: 14px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     flex-wrap: wrap;
   }}
 
   .code-title-group {{
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
   }}
 
   .sc-code-badge {{
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.45rem;
-    font-weight: 800;
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--glass-border);
-    padding: 4px 14px;
-    border-radius: 12px;
-    letter-spacing: -0.02em;
+    font-family: var(--default-mono-font-family);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--t-brand);
+    background: var(--t-bg-deep);
+    border: 1px solid var(--t-border-strong);
+    padding: 3px 12px;
+    border-radius: 6px;
   }}
 
   .sc-title {{
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: -0.02em;
-    color: var(--text-primary);
+    color: var(--t-text);
   }}
 
   .card-actions {{
@@ -584,166 +522,170 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     flex-wrap: wrap;
   }}
 
-  .glass-badge {{
+  .matte-badge {{
     font-size: 0.72rem;
-    font-weight: 700;
-    padding: 5px 12px;
-    border-radius: 9999px;
-    letter-spacing: 0.03em;
+    font-family: var(--default-mono-font-family);
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    backdrop-filter: blur(10px);
   }}
 
-  .glass-badge-a {{
-    background: var(--ios-red-glass);
-    color: #ff6b62;
-    border: 1px solid var(--ios-red-border);
+  .matte-badge-a {{
+    background: var(--t-danger-soft);
+    color: #f87171;
+    border: 1px solid var(--t-danger-border);
   }}
 
-  .glass-badge-b {{
-    background: var(--ios-amber-glass);
-    color: #ffb84d;
-    border: 1px solid var(--ios-amber-border);
+  .matte-badge-b {{
+    background: rgba(230, 142, 13, 0.12);
+    color: var(--t-brand);
+    border: 1px solid rgba(230, 142, 13, 0.3);
   }}
 
-  .glass-badge-d {{
-    background: var(--ios-blue-glass);
-    color: var(--text-primary);
-    border: 1px solid var(--ios-blue-border);
+  .matte-badge-d {{
+    background: var(--t-surface-2);
+    color: var(--t-text-secondary);
+    border: 1px solid var(--t-border-subtle);
   }}
 
-  .glass-badge-reset {{
-    background: rgba(114, 68, 68, 0.4);
-    color: #ffd4d4;
-    border: 1px solid rgba(114, 68, 68, 0.7);
+  .matte-badge-reset {{
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.5);
   }}
 
   .card-action-btn {{
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--glass-border);
-    color: var(--text-primary);
-    border-radius: 9999px;
-    padding: 5px 12px;
-    font-size: 0.76rem;
-    font-weight: 600;
+    background: var(--t-surface-2);
+    border: 1px solid var(--t-border-subtle);
+    color: var(--t-text-secondary);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-family: var(--default-font-family);
+    font-weight: 500;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 5px;
-    transition: all 0.2s;
+    gap: 4px;
+    transition: all 0.15s;
   }}
 
   .card-action-btn:hover {{
-    background: rgba(255, 255, 255, 0.18);
-    transform: scale(1.03);
+    color: var(--t-text);
+    border-color: var(--t-border-strong);
+    background: var(--t-bg-deep);
   }}
 
   .card-action-ticket {{
-    background: rgba(110, 78, 54, 0.25);
-    border-color: rgba(110, 78, 54, 0.5);
-    color: var(--text-primary);
+    color: var(--t-brand);
+    border-color: rgba(230, 142, 13, 0.4);
+    background: var(--t-brand-soft);
+  }}
+
+  .card-action-ticket:hover {{
+    border-color: var(--t-brand);
+    background: rgba(230, 142, 13, 0.2);
   }}
 
   .models-row {{
     font-size: 0.8rem;
-    color: var(--text-secondary);
+    color: var(--t-text-muted);
     margin-bottom: 12px;
   }}
 
   .section-label {{
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-tertiary);
+    letter-spacing: 0.08em;
+    color: var(--t-text-muted);
+    font-family: var(--default-mono-font-family);
     margin: 14px 0 6px 0;
   }}
 
-  .glass-symptom-box {{
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--glass-border);
-    border-left: 3px solid var(--ios-blue);
-    border-radius: 12px;
+  .symptom-box {{
+    background: var(--t-bg-deep);
+    border: 1px solid var(--t-border-subtle);
+    border-left: 3px solid var(--t-brand);
+    border-radius: 4px;
     padding: 10px 14px;
-    font-size: 0.92rem;
-    color: var(--text-primary);
+    font-size: 0.9rem;
+    color: var(--t-text);
   }}
 
-  ul.glass-list, ol.glass-list {{
+  ul.omarchy-list, ol.omarchy-list {{
     margin-left: 20px;
-    font-size: 0.92rem;
-    color: var(--text-primary);
+    font-size: 0.9rem;
+    color: var(--t-text-secondary);
   }}
 
-  ul.glass-list li, ol.glass-list li {{
-    margin-bottom: 5px;
+  ul.omarchy-list li, ol.omarchy-list li {{
+    margin-bottom: 4px;
   }}
 
-  .reset-glass-callout {{
-    margin-top: 16px;
-    background: var(--ios-red-glass);
-    border: 1px solid var(--ios-red-border);
-    border-radius: 14px;
-    padding: 12px 16px;
-    font-size: 0.88rem;
+  .reset-alert-box {{
+    margin-top: 14px;
+    background: var(--t-danger-soft);
+    border: 1px solid var(--t-danger-border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: #ffd2cf;
+    gap: 8px;
+    color: #fca5a5;
   }}
 
-  /* iOS Dynamic Island Toast */
-  .ios-toast {{
+  /* Toast */
+  .omarchy-toast {{
     position: fixed;
-    top: 24px;
+    top: 20px;
     left: 50%;
-    transform: translateX(-50%) translateY(-30px) scale(0.9);
-    background: rgba(20, 24, 38, 0.88);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
-    color: #ffffff;
-    border-radius: 9999px;
-    padding: 10px 24px;
-    font-size: 0.88rem;
-    font-weight: 600;
+    transform: translateX(-50%) translateY(-30px);
+    background: var(--t-bg);
+    border: 1px solid var(--t-brand);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    color: var(--t-text);
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    font-family: var(--default-mono-font-family);
     opacity: 0;
     pointer-events: none;
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.25s ease;
     z-index: 200;
     display: flex;
     align-items: center;
     gap: 8px;
   }}
 
-  .ios-toast.show {{
+  .omarchy-toast.show {{
     opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1);
+    transform: translateX(-50%) translateY(0);
   }}
 
   .empty-state {{
     text-align: center;
     padding: 80px 20px;
-    color: var(--text-tertiary);
+    color: var(--t-text-muted);
   }}
 
   .empty-state span {{
     font-size: 48px;
-    color: var(--ios-blue);
+    color: var(--t-brand);
   }}
 
-  /* ================= Printable Service Ticket Modal ================= */
+  /* Printable Service Ticket Modal */
   .modal-backdrop {{
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.85);
     z-index: 300;
     display: none;
     align-items: center;
@@ -762,10 +704,10 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     max-width: 640px;
     max-height: 90vh;
     overflow-y: auto;
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 28px;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.8);
+    font-family: var(--default-font-family);
   }}
 
   .ticket-header {{
@@ -784,12 +726,13 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   }}
 
   .ticket-badge {{
-    background: #6E4E36;
-    color: #F0E3B4;
+    background: #e68e0d;
+    color: #0c0e10;
     font-weight: 800;
     font-size: 0.75rem;
+    font-family: var(--default-mono-font-family);
     padding: 4px 10px;
-    border-radius: 6px;
+    border-radius: 4px;
   }}
 
   .ticket-grid {{
@@ -799,7 +742,7 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     background: #f9fafb;
     border: 1px solid #e5e7eb;
     padding: 12px;
-    border-radius: 10px;
+    border-radius: 6px;
     margin-bottom: 16px;
     font-size: 0.85rem;
   }}
@@ -848,12 +791,13 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   }}
 
   .btn-print {{
-    background: #6E4E36;
-    color: #F0E3B4;
+    background: #e68e0d;
+    color: #0c0e10;
     border: none;
-    border-radius: 10px;
+    border-radius: 6px;
     padding: 10px 20px;
     font-weight: 700;
+    font-family: var(--default-font-family);
     cursor: pointer;
   }}
 
@@ -861,13 +805,12 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     background: #e5e7eb;
     color: #374151;
     border: none;
-    border-radius: 10px;
+    border-radius: 6px;
     padding: 10px 16px;
     font-weight: 600;
     cursor: pointer;
   }}
 
-  /* Print Stylesheet for Saving as Clean PDF */
   @media print {{
     body * {{
       visibility: hidden;
@@ -899,102 +842,95 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
 </head>
 <body>
 
-<!-- Ambient Lighting Orbs for Specular Reflection -->
-<div class="ambient-glow"></div>
-
-<!-- iOS Frosted Header -->
-<header class="ios-header">
+<!-- Omarchy Matte Header -->
+<header class="omarchy-header">
   <div class="container header-content">
     <div class="brand">
-      <div class="ios-app-icon">R</div>
+      <div class="brand-icon">R</div>
       <div class="brand-title">
         <h1>Ricoh Diagnostics</h1>
         <p>M · MP · MP C · IM · IM C Series</p>
       </div>
     </div>
     <div class="header-actions">
-      <button class="ios-glass-btn" id="installBtn" style="display: none;" onclick="installPWA()">
-        <span class="material-symbols-rounded">download</span>
-        <span>Install App</span>
-      </button>
-      <button class="ios-glass-btn" id="themeToggle" onclick="toggleTheme()">
-        <span class="material-symbols-rounded" id="themeIcon">light_mode</span>
-        <span id="themeText">Light Glass</span>
+      <span class="omarchy-badge">OMARCHY MATTE-BLACK</span>
+      <button class="omarchy-btn" id="installBtn" style="display: none;" onclick="installPWA()">
+        <span class="material-symbols-rounded" style="font-size: 16px;">download</span> Install App
       </button>
     </div>
   </div>
 </header>
 
 <main class="container">
-  <!-- iOS Search Bar (Glass Capsule) -->
+  <!-- Search Bar -->
   <div class="search-area">
-    <div class="ios-search-bar">
+    <div class="omarchy-search-bar">
       <span class="material-symbols-rounded search-icon">search</span>
-      <input type="text" id="searchInput" class="ios-search-input" placeholder="Search error code (e.g. 542, 672, 899) or component..." autofocus autocomplete="off" />
+      <input type="text" id="searchInput" class="omarchy-search-input" placeholder="Search error code (e.g. 542, 672, 899) or component (fuser, laser, motor)..." autofocus autocomplete="off" />
       <button class="clear-btn" id="clearBtn" onclick="clearSearch()">
-        <span class="material-symbols-rounded" style="font-size: 16px;">close</span>
+        <span class="material-symbols-rounded" style="font-size: 14px;">close</span>
       </button>
     </div>
   </div>
 
-  <!-- Model Series Filter Bar (Option 3) -->
-  <div style="display: flex; justify-content: space-between; align-items: center; margin: 14px 4px 6px 4px;">
+  <!-- Model Series Filter Bar -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin: 14px 2px 6px 2px;">
     <div class="filter-section-title" style="margin: 0;">
-      <span class="material-symbols-rounded" style="font-size: 16px;">print</span> Filter by Ricoh Machine Series
+      <span class="material-symbols-rounded" style="font-size: 14px; color: var(--t-brand);">print</span> Machine Series
     </div>
-    <button class="ios-glass-btn" onclick="resetAllFilters()" style="padding: 4px 12px; font-size: 0.75rem; border-color: rgba(255,255,255,0.2);">
-      <span class="material-symbols-rounded" style="font-size: 14px; color: var(--ios-amber);">restart_alt</span> Reset All Filters
+    <button class="omarchy-btn" onclick="resetAllFilters()" style="padding: 3px 10px; font-size: 0.72rem;">
+      <span class="material-symbols-rounded" style="font-size: 14px; color: var(--t-brand);">restart_alt</span> Reset Filters
     </button>
   </div>
   <div class="segmented-scroll" id="modelFilterBar">
-    <button class="ios-pill ios-pill-model active" onclick="setModelFilter('ALL', event)">All Models</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('M', event)">M Series</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('MP', event)">MP Series (Mono)</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('MP_C', event)">MP C (Color)</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('IM', event)">IM Series (Smart Mono)</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('IM_C', event)">IM C (Smart Color)</button>
+    <button class="omarchy-pill omarchy-pill-model active" onclick="setModelFilter('ALL', event)">All Models</button>
+    <button class="omarchy-pill omarchy-pill-model" onclick="setModelFilter('M', event)">M Series</button>
+    <button class="omarchy-pill omarchy-pill-model" onclick="setModelFilter('MP', event)">MP Series (Mono)</button>
+    <button class="omarchy-pill omarchy-pill-model" onclick="setModelFilter('MP_C', event)">MP C (Color)</button>
+    <button class="omarchy-pill omarchy-pill-model" onclick="setModelFilter('IM', event)">IM Series (Smart Mono)</button>
+    <button class="omarchy-pill omarchy-pill-model" onclick="setModelFilter('IM_C', event)">IM C (Smart Color)</button>
   </div>
 
   <!-- Subsystem Category Filter Bar -->
   <div class="filter-section-title">
-    <span class="material-symbols-rounded" style="font-size: 16px;">category</span> Subsystem Category
+    <span class="material-symbols-rounded" style="font-size: 14px; color: var(--t-brand);">category</span> Subsystem Category
   </div>
   <div class="segmented-scroll" id="categoryFilterBar">
-    <button class="ios-pill active" onclick="setCategory('ALL', event)">All Categories</button>
-    <button class="ios-pill ios-pill-danger" onclick="filterLevelA(event)">
-      <span class="material-symbols-rounded" style="font-size: 16px;">lock_clock</span> Level A (Reset Required)
+    <button class="omarchy-pill active" onclick="setCategory('ALL', event)">All Categories</button>
+    <button class="omarchy-pill omarchy-pill-danger" onclick="filterLevelA(event)">
+      <span class="material-symbols-rounded" style="font-size: 15px;">lock_clock</span> Level A (Reset Required)
     </button>
-    <button class="ios-pill" onclick="setCategory('SC100', event)">SC100 Optics</button>
-    <button class="ios-pill" onclick="setCategory('SC200', event)">SC200 Laser</button>
-    <button class="ios-pill" onclick="setCategory('SC300', event)">SC300 Drum & PCU</button>
-    <button class="ios-pill" onclick="setCategory('SC400', event)">SC400 Transfer</button>
-    <button class="ios-pill" onclick="setCategory('SC500', event)">SC500 Fuser</button>
-    <button class="ios-pill" onclick="setCategory('SC600', event)">SC600 Comm & RFID</button>
-    <button class="ios-pill" onclick="setCategory('SC700', event)">SC700 Finisher</button>
-    <button class="ios-pill" onclick="setCategory('SC800', event)">SC800 Controller/HDD</button>
-    <button class="ios-pill" onclick="setCategory('SC900', event)">SC900 Engine</button>
+    <button class="omarchy-pill" onclick="setCategory('SC100', event)">SC100 Optics</button>
+    <button class="omarchy-pill" onclick="setCategory('SC200', event)">SC200 Laser</button>
+    <button class="omarchy-pill" onclick="setCategory('SC300', event)">SC300 Drum & PCU</button>
+    <button class="omarchy-pill" onclick="setCategory('SC400', event)">SC400 Transfer</button>
+    <button class="omarchy-pill" onclick="setCategory('SC500', event)">SC500 Fuser</button>
+    <button class="omarchy-pill" onclick="setCategory('SC600', event)">SC600 Comm & RFID</button>
+    <button class="omarchy-pill" onclick="setCategory('SC700', event)">SC700 Finisher</button>
+    <button class="omarchy-pill" onclick="setCategory('SC800', event)">SC800 Controller/HDD</button>
+    <button class="omarchy-pill" onclick="setCategory('SC900', event)">SC900 Engine</button>
   </div>
 
-  <!-- Visual SP Mode Keypad Simulator Section (Option 6) -->
-  <section class="sp-card-glass">
+  <!-- SP Mode Keypad Simulator Section -->
+  <section class="sp-card-omarchy">
     <div class="sp-header" onclick="toggleSPAccordion()">
       <h2>
         <span class="material-symbols-rounded">dialpad</span>
-        Interactive SP Mode Keypad Simulator & Reset Cheatsheet
+        SP Mode Keypad Simulator & Reset Cheatsheet
       </h2>
-      <span class="material-symbols-rounded" id="spArrow" style="transition: transform 0.25s;">expand_more</span>
+      <span class="material-symbols-rounded" id="spArrow" style="transition: transform 0.2s; color: var(--t-text-muted);">expand_more</span>
     </div>
     
     <div class="sp-grid" id="spContent" style="display: none;">
       <!-- Classic Keypad Simulator -->
       <div class="simulator-panel">
         <div class="sim-title">
-          <h3>Classic Hardware Keypad (MP & M Series)</h3>
-          <span style="font-size: 0.75rem; color: var(--ios-amber); font-weight: 600;">10-Key Sequence</span>
+          <h3>Classic Keypad (MP & M Series)</h3>
+          <span style="font-size: 0.72rem; color: var(--t-brand); font-family: var(--default-mono-font-family);">10-Key Sequence</span>
         </div>
         <div class="sim-screen" id="classicScreen">
           <span id="classicStatus">READY. PRESS YELLOW KEY</span>
-          <span id="classicSeq" style="color: #60a5fa;">[ _ _ _ ]</span>
+          <span id="classicSeq" style="color: var(--t-brand);">[ _ _ _ ]</span>
         </div>
         <div class="keypad-grid">
           <button class="kp-btn" onclick="pressClassicKey('1')">1</button>
@@ -1012,10 +948,10 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
         </div>
         <div class="sim-controls">
           <button class="sim-action-btn" onclick="playClassicSequence()">
-            <span class="material-symbols-rounded" style="font-size:16px;">play_arrow</span> Auto-Play Sequence
+            <span class="material-symbols-rounded" style="font-size:14px;">play_arrow</span> Auto-Play
           </button>
           <button class="sim-action-btn" onclick="resetClassicKeypad()">
-            <span class="material-symbols-rounded" style="font-size:16px;">refresh</span> Reset
+            <span class="material-symbols-rounded" style="font-size:14px;">refresh</span> Reset
           </button>
         </div>
       </div>
@@ -1024,11 +960,11 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
       <div class="simulator-panel">
         <div class="sim-title">
           <h3>Smart Operation Panel (IM & IM C Series)</h3>
-          <span style="font-size: 0.75rem; color: var(--ios-blue); font-weight: 600;">SOP Virtual Keypad</span>
+          <span style="font-size: 0.72rem; color: var(--t-brand); font-family: var(--default-mono-font-family);">SOP Virtual Keypad</span>
         </div>
         <div class="sim-screen" id="sopScreen">
           <span id="sopStatus">READY: TAP RESET</span>
-          <span id="sopSeq" style="color: #a78bfa;">[ 806182 ]</span>
+          <span id="sopSeq" style="color: var(--t-brand);">[ 806182 ]</span>
         </div>
         <div class="keypad-grid">
           <button class="kp-btn" onclick="pressSopKey('8')">8</button>
@@ -1043,10 +979,10 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
         </div>
         <div class="sim-controls">
           <button class="sim-action-btn" onclick="playSopSequence()">
-            <span class="material-symbols-rounded" style="font-size:16px;">play_arrow</span> Auto-Play Sequence
+            <span class="material-symbols-rounded" style="font-size:14px;">play_arrow</span> Auto-Play
           </button>
           <button class="sim-action-btn" onclick="resetSopKeypad()">
-            <span class="material-symbols-rounded" style="font-size:16px;">refresh</span> Reset
+            <span class="material-symbols-rounded" style="font-size:14px;">refresh</span> Reset
           </button>
         </div>
       </div>
@@ -1054,16 +990,16 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   </section>
 
   <!-- Status Bar -->
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 0.85rem; color: var(--text-tertiary);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 0.8rem; color: var(--t-text-muted); font-family: var(--default-mono-font-family);">
     <span id="resultsCount">Loading error codes...</span>
-    <span>iOS Glass Interface · PWA Ready</span>
+    <span>OMARCHY OS THEME · GEIST FONT</span>
   </div>
 
-  <!-- Glass Cards Grid -->
+  <!-- Cards Grid -->
   <div class="cards-grid" id="cardsGrid"></div>
 </main>
 
-<!-- Printable Service Ticket Modal (Option 5) -->
+<!-- Printable Service Ticket Modal -->
 <div class="modal-backdrop" id="ticketModal" onclick="closeTicketOnBackdrop(event)">
   <div class="ticket-card" id="ticketCard">
     <div class="ticket-header">
@@ -1073,7 +1009,7 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
       </div>
       <div style="text-align:right; font-size:0.75rem; color:#6b7280;">
         <div id="tktDate">Date: 2026-10-21</div>
-        <div id="tktNum" style="font-family:'JetBrains Mono'; font-weight:700;">#RST-542-8821</div>
+        <div id="tktNum" style="font-family:var(--default-mono-font-family); font-weight:700;">#RST-542-8821</div>
       </div>
     </div>
 
@@ -1112,9 +1048,9 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   </div>
 </div>
 
-<!-- Dynamic Island Toast -->
-<div class="ios-toast" id="toast">
-  <span class="material-symbols-rounded" style="color: #30d158; font-size: 20px;">check_circle</span>
+<!-- Omarchy Toast -->
+<div class="omarchy-toast" id="toast">
+  <span class="material-symbols-rounded" style="color: var(--t-brand); font-size: 18px;">check_circle</span>
   <span id="toastMsg">Copied to clipboard!</span>
 </div>
 
@@ -1124,52 +1060,20 @@ let currentCategory = 'ALL';
 let currentModelFilter = 'ALL';
 let filterOnlyLevelA = false;
 
-// Self-clearing cache script: ensure browser never gets stuck on old Service Worker cache
+// Auto-purge any stale Service Worker cache so updates appear instantly
 if ('serviceWorker' in navigator) {{
-  navigator.serviceWorker.getRegistrations().then(function(registrations) {{
-    for (let registration of registrations) {{
-      registration.unregister();
+  navigator.serviceWorker.getRegistrations().then((registrations) => {{
+    for (let reg of registrations) {{
+      reg.unregister();
     }}
   }});
 }}
 if ('caches' in window) {{
-  caches.keys().then(function(names) {{
+  caches.keys().then((names) => {{
     for (let name of names) {{
       caches.delete(name);
     }}
   }});
-}}
-
-// Handle PWA Install Prompt
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {{
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById('installBtn').style.display = 'flex';
-}});
-
-function installPWA() {{
-  if (deferredPrompt) {{
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choice) => {{
-      if (choice.outcome === 'accepted') {{
-        document.getElementById('installBtn').style.display = 'none';
-      }}
-      deferredPrompt = null;
-    }});
-  }} else {{
-    showToast('Add to Home Screen from browser menu');
-  }}
-}}
-
-function toggleTheme() {{
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') === 'dark';
-  const newTheme = isDark ? 'light' : 'dark';
-  html.setAttribute('data-theme', newTheme);
-  
-  document.getElementById('themeIcon').textContent = isDark ? 'dark_mode' : 'light_mode';
-  document.getElementById('themeText').textContent = isDark ? 'Dark Glass' : 'Light Glass';
 }}
 
 function toggleSPAccordion() {{
@@ -1184,7 +1088,7 @@ function showToast(msg) {{
   const toast = document.getElementById('toast');
   document.getElementById('toastMsg').textContent = msg;
   toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2200);
+  setTimeout(() => toast.classList.remove('show'), 2000);
 }}
 
 function copyFix(code, title, solutions) {{
@@ -1194,7 +1098,6 @@ function copyFix(code, title, solutions) {{
   }});
 }}
 
-// Service Ticket / PDF Modal (Option 5)
 function openServiceTicket(item) {{
   document.getElementById('tktCodeTitle').textContent = `${{item.code}} - ${{item.title}}`;
   document.getElementById('tktLevel').textContent = `Level ${{item.level}} ${{item.sp_reset_required ? '(Reset Required)' : '(Auto Reset)'}}`;
@@ -1223,7 +1126,7 @@ function closeTicketOnBackdrop(e) {{
   }}
 }}
 
-// Keypad Simulator Logic (Option 6)
+// Keypad Simulator Logic
 let classicStep = 0;
 function pressClassicKey(key) {{
   const status = document.getElementById('classicStatus');
@@ -1246,7 +1149,7 @@ function pressClassicKey(key) {{
   }} else if (classicStep === 4 && key === 'HOLD_STOP') {{
     classicStep = 5;
     status.textContent = 'ACCESS GRANTED: SYSTEM SP';
-    status.style.color = '#38bdf8';
+    status.style.color = 'var(--t-brand)';
     seq.textContent = 'SUCCESS: SP 5-810 UNLOCKED';
     showToast('SP Mode Unlocked!');
   }} else {{
@@ -1260,7 +1163,7 @@ function resetClassicKeypad() {{
   classicStep = 0;
   const status = document.getElementById('classicStatus');
   status.textContent = 'READY. PRESS YELLOW KEY';
-  status.style.color = '#30d158';
+  status.style.color = 'var(--t-brand)';
   document.getElementById('classicSeq').textContent = '[ _ _ _ ]';
 }}
 
@@ -1310,7 +1213,7 @@ function pressSopKey(key) {{
   }} else if (sopStep === 7 && key === 'HOLD_C') {{
     sopStep = 8;
     status.textContent = 'ACCESS GRANTED: SYSTEM SP';
-    status.style.color = '#38bdf8';
+    status.style.color = 'var(--t-brand)';
     seq.textContent = 'SOP UNLOCKED';
     showToast('SOP Mode Unlocked!');
   }}
@@ -1320,7 +1223,7 @@ function resetSopKeypad() {{
   sopStep = 0;
   const status = document.getElementById('sopStatus');
   status.textContent = 'READY: TAP RESET';
-  status.style.color = '#30d158';
+  status.style.color = 'var(--t-brand)';
   document.getElementById('sopSeq').textContent = '[ 806182 ]';
 }}
 
@@ -1341,6 +1244,17 @@ function playSopSequence() {{
   }});
 }}
 
+function checkModelMatch(modelsStr, key) {{
+  if (key === 'ALL') return true;
+  const m = modelsStr.toUpperCase();
+  if (key === 'M') return /\\bM\\b(?!\\s*P)/.test(m);
+  if (key === 'MP') return /\\bMP\\b(?!\\s*C)/.test(m);
+  if (key === 'MP_C') return m.includes('MP C');
+  if (key === 'IM') return /\\bIM\\b(?!\\s*C)/.test(m);
+  if (key === 'IM_C') return m.includes('IM C');
+  return true;
+}}
+
 function renderCards(items) {{
   const grid = document.getElementById('cardsGrid');
   const count = document.getElementById('resultsCount');
@@ -1351,8 +1265,8 @@ function renderCards(items) {{
     grid.innerHTML = `
       <div class="empty-state">
         <span class="material-symbols-rounded">search_off</span>
-        <h3 style="margin-top: 12px; color: var(--text-primary);">No matching SC codes found</h3>
-        <p style="margin-top: 4px;">Try adjusting the Model Filter or searching by keyword.</p>
+        <h3 style="margin-top: 12px; color: var(--t-text);">No matching SC codes found</h3>
+        <p style="margin-top: 4px;">Try searching by keyword or clicking Reset Filters.</p>
       </div>
     `;
     return;
@@ -1360,15 +1274,15 @@ function renderCards(items) {{
 
   items.forEach(item => {{
     const card = document.createElement('div');
-    card.className = 'ios-glass-card';
+    card.className = 'omarchy-card';
     card.id = item.code.toLowerCase();
 
     const causesHtml = item.causes.map(c => `<li>${{c}}</li>`).join('');
     const solutionsHtml = item.solutions.map(s => `<li>${{s}}</li>`).join('');
 
-    let badgeClass = 'glass-badge-d';
-    if (item.level === 'A') badgeClass = 'glass-badge-a';
-    else if (item.level === 'B') badgeClass = 'glass-badge-b';
+    let badgeClass = 'matte-badge-d';
+    if (item.level === 'A') badgeClass = 'matte-badge-a';
+    else if (item.level === 'B') badgeClass = 'matte-badge-b';
 
     card.innerHTML = `
       <div class="card-top">
@@ -1377,13 +1291,13 @@ function renderCards(items) {{
           <span class="sc-title">${{item.title}}</span>
         </div>
         <div class="card-actions">
-          <span class="glass-badge ${{badgeClass}}">Level ${{item.level}}</span>
-          ${{item.sp_reset_required ? '<span class="glass-badge glass-badge-reset">SP 5-810 Reset</span>' : ''}}
+          <span class="matte-badge ${{badgeClass}}">Level ${{item.level}}</span>
+          ${{item.sp_reset_required ? '<span class="matte-badge matte-badge-reset">SP 5-810 Reset</span>' : ''}}
           <button class="card-action-btn card-action-ticket" onclick='openServiceTicket(${{JSON.stringify(item)}})'>
-            <span class="material-symbols-rounded" style="font-size:15px;">receipt_long</span> Ticket / PDF
+            <span class="material-symbols-rounded" style="font-size:14px;">receipt_long</span> Ticket / PDF
           </button>
           <button class="card-action-btn" onclick='copyFix("${{item.code}}", "${{item.title.replace(/"/g, '&quot;')}}", ${{JSON.stringify(item.solutions)}})'>
-            <span class="material-symbols-rounded" style="font-size:15px;">ios_share</span> Copy
+            <span class="material-symbols-rounded" style="font-size:14px;">content_copy</span> Copy
           </button>
         </div>
       </div>
@@ -1393,34 +1307,23 @@ function renderCards(items) {{
       </div>
 
       <div class="section-label">Symptom</div>
-      <div class="glass-symptom-box">${{item.symptom}}</div>
+      <div class="symptom-box">${{item.symptom}}</div>
 
       <div class="section-label">Probable Causes</div>
-      <ul class="glass-list">${{causesHtml}}</ul>
+      <ul class="omarchy-list">${{causesHtml}}</ul>
 
       <div class="section-label">Troubleshooting & Repair Sequence</div>
-      <ol class="glass-list">${{solutionsHtml}}</ol>
+      <ol class="omarchy-list">${{solutionsHtml}}</ol>
 
       ${{item.sp_reset_required ? `
-        <div class="reset-glass-callout">
-          <span class="material-symbols-rounded" style="font-size: 20px;">restart_alt</span>
+        <div class="reset-alert-box">
+          <span class="material-symbols-rounded" style="font-size: 18px;">restart_alt</span>
           <div><strong>SP Mode Reset Required:</strong> ${{item.sp_reset_guide}}</div>
         </div>
       ` : ''}}
     `;
     grid.appendChild(card);
   }});
-}}
-
-function checkModelMatch(modelsStr, key) {{
-  if (key === 'ALL') return true;
-  const m = modelsStr.toUpperCase();
-  if (key === 'M') return /\\bM\\b(?!\\s*P)/.test(m);
-  if (key === 'MP') return /\\bMP\\b(?!\\s*C)/.test(m);
-  if (key === 'MP_C') return m.includes('MP C');
-  if (key === 'IM') return /\\bIM\\b(?!\\s*C)/.test(m);
-  if (key === 'IM_C') return m.includes('IM C');
-  return true;
 }}
 
 function applyFilter() {{
@@ -1460,7 +1363,7 @@ function clearSearch() {{
 function setCategory(cat, ev) {{
   currentCategory = cat;
   filterOnlyLevelA = false;
-  document.querySelectorAll('#categoryFilterBar .ios-pill').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('#categoryFilterBar .omarchy-pill').forEach(btn => btn.classList.remove('active'));
   if (ev && ev.currentTarget) {{
     ev.currentTarget.classList.add('active');
   }}
@@ -1469,7 +1372,7 @@ function setCategory(cat, ev) {{
 
 function setModelFilter(model, ev) {{
   currentModelFilter = model;
-  document.querySelectorAll('#modelFilterBar .ios-pill').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('#modelFilterBar .omarchy-pill').forEach(btn => btn.classList.remove('active'));
   if (ev && ev.currentTarget) {{
     ev.currentTarget.classList.add('active');
   }}
@@ -1479,7 +1382,7 @@ function setModelFilter(model, ev) {{
 function filterLevelA(ev) {{
   filterOnlyLevelA = true;
   currentCategory = 'ALL';
-  document.querySelectorAll('#categoryFilterBar .ios-pill').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('#categoryFilterBar .omarchy-pill').forEach(btn => btn.classList.remove('active'));
   if (ev && ev.currentTarget) {{
     ev.currentTarget.classList.add('active');
   }}
@@ -1493,18 +1396,16 @@ function resetAllFilters() {{
   document.getElementById('searchInput').value = '';
   document.getElementById('clearBtn').style.display = 'none';
 
-  // Reset Model bar buttons
-  document.querySelectorAll('#modelFilterBar .ios-pill').forEach(btn => btn.classList.remove('active'));
-  const firstModelBtn = document.querySelector('#modelFilterBar .ios-pill');
+  document.querySelectorAll('#modelFilterBar .omarchy-pill').forEach(btn => btn.classList.remove('active'));
+  const firstModelBtn = document.querySelector('#modelFilterBar .omarchy-pill');
   if (firstModelBtn) firstModelBtn.classList.add('active');
 
-  // Reset Category bar buttons
-  document.querySelectorAll('#categoryFilterBar .ios-pill').forEach(btn => btn.classList.remove('active'));
-  const firstCatBtn = document.querySelector('#categoryFilterBar .ios-pill');
+  document.querySelectorAll('#categoryFilterBar .omarchy-pill').forEach(btn => btn.classList.remove('active'));
+  const firstCatBtn = document.querySelector('#categoryFilterBar .omarchy-pill');
   if (firstCatBtn) firstCatBtn.classList.add('active');
 
   applyFilter();
-  showToast('All filters reset: Showing all SC codes');
+  showToast('Filters Reset');
 }}
 
 document.getElementById('searchInput').addEventListener('input', applyFilter);
@@ -1517,7 +1418,7 @@ renderCards(scData);
 """
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(html_content)
-    print(f"Generated Enhanced iOS Glassy HTML guide at: {output_path}")
+    print(f"Generated Omarchy Matte Black HTML guide at: {output_path}")
 
 if __name__ == "__main__":
     generate_html_file()
