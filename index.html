@@ -929,36 +929,41 @@
   </div>
 
   <!-- Model Series Filter Bar (Option 3) -->
-  <div class="filter-section-title">
-    <span class="material-symbols-rounded" style="font-size: 16px;">print</span> Filter by Ricoh Machine Series
+  <div style="display: flex; justify-content: space-between; align-items: center; margin: 14px 4px 6px 4px;">
+    <div class="filter-section-title" style="margin: 0;">
+      <span class="material-symbols-rounded" style="font-size: 16px;">print</span> Filter by Ricoh Machine Series
+    </div>
+    <button class="ios-glass-btn" onclick="resetAllFilters()" style="padding: 4px 12px; font-size: 0.75rem; border-color: rgba(255,255,255,0.2);">
+      <span class="material-symbols-rounded" style="font-size: 14px; color: var(--ios-amber);">restart_alt</span> Reset All Filters
+    </button>
   </div>
-  <div class="segmented-scroll">
-    <button class="ios-pill ios-pill-model active" onclick="setModelFilter('ALL')">All Models</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('M ')">M Series</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('MP series')">MP Series (Mono)</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('MP C')">MP C (Color)</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('IM series')">IM Series (Smart Mono)</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('IM C')">IM C (Smart Color)</button>
+  <div class="segmented-scroll" id="modelFilterBar">
+    <button class="ios-pill ios-pill-model active" onclick="setModelFilter('ALL', event)">All Models</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('M ', event)">M Series</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('MP series', event)">MP Series (Mono)</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('MP C', event)">MP C (Color)</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('IM series', event)">IM Series (Smart Mono)</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('IM C', event)">IM C (Smart Color)</button>
   </div>
 
   <!-- Subsystem Category Filter Bar -->
   <div class="filter-section-title">
     <span class="material-symbols-rounded" style="font-size: 16px;">category</span> Subsystem Category
   </div>
-  <div class="segmented-scroll">
-    <button class="ios-pill active" onclick="setCategory('ALL')">All Categories</button>
-    <button class="ios-pill ios-pill-danger" onclick="filterLevelA()">
+  <div class="segmented-scroll" id="categoryFilterBar">
+    <button class="ios-pill active" onclick="setCategory('ALL', event)">All Categories</button>
+    <button class="ios-pill ios-pill-danger" onclick="filterLevelA(event)">
       <span class="material-symbols-rounded" style="font-size: 16px;">lock_clock</span> Level A (Reset Required)
     </button>
-    <button class="ios-pill" onclick="setCategory('SC100')">SC100 Optics</button>
-    <button class="ios-pill" onclick="setCategory('SC200')">SC200 Laser</button>
-    <button class="ios-pill" onclick="setCategory('SC300')">SC300 Drum & PCU</button>
-    <button class="ios-pill" onclick="setCategory('SC400')">SC400 Transfer</button>
-    <button class="ios-pill" onclick="setCategory('SC500')">SC500 Fuser</button>
-    <button class="ios-pill" onclick="setCategory('SC600')">SC600 Comm & RFID</button>
-    <button class="ios-pill" onclick="setCategory('SC700')">SC700 Finisher</button>
-    <button class="ios-pill" onclick="setCategory('SC800')">SC800 Controller/HDD</button>
-    <button class="ios-pill" onclick="setCategory('SC900')">SC900 Engine</button>
+    <button class="ios-pill" onclick="setCategory('SC100', event)">SC100 Optics</button>
+    <button class="ios-pill" onclick="setCategory('SC200', event)">SC200 Laser</button>
+    <button class="ios-pill" onclick="setCategory('SC300', event)">SC300 Drum & PCU</button>
+    <button class="ios-pill" onclick="setCategory('SC400', event)">SC400 Transfer</button>
+    <button class="ios-pill" onclick="setCategory('SC500', event)">SC500 Fuser</button>
+    <button class="ios-pill" onclick="setCategory('SC600', event)">SC600 Comm & RFID</button>
+    <button class="ios-pill" onclick="setCategory('SC700', event)">SC700 Finisher</button>
+    <button class="ios-pill" onclick="setCategory('SC800', event)">SC800 Controller/HDD</button>
+    <button class="ios-pill" onclick="setCategory('SC900', event)">SC900 Engine</button>
   </div>
 
   <!-- Visual SP Mode Keypad Simulator Section (Option 6) -->
@@ -1427,27 +1432,54 @@ function clearSearch() {
   document.getElementById('searchInput').focus();
 }
 
-function setCategory(cat) {
+function setCategory(cat, ev) {
   currentCategory = cat;
   filterOnlyLevelA = false;
-  document.querySelectorAll('.segmented-scroll:nth-of-type(2) .ios-pill').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
+  document.querySelectorAll('#categoryFilterBar .ios-pill').forEach(btn => btn.classList.remove('active'));
+  if (ev && ev.currentTarget) {
+    ev.currentTarget.classList.add('active');
+  }
   applyFilter();
 }
 
-function setModelFilter(model) {
+function setModelFilter(model, ev) {
   currentModelFilter = model;
-  document.querySelectorAll('.ios-pill-model').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
+  document.querySelectorAll('#modelFilterBar .ios-pill').forEach(btn => btn.classList.remove('active'));
+  if (ev && ev.currentTarget) {
+    ev.currentTarget.classList.add('active');
+  }
   applyFilter();
 }
 
-function filterLevelA() {
+function filterLevelA(ev) {
   filterOnlyLevelA = true;
   currentCategory = 'ALL';
-  document.querySelectorAll('.segmented-scroll:nth-of-type(2) .ios-pill').forEach(btn => btn.classList.remove('active'));
-  event.currentTarget.classList.add('active');
+  document.querySelectorAll('#categoryFilterBar .ios-pill').forEach(btn => btn.classList.remove('active'));
+  if (ev && ev.currentTarget) {
+    ev.currentTarget.classList.add('active');
+  }
   applyFilter();
+}
+
+function resetAllFilters() {
+  currentCategory = 'ALL';
+  currentModelFilter = 'ALL';
+  filterOnlyLevelA = false;
+  document.getElementById('searchInput').value = '';
+  document.getElementById('clearBtn').style.display = 'none';
+
+  // Reset Model bar buttons
+  document.querySelectorAll('#modelFilterBar .ios-pill').forEach(btn => btn.classList.remove('active'));
+  const firstModelBtn = document.querySelector('#modelFilterBar .ios-pill');
+  if (firstModelBtn) firstModelBtn.classList.add('active');
+
+  // Reset Category bar buttons
+  document.querySelectorAll('#categoryFilterBar .ios-pill').forEach(btn => btn.classList.remove('active'));
+  const firstCatBtn = document.querySelector('#categoryFilterBar .ios-pill');
+  if (firstCatBtn) firstCatBtn.classList.add('active');
+
+  applyFilter();
+  showToast('All filters reset: Showing all SC codes');
 }
 
 document.getElementById('searchInput').addEventListener('input', applyFilter);
