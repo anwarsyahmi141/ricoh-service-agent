@@ -11,128 +11,138 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ricoh SC Diagnostics | Material You</title>
-<!-- Google Fonts: Roboto Flex & Material Symbols Outlined -->
+<title>Ricoh SC Diagnostics | iOS Glass UI</title>
+<!-- Google Fonts: SF Pro / Inter & Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 <style>
-  /* ================= Material You (M3) Design Tokens ================= */
+  /* ================= iOS Glassmorphism Design Tokens ================= */
   :root[data-theme="dark"] {{
-    --md-sys-color-background: #0f141c;
-    --md-sys-color-on-background: #e1e2e9;
-    --md-sys-color-surface: #121824;
-    --md-sys-color-surface-dim: #0a0e17;
-    --md-sys-color-surface-container-lowest: #0b1019;
-    --md-sys-color-surface-container-low: #151d2c;
-    --md-sys-color-surface-container: #1b2436;
-    --md-sys-color-surface-container-high: #222d42;
-    --md-sys-color-surface-container-highest: #2b3850;
+    --bg-base: #060810;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.68);
+    --text-tertiary: rgba(255, 255, 255, 0.45);
     
-    --md-sys-color-primary: #a8c7fa;
-    --md-sys-color-on-primary: #062e6f;
-    --md-sys-color-primary-container: #1b437e;
-    --md-sys-color-on-primary-container: #d3e3fd;
+    /* Apple Vision / iOS Glass Tokens */
+    --glass-bg: rgba(25, 30, 48, 0.42);
+    --glass-bg-hover: rgba(35, 42, 66, 0.55);
+    --glass-card: rgba(20, 25, 40, 0.48);
+    --glass-card-hover: rgba(28, 35, 56, 0.62);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-border-highlight: rgba(255, 255, 255, 0.22);
+    --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
+    --glass-blur: blur(28px) saturate(190%);
+    
+    --ios-blue: #0a84ff;
+    --ios-blue-glass: rgba(10, 132, 255, 0.22);
+    --ios-blue-border: rgba(10, 132, 255, 0.4);
+    
+    --ios-red: #ff453a;
+    --ios-red-glass: rgba(255, 69, 58, 0.22);
+    --ios-red-border: rgba(255, 69, 58, 0.45);
 
-    --md-sys-color-secondary: #c2e7ff;
-    --md-sys-color-on-secondary: #003353;
-    --md-sys-color-secondary-container: #004a75;
-    --md-sys-color-on-secondary-container: #c2e7ff;
+    --ios-amber: #ff9f0a;
+    --ios-amber-glass: rgba(255, 159, 10, 0.22);
+    --ios-amber-border: rgba(255, 159, 10, 0.4);
 
-    --md-sys-color-tertiary: #d0bcff;
-    --md-sys-color-on-tertiary: #381e72;
-    --md-sys-color-tertiary-container: #4f378b;
-    --md-sys-color-on-tertiary-container: #eaddff;
-
-    --md-sys-color-error: #ffb4ab;
-    --md-sys-color-on-error: #690005;
-    --md-sys-color-error-container: #93000a;
-    --md-sys-color-on-error-container: #ffdad6;
-
-    --md-sys-color-warning: #ffb74d;
-    --md-sys-color-warning-container: #4e2c00;
-    --md-sys-color-on-warning-container: #ffe0b2;
-
-    --md-sys-color-outline: #8c919d;
-    --md-sys-color-outline-variant: #434751;
-    --md-sys-color-shadow: rgba(0, 0, 0, 0.4);
-    --card-border: rgba(255, 255, 255, 0.06);
+    --ios-green: #30d158;
+    --segmented-bg: rgba(255, 255, 255, 0.08);
+    --orb-1: radial-gradient(circle at 15% 20%, rgba(10, 132, 255, 0.25) 0%, transparent 45%);
+    --orb-2: radial-gradient(circle at 85% 15%, rgba(191, 90, 242, 0.22) 0%, transparent 45%);
+    --orb-3: radial-gradient(circle at 50% 80%, rgba(48, 209, 88, 0.15) 0%, transparent 50%);
   }}
 
   :root[data-theme="light"] {{
-    --md-sys-color-background: #fdfcff;
-    --md-sys-color-on-background: #1a1c1e;
-    --md-sys-color-surface: #f8f9ff;
-    --md-sys-color-surface-dim: #dedfe5;
-    --md-sys-color-surface-container-lowest: #ffffff;
-    --md-sys-color-surface-container-low: #f3f3fa;
-    --md-sys-color-surface-container: #ededf4;
-    --md-sys-color-surface-container-high: #e7e8ef;
-    --md-sys-color-surface-container-highest: #e1e2e9;
+    --bg-base: #f2f4f8;
+    --text-primary: #1c1c1e;
+    --text-secondary: rgba(60, 60, 67, 0.75);
+    --text-tertiary: rgba(60, 60, 67, 0.45);
 
-    --md-sys-color-primary: #0b57d0;
-    --md-sys-color-on-primary: #ffffff;
-    --md-sys-color-primary-container: #d3e3fd;
-    --md-sys-color-on-primary-container: #041e49;
+    --glass-bg: rgba(255, 255, 255, 0.72);
+    --glass-bg-hover: rgba(255, 255, 255, 0.85);
+    --glass-card: rgba(255, 255, 255, 0.75);
+    --glass-card-hover: rgba(255, 255, 255, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.65);
+    --glass-border-highlight: rgba(255, 255, 255, 0.9);
+    --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
+    --glass-blur: blur(28px) saturate(180%);
 
-    --md-sys-color-secondary: #00639b;
-    --md-sys-color-on-secondary: #ffffff;
-    --md-sys-color-secondary-container: #c2e7ff;
-    --md-sys-color-on-secondary-container: #001d32;
+    --ios-blue: #007aff;
+    --ios-blue-glass: rgba(0, 122, 255, 0.15);
+    --ios-blue-border: rgba(0, 122, 255, 0.3);
 
-    --md-sys-color-tertiary: #6750a4;
-    --md-sys-color-on-tertiary: #ffffff;
-    --md-sys-color-tertiary-container: #eaddff;
-    --md-sys-color-on-tertiary-container: #21005d;
+    --ios-red: #ff3b30;
+    --ios-red-glass: rgba(255, 59, 48, 0.15);
+    --ios-red-border: rgba(255, 59, 48, 0.3);
 
-    --md-sys-color-error: #ba1a1a;
-    --md-sys-color-on-error: #ffffff;
-    --md-sys-color-error-container: #ffdad6;
-    --md-sys-color-on-error-container: #410002;
+    --ios-amber: #ff9500;
+    --ios-amber-glass: rgba(255, 149, 0, 0.15);
+    --ios-amber-border: rgba(255, 149, 0, 0.3);
 
-    --md-sys-color-warning: #b26a00;
-    --md-sys-color-warning-container: #ffe0b2;
-    --md-sys-color-on-warning-container: #331c00;
-
-    --md-sys-color-outline: #73777f;
-    --md-sys-color-outline-variant: #c3c7d0;
-    --md-sys-color-shadow: rgba(0, 0, 0, 0.08);
-    --card-border: rgba(0, 0, 0, 0.08);
+    --ios-green: #34c759;
+    --segmented-bg: rgba(0, 0, 0, 0.06);
+    --orb-1: radial-gradient(circle at 10% 20%, rgba(0, 122, 255, 0.2) 0%, transparent 45%);
+    --orb-2: radial-gradient(circle at 85% 20%, rgba(175, 82, 222, 0.18) 0%, transparent 45%);
+    --orb-3: radial-gradient(circle at 50% 85%, rgba(52, 199, 89, 0.15) 0%, transparent 50%);
   }}
 
   * {{ box-sizing: border-box; margin: 0; padding: 0; }}
 
   body {{
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    background-color: var(--md-sys-color-background);
-    color: var(--md-sys-color-on-background);
-    line-height: 1.5;
-    padding-bottom: 60px;
-    transition: background-color 0.25s, color 0.25s;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", 'Plus Jakarta Sans', "Helvetica Neue", sans-serif;
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    line-height: 1.45;
+    padding-bottom: 80px;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease;
+  }}
+
+  /* Ambient Glass Lighting Mesh */
+  .ambient-glow {{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    background-image: var(--orb-1), var(--orb-2), var(--orb-3);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    filter: blur(40px);
+    transition: all 0.4s ease;
   }}
 
   .container {{
-    max-width: 1100px;
+    max-width: 1120px;
     margin: 0 auto;
     padding: 0 20px;
+    position: relative;
+    z-index: 1;
   }}
 
-  /* Top App Bar */
-  .m3-top-bar {{
+  /* iOS Frosted Header */
+  .ios-header {{
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--md-sys-color-surface-container);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--card-border);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), var(--glass-specular);
     padding: 16px 0;
-    transition: background 0.25s;
+    transition: all 0.3s ease;
   }}
 
-  .top-bar-inner {{
+  .header-content {{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -146,38 +156,42 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     gap: 12px;
   }}
 
-  .brand-logo {{
+  .ios-app-icon {{
     width: 44px;
     height: 44px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #e11d48, #be123c);
-    color: white;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #e11d48, #be123c);
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #fff;
     font-weight: 800;
-    font-size: 1.15rem;
-    box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);
+    font-size: 1.2rem;
+    box-shadow: 0 8px 16px rgba(225, 29, 72, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    letter-spacing: -0.05em;
   }}
 
-  .brand-text h1 {{
+  .brand-title h1 {{
     font-size: 1.25rem;
     font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--md-sys-color-on-background);
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
   }}
 
-  .brand-text p {{
+  .brand-title p {{
     font-size: 0.78rem;
-    color: var(--md-sys-color-outline);
+    color: var(--text-secondary);
     font-weight: 500;
   }}
 
-  .theme-toggle-btn {{
-    background: var(--md-sys-color-surface-container-high);
-    color: var(--md-sys-color-on-background);
-    border: none;
-    border-radius: 20px;
+  .ios-glass-btn {{
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-specular);
+    border-radius: 9999px;
     padding: 8px 16px;
     font-size: 0.85rem;
     font-weight: 600;
@@ -185,212 +199,220 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: all 0.2s;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }}
 
-  .theme-toggle-btn:hover {{
-    background: var(--md-sys-color-primary-container);
-    color: var(--md-sys-color-on-primary-container);
+  .ios-glass-btn:hover {{
+    background: var(--glass-bg-hover);
+    border-color: var(--glass-border-highlight);
+    transform: scale(1.02);
   }}
 
-  /* Material You Floating Search Bar */
-  .search-wrapper {{
-    margin: 24px 0 16px 0;
+  /* iOS Search Bar (Glass Pill) */
+  .search-area {{
+    margin: 28px 0 16px 0;
   }}
 
-  .m3-search-bar {{
-    background: var(--md-sys-color-surface-container-high);
-    border-radius: 28px;
+  .ios-search-bar {{
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15), var(--glass-specular);
+    border-radius: 9999px;
+    padding: 6px 16px 6px 20px;
     display: flex;
     align-items: center;
-    padding: 6px 14px 6px 20px;
-    box-shadow: 0 6px 20px var(--md-sys-color-shadow);
-    transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
-    border: 2px solid transparent;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }}
 
-  .m3-search-bar:focus-within {{
-    background: var(--md-sys-color-surface-container-highest);
-    border-color: var(--md-sys-color-primary);
-    box-shadow: 0 8px 28px rgba(168, 199, 250, 0.25);
+  .ios-search-bar:focus-within {{
+    border-color: var(--ios-blue);
+    background: var(--glass-bg-hover);
+    box-shadow: 0 12px 36px rgba(10, 132, 255, 0.25), var(--glass-specular);
+    transform: translateY(-1px);
   }}
 
   .search-icon {{
-    color: var(--md-sys-color-primary);
+    color: var(--ios-blue);
+    font-size: 24px;
     margin-right: 12px;
-    font-size: 26px;
   }}
 
-  .m3-search-input {{
+  .ios-search-input {{
     flex: 1;
     background: transparent;
     border: none;
     outline: none;
     font-size: 1.05rem;
     font-family: inherit;
-    color: var(--md-sys-color-on-background);
+    color: var(--text-primary);
   }}
 
-  .m3-search-input::placeholder {{
-    color: var(--md-sys-color-outline);
-    font-size: 0.95rem;
+  .ios-search-input::placeholder {{
+    color: var(--text-tertiary);
+    font-weight: 400;
   }}
 
   .clear-btn {{
-    background: transparent;
+    background: var(--segmented-bg);
     border: none;
-    color: var(--md-sys-color-outline);
-    cursor: pointer;
-    display: none;
-    padding: 6px;
+    color: var(--text-secondary);
     border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s;
   }}
 
   .clear-btn:hover {{
-    color: var(--md-sys-color-on-background);
+    color: var(--text-primary);
   }}
 
-  /* M3 Filter Chips */
-  .chips-container {{
+  /* iOS Segmented / Pill Filter Control */
+  .segmented-scroll {{
     display: flex;
     gap: 8px;
     overflow-x: auto;
-    padding: 4px 2px 14px 2px;
-    scrollbar-width: thin;
+    padding: 6px 4px 18px 4px;
+    scrollbar-width: none;
   }}
 
-  .m3-chip {{
-    background: var(--md-sys-color-surface-container-low);
-    color: var(--md-sys-color-on-background);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
+  .segmented-scroll::-webkit-scrollbar {{
+    display: none;
+  }}
+
+  .ios-pill {{
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-specular);
+    color: var(--text-secondary);
     padding: 8px 16px;
+    border-radius: 9999px;
     font-size: 0.85rem;
     font-weight: 600;
-    cursor: pointer;
     white-space: nowrap;
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 6px;
-    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }}
 
-  .m3-chip:hover {{
-    background: var(--md-sys-color-surface-container-high);
+  .ios-pill:hover {{
+    color: var(--text-primary);
+    background: var(--glass-bg-hover);
+    border-color: var(--glass-border-highlight);
   }}
 
-  .m3-chip.active {{
-    background: var(--md-sys-color-primary-container);
-    color: var(--md-sys-color-on-primary-container);
-    border-color: var(--md-sys-color-primary);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  .ios-pill.active {{
+    background: var(--ios-blue);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 16px rgba(10, 132, 255, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
   }}
 
-  .m3-chip-danger.active {{
-    background: var(--md-sys-color-error-container);
-    color: var(--md-sys-color-on-error-container);
-    border-color: var(--md-sys-color-error);
+  .ios-pill-danger.active {{
+    background: var(--ios-red);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 16px rgba(255, 69, 58, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
   }}
 
-  /* Model Badges Bar */
-  .model-pill-row {{
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 20px;
-  }}
-
-  .model-pill {{
-    background: var(--md-sys-color-surface-container-highest);
-    color: var(--md-sys-color-on-background);
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 20px;
-    letter-spacing: 0.02em;
-  }}
-
-  /* SP Mode Banner Accordion */
-  .sp-card-m3 {{
-    background: var(--md-sys-color-surface-container-low);
-    border-radius: 24px;
-    border: 1px solid var(--card-border);
-    margin-bottom: 28px;
+  /* SP Mode Collapsible Frosted Glass Card */
+  .sp-card-glass {{
+    background: var(--glass-card);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), var(--glass-specular);
+    border-radius: 22px;
+    margin-bottom: 24px;
     overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+    transition: all 0.3s ease;
   }}
 
-  .sp-card-header {{
-    padding: 18px 24px;
+  .sp-header {{
+    padding: 16px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
     user-select: none;
-    background: var(--md-sys-color-surface-container);
+    background: rgba(255, 255, 255, 0.04);
   }}
 
-  .sp-card-header h2 {{
-    font-size: 1.05rem;
+  .sp-header h2 {{
+    font-size: 1rem;
     font-weight: 700;
+    color: var(--ios-blue);
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: var(--md-sys-color-primary);
+    gap: 8px;
   }}
 
-  .sp-content {{
-    padding: 20px 24px;
+  .sp-grid {{
+    padding: 20px;
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
   }}
 
   @media(min-width: 768px) {{
-    .sp-content {{ grid-template-columns: 1fr 1fr; }}
+    .sp-grid {{ grid-template-columns: 1fr 1fr; }}
   }}
 
-  .sp-box {{
-    background: var(--md-sys-color-surface-container-highest);
+  .sp-inner-box {{
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
     border-radius: 16px;
     padding: 16px;
   }}
 
-  .sp-box h3 {{
-    font-size: 0.95rem;
+  .sp-inner-box h3 {{
+    font-size: 0.92rem;
     font-weight: 700;
-    color: var(--md-sys-color-secondary);
+    color: var(--text-primary);
     margin-bottom: 8px;
   }}
 
-  .sp-box pre {{
-    font-family: 'Roboto Mono', monospace;
+  .sp-inner-box pre {{
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
     line-height: 1.5;
     white-space: pre-wrap;
-    color: var(--md-sys-color-on-background);
+    color: var(--text-secondary);
   }}
 
-  /* Error Cards Grid */
+  /* Glass Cards Grid */
   .cards-grid {{
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
   }}
 
-  .m3-card {{
-    background: var(--md-sys-color-surface-container);
+  .ios-glass-card {{
+    background: var(--glass-card);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
     border-radius: 24px;
-    border: 1px solid var(--card-border);
     padding: 24px;
-    box-shadow: 0 4px 16px var(--md-sys-color-shadow);
-    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1), var(--glass-specular);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s, border-color 0.25s;
+    position: relative;
   }}
 
-  .m3-card:hover {{
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px var(--md-sys-color-shadow);
+  .ios-glass-card:hover {{
+    transform: translateY(-3px);
+    border-color: var(--glass-border-highlight);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18), var(--glass-specular);
   }}
 
   .card-top {{
@@ -398,222 +420,245 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     justify-content: space-between;
     align-items: flex-start;
     gap: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     flex-wrap: wrap;
   }}
 
-  .code-group {{
+  .code-title-group {{
     display: flex;
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
   }}
 
-  .sc-badge-code {{
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1.5rem;
+  .sc-code-badge {{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.45rem;
     font-weight: 700;
-    color: var(--md-sys-color-primary);
-    background: var(--md-sys-color-surface-container-high);
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--glass-border);
     padding: 4px 14px;
-    border-radius: 14px;
+    border-radius: 12px;
+    letter-spacing: -0.02em;
   }}
 
   .sc-title {{
     font-size: 1.15rem;
     font-weight: 700;
-    color: var(--md-sys-color-on-background);
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
   }}
 
-  .badge-tag {{
+  /* Translucent Glass Badges */
+  .glass-badge {{
     font-size: 0.72rem;
-    font-weight: 800;
-    padding: 6px 12px;
-    border-radius: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 9999px;
+    letter-spacing: 0.03em;
     display: inline-flex;
     align-items: center;
     gap: 4px;
+    backdrop-filter: blur(10px);
   }}
 
-  .badge-level-a {{
-    background: var(--md-sys-color-error-container);
-    color: var(--md-sys-color-on-error-container);
+  .glass-badge-a {{
+    background: var(--ios-red-glass);
+    color: #ff6b62;
+    border: 1px solid var(--ios-red-border);
   }}
 
-  .badge-level-b {{
-    background: var(--md-sys-color-warning-container);
-    color: var(--md-sys-color-on-warning-container);
+  .glass-badge-b {{
+    background: var(--ios-amber-glass);
+    color: #ffb84d;
+    border: 1px solid var(--ios-amber-border);
   }}
 
-  .badge-level-d {{
-    background: var(--md-sys-color-primary-container);
-    color: var(--md-sys-color-on-primary-container);
+  .glass-badge-d {{
+    background: var(--ios-blue-glass);
+    color: #5ac8fa;
+    border: 1px solid var(--ios-blue-border);
   }}
 
-  .badge-reset-needed {{
-    background: #e11d48;
-    color: white;
+  .glass-badge-reset {{
+    background: rgba(225, 29, 72, 0.25);
+    color: #ff7597;
+    border: 1px solid rgba(225, 29, 72, 0.5);
   }}
 
-  /* Card Inner Sections */
-  .section-title {{
+  .card-copy-btn {{
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    border-radius: 9999px;
+    padding: 5px 12px;
     font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s;
+  }}
+
+  .card-copy-btn:hover {{
+    background: rgba(255, 255, 255, 0.18);
+    transform: scale(1.03);
+  }}
+
+  .models-row {{
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+  }}
+
+  .section-label {{
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--md-sys-color-outline);
+    color: var(--text-tertiary);
     margin: 14px 0 6px 0;
   }}
 
-  .symptom-box {{
-    background: var(--md-sys-color-surface-container-high);
-    border-left: 4px solid var(--md-sys-color-primary);
-    border-radius: 0 12px 12px 0;
+  .glass-symptom-box {{
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    border-left: 3px solid var(--ios-blue);
+    border-radius: 12px;
     padding: 10px 14px;
     font-size: 0.92rem;
-    color: var(--md-sys-color-on-background);
+    color: var(--text-primary);
   }}
 
-  ul.m3-list, ol.m3-list {{
+  ul.glass-list, ol.glass-list {{
     margin-left: 20px;
     font-size: 0.92rem;
-    color: var(--md-sys-color-on-background);
+    color: var(--text-primary);
   }}
 
-  ul.m3-list li, ol.m3-list li {{
-    margin-bottom: 6px;
+  ul.glass-list li, ol.glass-list li {{
+    margin-bottom: 5px;
   }}
 
-  .reset-alert-box {{
+  .reset-glass-callout {{
     margin-top: 16px;
-    background: var(--md-sys-color-error-container);
-    color: var(--md-sys-color-on-error-container);
+    background: var(--ios-red-glass);
+    border: 1px solid var(--ios-red-border);
     border-radius: 14px;
     padding: 12px 16px;
     font-size: 0.88rem;
     display: flex;
     align-items: center;
     gap: 10px;
-    font-weight: 500;
+    color: #ffd2cf;
   }}
 
-  .copy-card-btn {{
-    background: var(--md-sys-color-surface-container-highest);
-    color: var(--md-sys-color-on-background);
-    border: none;
-    border-radius: 12px;
-    padding: 6px 12px;
-    font-size: 0.8rem;
+  /* iOS Floating Dynamic Island Toast */
+  .ios-toast {{
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-30px) scale(0.9);
+    background: rgba(20, 24, 38, 0.85);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    border-radius: 9999px;
+    padding: 10px 24px;
+    font-size: 0.88rem;
     font-weight: 600;
-    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 200;
     display: flex;
     align-items: center;
-    gap: 6px;
-    transition: background 0.2s;
+    gap: 8px;
   }}
 
-  .copy-card-btn:hover {{
-    background: var(--md-sys-color-primary-container);
-    color: var(--md-sys-color-on-primary-container);
-  }}
-
-  /* Toast Notification */
-  .m3-toast {{
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: var(--md-sys-color-on-background);
-    color: var(--md-sys-color-background);
-    border-radius: 28px;
-    padding: 12px 24px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
-    pointer-events: none;
-    z-index: 1000;
-  }}
-
-  .m3-toast.show {{
+  .ios-toast.show {{
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0) scale(1);
   }}
 
   .empty-state {{
     text-align: center;
     padding: 80px 20px;
-    color: var(--md-sys-color-outline);
+    color: var(--text-tertiary);
   }}
 
   .empty-state span {{
     font-size: 48px;
-    color: var(--md-sys-color-primary);
+    color: var(--ios-blue);
   }}
 </style>
 </head>
 <body>
 
-<!-- Material 3 Top App Bar -->
-<header class="m3-top-bar">
-  <div class="container top-bar-inner">
+<!-- Ambient Lighting Orbs for Specular Reflection -->
+<div class="ambient-glow"></div>
+
+<!-- iOS Frosted Header -->
+<header class="ios-header">
+  <div class="container header-content">
     <div class="brand">
-      <div class="brand-logo">R</div>
-      <div class="brand-text">
-        <h1>Ricoh Service Call (SC) Diagnostics</h1>
+      <div class="ios-app-icon">R</div>
+      <div class="brand-title">
+        <h1>Ricoh Diagnostics</h1>
         <p>M · MP · MP C · IM · IM C Series</p>
       </div>
     </div>
-    <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">
-      <span class="material-symbols-outlined" id="themeIcon">light_mode</span>
-      <span id="themeText">Light Mode</span>
+    <button class="ios-glass-btn" id="themeToggle" onclick="toggleTheme()">
+      <span class="material-symbols-rounded" id="themeIcon">light_mode</span>
+      <span id="themeText">Light Glass</span>
     </button>
   </div>
 </header>
 
 <main class="container">
-  <!-- Material You Floating Search Bar -->
-  <div class="search-wrapper">
-    <div class="m3-search-bar">
-      <span class="material-symbols-outlined search-icon">search</span>
-      <input type="text" id="searchInput" class="m3-search-input" placeholder="Search SC code (542, 672, 899) or component (fuser, laser, motor, chip)..." autofocus autocomplete="off" />
+  <!-- iOS Search Bar (Glass Capsule) -->
+  <div class="search-area">
+    <div class="ios-search-bar">
+      <span class="material-symbols-rounded search-icon">search</span>
+      <input type="text" id="searchInput" class="ios-search-input" placeholder="Search error code (e.g. 542, 672, 899) or component..." autofocus autocomplete="off" />
       <button class="clear-btn" id="clearBtn" onclick="clearSearch()">
-        <span class="material-symbols-outlined">close</span>
+        <span class="material-symbols-rounded" style="font-size: 16px;">close</span>
       </button>
     </div>
   </div>
 
-  <!-- Material 3 Filter Chips -->
-  <div class="chips-container">
-    <button class="m3-chip active" onclick="setCategory('ALL')">All Codes</button>
-    <button class="m3-chip m3-chip-danger" onclick="filterLevelA()">
-      <span class="material-symbols-outlined" style="font-size: 18px;">warning</span> Level A (Reset Required)
+  <!-- iOS Segmented Filter Pills -->
+  <div class="segmented-scroll">
+    <button class="ios-pill active" onclick="setCategory('ALL')">All Codes</button>
+    <button class="ios-pill ios-pill-danger" onclick="filterLevelA()">
+      <span class="material-symbols-rounded" style="font-size: 16px;">lock_clock</span> Level A (Reset Required)
     </button>
-    <button class="m3-chip" onclick="setCategory('SC100')">SC100 Optics</button>
-    <button class="m3-chip" onclick="setCategory('SC200')">SC200 Laser</button>
-    <button class="m3-chip" onclick="setCategory('SC300')">SC300 Drum & PCU</button>
-    <button class="m3-chip" onclick="setCategory('SC400')">SC400 Transfer</button>
-    <button class="m3-chip" onclick="setCategory('SC500')">SC500 Fuser</button>
-    <button class="m3-chip" onclick="setCategory('SC600')">SC600 Comm & RFID</button>
-    <button class="m3-chip" onclick="setCategory('SC700')">SC700 Finisher</button>
-    <button class="m3-chip" onclick="setCategory('SC800')">SC800 Controller/HDD</button>
-    <button class="m3-chip" onclick="setCategory('SC900')">SC900 Engine</button>
+    <button class="ios-pill" onclick="setCategory('SC100')">SC100 Optics</button>
+    <button class="ios-pill" onclick="setCategory('SC200')">SC200 Laser</button>
+    <button class="ios-pill" onclick="setCategory('SC300')">SC300 Drum & PCU</button>
+    <button class="ios-pill" onclick="setCategory('SC400')">SC400 Transfer</button>
+    <button class="ios-pill" onclick="setCategory('SC500')">SC500 Fuser</button>
+    <button class="ios-pill" onclick="setCategory('SC600')">SC600 Comm & RFID</button>
+    <button class="ios-pill" onclick="setCategory('SC700')">SC700 Finisher</button>
+    <button class="ios-pill" onclick="setCategory('SC800')">SC800 Controller/HDD</button>
+    <button class="ios-pill" onclick="setCategory('SC900')">SC900 Engine</button>
   </div>
 
-  <!-- SP Mode Accordion -->
-  <section class="sp-card-m3">
-    <div class="sp-card-header" onclick="toggleSPAccordion()">
+  <!-- SP Mode Frosted Glass Accordion -->
+  <section class="sp-card-glass">
+    <div class="sp-header" onclick="toggleSPAccordion()">
       <h2>
-        <span class="material-symbols-outlined">build</span>
-        Service Program (SP) Mode Entry & Fuser Reset Cheatsheet
+        <span class="material-symbols-rounded">build</span>
+        Service Program (SP) Mode Entry & Fuser Reset Guide
       </h2>
-      <span class="material-symbols-outlined" id="spArrow" style="transition: transform 0.25s;">expand_more</span>
+      <span class="material-symbols-rounded" id="spArrow" style="transition: transform 0.25s;">expand_more</span>
     </div>
-    <div class="sp-content" id="spContent" style="display: none;">
-      <div class="sp-box">
+    <div class="sp-grid" id="spContent" style="display: none;">
+      <div class="sp-inner-box">
         <h3>Classic MP & M Series (Physical Keypad)</h3>
         <pre>1. Press Yellow [Clear Modes / Reset] button.
 2. Type 1 - 0 - 7 on numeric keypad.
@@ -625,7 +670,7 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
    - Press [Execute].
 6. Switch Main Power OFF for 15 sec, then turn ON.</pre>
       </div>
-      <div class="sp-box">
+      <div class="sp-inner-box">
         <h3>Smart Operation Panel (SOP) - MP Cxx04 & IM / IM C Series</h3>
         <pre>Method 1 (Keypad Code):
 1. Go to Home -> open [Copier] application.
@@ -642,18 +687,21 @@ Method 2 (Check Status):
     </div>
   </section>
 
-  <!-- Counter & Status -->
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 0.85rem; color: var(--md-sys-color-outline);">
+  <!-- Status Row -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 0.85rem; color: var(--text-tertiary);">
     <span id="resultsCount">Loading error codes...</span>
-    <span>Material 3 Diagnostic Guide</span>
+    <span>iOS Glassmorphism Interface</span>
   </div>
 
-  <!-- Cards Grid -->
+  <!-- Glass Cards Grid -->
   <div class="cards-grid" id="cardsGrid"></div>
 </main>
 
-<!-- Material 3 Toast -->
-<div class="m3-toast" id="toast">Copied to clipboard!</div>
+<!-- Dynamic Island Toast -->
+<div class="ios-toast" id="toast">
+  <span class="material-symbols-rounded" style="color: #30d158; font-size: 20px;">check_circle</span>
+  <span id="toastMsg">Copied to clipboard!</span>
+</div>
 
 <script>
 const scData = {codes_json};
@@ -667,7 +715,7 @@ function toggleTheme() {{
   html.setAttribute('data-theme', newTheme);
   
   document.getElementById('themeIcon').textContent = isDark ? 'dark_mode' : 'light_mode';
-  document.getElementById('themeText').textContent = isDark ? 'Dark Mode' : 'Light Mode';
+  document.getElementById('themeText').textContent = isDark ? 'Dark Glass' : 'Light Glass';
 }}
 
 function toggleSPAccordion() {{
@@ -680,15 +728,15 @@ function toggleSPAccordion() {{
 
 function showToast(msg) {{
   const toast = document.getElementById('toast');
-  toast.textContent = msg;
+  document.getElementById('toastMsg').textContent = msg;
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 2200);
 }}
 
 function copyFix(code, title, solutions) {{
-  const text = `Ricoh SC Error: ${{code}} - ${{title}}\\n\\nSolutions:\\n${{solutions.map((s, i) => `${{i+1}}. ${{s}}`).join('\\n')}}`;
+  const text = `Ricoh SC Error: ${{code}} - ${{title}}\\n\\nTroubleshooting:\\n${{solutions.map((s, i) => `${{i+1}}. ${{s}}`).join('\\n')}}`;
   navigator.clipboard.writeText(text).then(() => {{
-    showToast(`Copied fix for ${{code}}!`);
+    showToast(`Copied fix for ${{code}}`);
   }});
 }}
 
@@ -701,9 +749,9 @@ function renderCards(items) {{
   if (items.length === 0) {{
     grid.innerHTML = `
       <div class="empty-state">
-        <span class="material-symbols-outlined">search_off</span>
-        <h3 style="margin-top: 12px; color: var(--md-sys-color-on-background);">No matching SC codes found</h3>
-        <p style="margin-top: 4px;">Try searching by code number (e.g. 542, 672) or component (fuser, laser, toner).</p>
+        <span class="material-symbols-rounded">search_off</span>
+        <h3 style="margin-top: 12px; color: var(--text-primary);">No matching SC codes found</h3>
+        <p style="margin-top: 4px;">Search by number (542, 672) or keyword (fuser, laser, motor).</p>
       </div>
     `;
     return;
@@ -711,48 +759,48 @@ function renderCards(items) {{
 
   items.forEach(item => {{
     const card = document.createElement('div');
-    card.className = 'm3-card';
+    card.className = 'ios-glass-card';
     card.id = item.code.toLowerCase();
 
     const causesHtml = item.causes.map(c => `<li>${{c}}</li>`).join('');
     const solutionsHtml = item.solutions.map(s => `<li>${{s}}</li>`).join('');
 
-    let levelBadgeClass = 'badge-level-d';
-    if (item.level === 'A') levelBadgeClass = 'badge-level-a';
-    else if (item.level === 'B') levelBadgeClass = 'badge-level-b';
+    let badgeClass = 'glass-badge-d';
+    if (item.level === 'A') badgeClass = 'glass-badge-a';
+    else if (item.level === 'B') badgeClass = 'glass-badge-b';
 
     card.innerHTML = `
       <div class="card-top">
-        <div class="code-group">
-          <span class="sc-badge-code">${{item.code}}</span>
+        <div class="code-title-group">
+          <span class="sc-code-badge">${{item.code}}</span>
           <span class="sc-title">${{item.title}}</span>
         </div>
         <div style="display:flex; gap:8px; align-items:center;">
-          <span class="badge-tag ${{levelBadgeClass}}">Level ${{item.level}}</span>
-          ${{item.sp_reset_required ? '<span class="badge-tag badge-reset-needed">SP 5-810 Reset</span>' : ''}}
-          <button class="copy-card-btn" onclick='copyFix("${{item.code}}", "${{item.title.replace(/"/g, '&quot;')}}", ${{JSON.stringify(item.solutions)}})'>
-            <span class="material-symbols-outlined" style="font-size:16px;">content_copy</span> Copy
+          <span class="glass-badge ${{badgeClass}}">Level ${{item.level}}</span>
+          ${{item.sp_reset_required ? '<span class="glass-badge glass-badge-reset">SP 5-810 Reset</span>' : ''}}
+          <button class="card-copy-btn" onclick='copyFix("${{item.code}}", "${{item.title.replace(/"/g, '&quot;')}}", ${{JSON.stringify(item.solutions)}})'>
+            <span class="material-symbols-rounded" style="font-size:16px;">ios_share</span> Copy
           </button>
         </div>
       </div>
 
-      <div style="font-size:0.8rem; color:var(--md-sys-color-outline); margin-bottom:12px;">
-        <strong>Models:</strong> ${{item.models}}
+      <div class="models-row">
+        <strong>Supported Models:</strong> ${{item.models}}
       </div>
 
-      <div class="section-title">Symptom</div>
-      <div class="symptom-box">${{item.symptom}}</div>
+      <div class="section-label">Symptom</div>
+      <div class="glass-symptom-box">${{item.symptom}}</div>
 
-      <div class="section-title">Probable Causes</div>
-      <ul class="m3-list">${{causesHtml}}</ul>
+      <div class="section-label">Probable Causes</div>
+      <ul class="glass-list">${{causesHtml}}</ul>
 
-      <div class="section-title">Step-by-Step Fix / Troubleshooting</div>
-      <ol class="m3-list">${{solutionsHtml}}</ol>
+      <div class="section-label">Troubleshooting & Repair</div>
+      <ol class="glass-list">${{solutionsHtml}}</ol>
 
       ${{item.sp_reset_required ? `
-        <div class="reset-alert-box">
-          <span class="material-symbols-outlined">restart_alt</span>
-          <div><strong>Reset Required:</strong> ${{item.sp_reset_guide}}</div>
+        <div class="reset-glass-callout">
+          <span class="material-symbols-rounded" style="font-size: 20px;">restart_alt</span>
+          <div><strong>SP Mode Reset Required:</strong> ${{item.sp_reset_guide}}</div>
         </div>
       ` : ''}}
     `;
@@ -763,7 +811,7 @@ function renderCards(items) {{
 function applyFilter() {{
   const query = document.getElementById('searchInput').value.trim().toLowerCase();
   const clearBtn = document.getElementById('clearBtn');
-  clearBtn.style.display = query.length > 0 ? 'inline-block' : 'none';
+  clearBtn.style.display = query.length > 0 ? 'flex' : 'none';
 
   const filtered = scData.filter(item => {{
     const matchesCategory = currentCategory === 'ALL' || item.category.startsWith(currentCategory);
@@ -796,7 +844,7 @@ function clearSearch() {{
 function setCategory(cat) {{
   currentCategory = cat;
   filterOnlyLevelA = false;
-  document.querySelectorAll('.m3-chip').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.ios-pill').forEach(btn => btn.classList.remove('active'));
   event.target.classList.add('active');
   applyFilter();
 }}
@@ -804,7 +852,7 @@ function setCategory(cat) {{
 function filterLevelA() {{
   filterOnlyLevelA = true;
   currentCategory = 'ALL';
-  document.querySelectorAll('.m3-chip').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.ios-pill').forEach(btn => btn.classList.remove('active'));
   event.currentTarget.classList.add('active');
   applyFilter();
 }}
@@ -819,7 +867,7 @@ renderCards(scData);
 """
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(html_content)
-    print(f"Generated Material You HTML guide at: {output_path}")
+    print(f"Generated iOS Glassy HTML guide at: {output_path}")
 
 if __name__ == "__main__":
     generate_html_file()
