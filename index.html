@@ -1116,15 +1116,19 @@ let currentCategory = 'ALL';
 let currentModelFilter = 'ALL';
 let filterOnlyLevelA = false;
 
-// Register PWA Service Worker & auto-check for updates
+// Self-clearing cache script: ensure browser never gets stuck on old Service Worker cache
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=2').then((reg) => {
-      reg.update();
-      console.log('PWA ServiceWorker registered:', reg.scope);
-    }).catch((err) => {
-      console.log('ServiceWorker error:', err);
-    });
+  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+    for (let registration of registrations) {
+      registration.unregister();
+    }
+  });
+}
+if ('caches' in window) {
+  caches.keys().then(function(names) {
+    for (let name of names) {
+      caches.delete(name);
+    }
   });
 }
 
