@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ricoh-sc-v2';
+const CACHE_NAME = 'ricoh-sc-v3';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

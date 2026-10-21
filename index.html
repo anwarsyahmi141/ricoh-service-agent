@@ -939,11 +939,11 @@
   </div>
   <div class="segmented-scroll" id="modelFilterBar">
     <button class="ios-pill ios-pill-model active" onclick="setModelFilter('ALL', event)">All Models</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('M ', event)">M Series</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('MP series', event)">MP Series (Mono)</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('MP C', event)">MP C (Color)</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('IM series', event)">IM Series (Smart Mono)</button>
-    <button class="ios-pill ios-pill-model" onclick="setModelFilter('IM C', event)">IM C (Smart Color)</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('M', event)">M Series</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('MP', event)">MP Series (Mono)</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('MP_C', event)">MP C (Color)</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('IM', event)">IM Series (Smart Mono)</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('IM_C', event)">IM C (Smart Color)</button>
   </div>
 
   <!-- Subsystem Category Filter Bar -->
@@ -1399,6 +1399,17 @@ function renderCards(items) {
   });
 }
 
+function checkModelMatch(modelsStr, key) {
+  if (key === 'ALL') return true;
+  const m = modelsStr.toUpperCase();
+  if (key === 'M') return /\bM\b(?!\s*P)/.test(m);
+  if (key === 'MP') return /\bMP\b(?!\s*C)/.test(m);
+  if (key === 'MP_C') return m.includes('MP C');
+  if (key === 'IM') return /\bIM\b(?!\s*C)/.test(m);
+  if (key === 'IM_C') return m.includes('IM C');
+  return true;
+}
+
 function applyFilter() {
   const query = document.getElementById('searchInput').value.trim().toLowerCase();
   const clearBtn = document.getElementById('clearBtn');
@@ -1406,7 +1417,7 @@ function applyFilter() {
 
   const filtered = scData.filter(item => {
     const matchesCategory = currentCategory === 'ALL' || item.category.startsWith(currentCategory);
-    const matchesModel = currentModelFilter === 'ALL' || item.models.toLowerCase().includes(currentModelFilter.toLowerCase());
+    const matchesModel = checkModelMatch(item.models, currentModelFilter);
     const matchesLevel = !filterOnlyLevelA || item.sp_reset_required || item.level === 'A';
     
     if (!matchesCategory || !matchesModel || !matchesLevel) return false;
