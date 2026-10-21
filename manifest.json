@@ -1,0 +1,18 @@
+{
+  "name": "Ricoh MFP SC Error Code Diagnostics",
+  "short_name": "Ricoh SC",
+  "description": "Comprehensive Ricoh MFP Service Call (SC) Diagnostics and Troubleshooting Guide",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#060810",
+  "theme_color": "#0a84ff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

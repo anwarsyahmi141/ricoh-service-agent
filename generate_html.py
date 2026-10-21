@@ -10,12 +10,22 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Ricoh SC Diagnostics | iOS Glass UI</title>
-<!-- Google Fonts: SF Pro / Inter & Icons -->
+
+<!-- PWA Meta Tags -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#060810">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ricoh SC">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+
+<!-- Google Fonts: Plus Jakarta Sans, JetBrains Mono, & Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 <style>
@@ -23,22 +33,20 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   :root[data-theme="dark"] {{
     --bg-base: #060810;
     --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.68);
+    --text-secondary: rgba(255, 255, 255, 0.7);
     --text-tertiary: rgba(255, 255, 255, 0.45);
     
-    /* Apple Vision / iOS Glass Tokens */
     --glass-bg: rgba(25, 30, 48, 0.42);
-    --glass-bg-hover: rgba(35, 42, 66, 0.55);
-    --glass-card: rgba(20, 25, 40, 0.48);
-    --glass-card-hover: rgba(28, 35, 56, 0.62);
+    --glass-bg-hover: rgba(35, 42, 66, 0.6);
+    --glass-card: rgba(20, 25, 40, 0.52);
     --glass-border: rgba(255, 255, 255, 0.12);
-    --glass-border-highlight: rgba(255, 255, 255, 0.22);
-    --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
+    --glass-border-highlight: rgba(255, 255, 255, 0.25);
+    --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.22);
     --glass-blur: blur(28px) saturate(190%);
     
     --ios-blue: #0a84ff;
     --ios-blue-glass: rgba(10, 132, 255, 0.22);
-    --ios-blue-border: rgba(10, 132, 255, 0.4);
+    --ios-blue-border: rgba(10, 132, 255, 0.45);
     
     --ios-red: #ff453a;
     --ios-red-glass: rgba(255, 69, 58, 0.22);
@@ -62,25 +70,24 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     --text-tertiary: rgba(60, 60, 67, 0.45);
 
     --glass-bg: rgba(255, 255, 255, 0.72);
-    --glass-bg-hover: rgba(255, 255, 255, 0.85);
-    --glass-card: rgba(255, 255, 255, 0.75);
-    --glass-card-hover: rgba(255, 255, 255, 0.9);
+    --glass-bg-hover: rgba(255, 255, 255, 0.88);
+    --glass-card: rgba(255, 255, 255, 0.78);
     --glass-border: rgba(255, 255, 255, 0.65);
-    --glass-border-highlight: rgba(255, 255, 255, 0.9);
+    --glass-border-highlight: rgba(255, 255, 255, 0.95);
     --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
     --glass-blur: blur(28px) saturate(180%);
 
     --ios-blue: #007aff;
     --ios-blue-glass: rgba(0, 122, 255, 0.15);
-    --ios-blue-border: rgba(0, 122, 255, 0.3);
+    --ios-blue-border: rgba(0, 122, 255, 0.35);
 
     --ios-red: #ff3b30;
     --ios-red-glass: rgba(255, 59, 48, 0.15);
-    --ios-red-border: rgba(255, 59, 48, 0.3);
+    --ios-red-border: rgba(255, 59, 48, 0.35);
 
     --ios-amber: #ff9500;
     --ios-amber-glass: rgba(255, 149, 0, 0.15);
-    --ios-amber-border: rgba(255, 149, 0, 0.3);
+    --ios-amber-border: rgba(255, 149, 0, 0.35);
 
     --ios-green: #34c759;
     --segmented-bg: rgba(0, 0, 0, 0.06);
@@ -121,9 +128,9 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   }}
 
   .container {{
-    max-width: 1120px;
+    max-width: 1140px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 18px;
     position: relative;
     z-index: 1;
   }}
@@ -138,7 +145,7 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     -webkit-backdrop-filter: var(--glass-blur);
     border-bottom: 1px solid var(--glass-border);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), var(--glass-specular);
-    padding: 16px 0;
+    padding: 14px 0;
     transition: all 0.3s ease;
   }}
 
@@ -146,7 +153,7 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     flex-wrap: wrap;
   }}
 
@@ -157,8 +164,8 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   }}
 
   .ios-app-icon {{
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     border-radius: 12px;
     background: linear-gradient(145deg, #e11d48, #be123c);
     display: flex;
@@ -166,22 +173,28 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     justify-content: center;
     color: #fff;
     font-weight: 800;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     box-shadow: 0 8px 16px rgba(225, 29, 72, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
     letter-spacing: -0.05em;
   }}
 
   .brand-title h1 {{
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: -0.03em;
     color: var(--text-primary);
   }}
 
   .brand-title p {{
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     color: var(--text-secondary);
     font-weight: 500;
+  }}
+
+  .header-actions {{
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }}
 
   .ios-glass-btn {{
@@ -192,13 +205,13 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-specular);
     border-radius: 9999px;
-    padding: 8px 16px;
-    font-size: 0.85rem;
+    padding: 7px 14px;
+    font-size: 0.82rem;
     font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }}
 
@@ -210,7 +223,7 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
 
   /* iOS Search Bar (Glass Pill) */
   .search-area {{
-    margin: 28px 0 16px 0;
+    margin: 22px 0 12px 0;
   }}
 
   .ios-search-bar {{
@@ -218,9 +231,9 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
     border: 1px solid var(--glass-border);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15), var(--glass-specular);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12), var(--glass-specular);
     border-radius: 9999px;
-    padding: 6px 16px 6px 20px;
+    padding: 6px 16px 6px 18px;
     display: flex;
     align-items: center;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -273,12 +286,24 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     color: var(--text-primary);
   }}
 
-  /* iOS Segmented / Pill Filter Control */
+  /* Filter Bars (Model Filter + Category Filter) */
+  .filter-section-title {{
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    margin: 12px 0 6px 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }}
+
   .segmented-scroll {{
     display: flex;
     gap: 8px;
     overflow-x: auto;
-    padding: 6px 4px 18px 4px;
+    padding: 2px 2px 10px 2px;
     scrollbar-width: none;
   }}
 
@@ -293,9 +318,9 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-specular);
     color: var(--text-secondary);
-    padding: 8px 16px;
+    padding: 7px 14px;
     border-radius: 9999px;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 600;
     white-space: nowrap;
     cursor: pointer;
@@ -315,17 +340,24 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     background: var(--ios-blue);
     color: #ffffff;
     border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 16px rgba(10, 132, 255, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 14px rgba(10, 132, 255, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  }}
+
+  .ios-pill-model.active {{
+    background: #5856d6;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 14px rgba(88, 86, 214, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
   }}
 
   .ios-pill-danger.active {{
     background: var(--ios-red);
     color: #ffffff;
     border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 16px rgba(255, 69, 58, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 14px rgba(255, 69, 58, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
   }}
 
-  /* SP Mode Collapsible Frosted Glass Card */
+  /* SP Mode Keypad Simulator Section */
   .sp-card-glass {{
     background: var(--glass-card);
     backdrop-filter: var(--glass-blur);
@@ -333,7 +365,7 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     border: 1px solid var(--glass-border);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), var(--glass-specular);
     border-radius: 22px;
-    margin-bottom: 24px;
+    margin: 14px 0 24px 0;
     overflow: hidden;
     transition: all 0.3s ease;
   }}
@@ -361,33 +393,127 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     padding: 20px;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 20px;
   }}
 
-  @media(min-width: 768px) {{
+  @media(min-width: 900px) {{
     .sp-grid {{ grid-template-columns: 1fr 1fr; }}
   }}
 
-  .sp-inner-box {{
-    background: rgba(0, 0, 0, 0.2);
+  .simulator-panel {{
+    background: rgba(0, 0, 0, 0.28);
     border: 1px solid var(--glass-border);
-    border-radius: 16px;
+    border-radius: 18px;
     padding: 16px;
   }}
 
-  .sp-inner-box h3 {{
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 8px;
+  .sim-title {{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
   }}
 
-  .sp-inner-box pre {{
+  .sim-title h3 {{
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }}
+
+  .sim-screen {{
+    background: #000;
+    color: #30d158;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    line-height: 1.5;
-    white-space: pre-wrap;
-    color: var(--text-secondary);
+    font-size: 0.85rem;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #1c2b1e;
+    margin-bottom: 14px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+  }}
+
+  .keypad-grid {{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-width: 240px;
+    margin: 0 auto 12px auto;
+  }}
+
+  .kp-btn {{
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border-radius: 12px;
+    padding: 12px 0;
+    cursor: pointer;
+    box-shadow: var(--glass-specular);
+    transition: all 0.15s ease;
+    user-select: none;
+  }}
+
+  .kp-btn:active, .kp-btn.active {{
+    background: var(--ios-blue);
+    color: white;
+    transform: scale(0.94);
+    box-shadow: 0 0 16px var(--ios-blue);
+  }}
+
+  .kp-btn-yellow {{
+    background: rgba(234, 179, 8, 0.25);
+    color: #fde047;
+    border-color: rgba(234, 179, 8, 0.5);
+    font-size: 0.82rem;
+  }}
+  .kp-btn-yellow.active {{
+    background: #eab308 !important;
+    color: black !important;
+    box-shadow: 0 0 16px #eab308 !important;
+  }}
+
+  .kp-btn-red {{
+    background: rgba(239, 68, 68, 0.25);
+    color: #fca5a5;
+    border-color: rgba(239, 68, 68, 0.5);
+    font-size: 0.82rem;
+  }}
+  .kp-btn-red.active {{
+    background: #ef4444 !important;
+    color: white !important;
+    box-shadow: 0 0 16px #ef4444 !important;
+  }}
+
+  .sim-controls {{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }}
+
+  .sim-action-btn {{
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }}
+
+  .sim-action-btn:hover {{
+    background: var(--glass-bg-hover);
+    transform: scale(1.02);
   }}
 
   /* Glass Cards Grid */
@@ -410,16 +536,16 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   }}
 
   .ios-glass-card:hover {{
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     border-color: var(--glass-border-highlight);
-    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18), var(--glass-specular);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16), var(--glass-specular);
   }}
 
   .card-top {{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 16px;
+    gap: 14px;
     margin-bottom: 14px;
     flex-wrap: wrap;
   }}
@@ -434,7 +560,7 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   .sc-code-badge {{
     font-family: 'JetBrains Mono', monospace;
     font-size: 1.45rem;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--text-primary);
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--glass-border);
@@ -450,7 +576,13 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     color: var(--text-primary);
   }}
 
-  /* Translucent Glass Badges */
+  .card-actions {{
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }}
+
   .glass-badge {{
     font-size: 0.72rem;
     font-weight: 700;
@@ -487,13 +619,13 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     border: 1px solid rgba(225, 29, 72, 0.5);
   }}
 
-  .card-copy-btn {{
+  .card-action-btn {{
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--glass-border);
     color: var(--text-primary);
     border-radius: 9999px;
     padding: 5px 12px;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     font-weight: 600;
     cursor: pointer;
     display: flex;
@@ -502,9 +634,15 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     transition: all 0.2s;
   }}
 
-  .card-copy-btn:hover {{
+  .card-action-btn:hover {{
     background: rgba(255, 255, 255, 0.18);
     transform: scale(1.03);
+  }}
+
+  .card-action-ticket {{
+    background: rgba(10, 132, 255, 0.18);
+    border-color: rgba(10, 132, 255, 0.4);
+    color: #70b7ff;
   }}
 
   .models-row {{
@@ -514,7 +652,7 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   }}
 
   .section-label {{
-    font-size: 0.75rem;
+    font-size: 0.74rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -555,13 +693,13 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     color: #ffd2cf;
   }}
 
-  /* iOS Floating Dynamic Island Toast */
+  /* iOS Dynamic Island Toast */
   .ios-toast {{
     position: fixed;
     top: 24px;
     left: 50%;
     transform: translateX(-50%) translateY(-30px) scale(0.9);
-    background: rgba(20, 24, 38, 0.85);
+    background: rgba(20, 24, 38, 0.88);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -595,6 +733,167 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     font-size: 48px;
     color: var(--ios-blue);
   }}
+
+  /* ================= Printable Service Ticket Modal ================= */
+  .modal-backdrop {{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }}
+
+  .modal-backdrop.open {{
+    display: flex;
+  }}
+
+  .ticket-card {{
+    background: #ffffff;
+    color: #111827;
+    width: 100%;
+    max-width: 640px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }}
+
+  .ticket-header {{
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 14px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }}
+
+  .ticket-title {{
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #111827;
+  }}
+
+  .ticket-badge {{
+    background: #e11d48;
+    color: white;
+    font-weight: 800;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }}
+
+  .ticket-grid {{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+  }}
+
+  .ticket-section-title {{
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #4b5563;
+    margin: 12px 0 6px 0;
+  }}
+
+  .ticket-list {{
+    margin-left: 20px;
+    font-size: 0.88rem;
+    color: #374151;
+    line-height: 1.45;
+  }}
+
+  .ticket-list li {{
+    margin-bottom: 4px;
+  }}
+
+  .ticket-sign-block {{
+    margin-top: 24px;
+    border-top: 1px dashed #9ca3af;
+    padding-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    font-size: 0.8rem;
+    color: #4b5563;
+  }}
+
+  .sign-line {{
+    border-bottom: 1px solid #000;
+    height: 30px;
+    margin-bottom: 4px;
+  }}
+
+  .ticket-actions {{
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }}
+
+  .btn-print {{
+    background: #0a84ff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 700;
+    cursor: pointer;
+  }}
+
+  .btn-close {{
+    background: #e5e7eb;
+    color: #374151;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }}
+
+  /* Print Stylesheet for Saving as Clean PDF */
+  @media print {{
+    body * {{
+      visibility: hidden;
+    }}
+    .modal-backdrop, .modal-backdrop * {{
+      visibility: visible;
+    }}
+    .modal-backdrop {{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: auto;
+      background: #fff !important;
+      padding: 0 !important;
+    }}
+    .ticket-card {{
+      box-shadow: none !important;
+      border: none !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 0 !important;
+    }}
+    .ticket-actions {{
+      display: none !important;
+    }}
+  }}
 </style>
 </head>
 <body>
@@ -612,10 +911,16 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
         <p>M · MP · MP C · IM · IM C Series</p>
       </div>
     </div>
-    <button class="ios-glass-btn" id="themeToggle" onclick="toggleTheme()">
-      <span class="material-symbols-rounded" id="themeIcon">light_mode</span>
-      <span id="themeText">Light Glass</span>
-    </button>
+    <div class="header-actions">
+      <button class="ios-glass-btn" id="installBtn" style="display: none;" onclick="installPWA()">
+        <span class="material-symbols-rounded">download</span>
+        <span>Install App</span>
+      </button>
+      <button class="ios-glass-btn" id="themeToggle" onclick="toggleTheme()">
+        <span class="material-symbols-rounded" id="themeIcon">light_mode</span>
+        <span id="themeText">Light Glass</span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -631,9 +936,25 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     </div>
   </div>
 
-  <!-- iOS Segmented Filter Pills -->
+  <!-- Model Series Filter Bar (Option 3) -->
+  <div class="filter-section-title">
+    <span class="material-symbols-rounded" style="font-size: 16px;">print</span> Filter by Ricoh Machine Series
+  </div>
   <div class="segmented-scroll">
-    <button class="ios-pill active" onclick="setCategory('ALL')">All Codes</button>
+    <button class="ios-pill ios-pill-model active" onclick="setModelFilter('ALL')">All Models</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('M ')">M Series</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('MP series')">MP Series (Mono)</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('MP C')">MP C (Color)</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('IM series')">IM Series (Smart Mono)</button>
+    <button class="ios-pill ios-pill-model" onclick="setModelFilter('IM C')">IM C (Smart Color)</button>
+  </div>
+
+  <!-- Subsystem Category Filter Bar -->
+  <div class="filter-section-title">
+    <span class="material-symbols-rounded" style="font-size: 16px;">category</span> Subsystem Category
+  </div>
+  <div class="segmented-scroll">
+    <button class="ios-pill active" onclick="setCategory('ALL')">All Categories</button>
     <button class="ios-pill ios-pill-danger" onclick="filterLevelA()">
       <span class="material-symbols-rounded" style="font-size: 16px;">lock_clock</span> Level A (Reset Required)
     </button>
@@ -648,54 +969,142 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     <button class="ios-pill" onclick="setCategory('SC900')">SC900 Engine</button>
   </div>
 
-  <!-- SP Mode Frosted Glass Accordion -->
+  <!-- Visual SP Mode Keypad Simulator Section (Option 6) -->
   <section class="sp-card-glass">
     <div class="sp-header" onclick="toggleSPAccordion()">
       <h2>
-        <span class="material-symbols-rounded">build</span>
-        Service Program (SP) Mode Entry & Fuser Reset Guide
+        <span class="material-symbols-rounded">dialpad</span>
+        Interactive SP Mode Keypad Simulator & Reset Cheatsheet
       </h2>
       <span class="material-symbols-rounded" id="spArrow" style="transition: transform 0.25s;">expand_more</span>
     </div>
+    
     <div class="sp-grid" id="spContent" style="display: none;">
-      <div class="sp-inner-box">
-        <h3>Classic MP & M Series (Physical Keypad)</h3>
-        <pre>1. Press Yellow [Clear Modes / Reset] button.
-2. Type 1 - 0 - 7 on numeric keypad.
-3. Press and HOLD Red [Clear/Stop] button (3-5 sec).
-4. Tap [System SP] on screen.
-5. To clear Fuser SC codes:
-   - Type 5810 then press [#].
-   - Select SP 5-810-001 (SC Code Reset).
-   - Press [Execute].
-6. Switch Main Power OFF for 15 sec, then turn ON.</pre>
+      <!-- Classic Keypad Simulator -->
+      <div class="simulator-panel">
+        <div class="sim-title">
+          <h3>Classic Hardware Keypad (MP & M Series)</h3>
+          <span style="font-size: 0.75rem; color: var(--ios-amber); font-weight: 600;">10-Key Sequence</span>
+        </div>
+        <div class="sim-screen" id="classicScreen">
+          <span id="classicStatus">READY. PRESS YELLOW KEY</span>
+          <span id="classicSeq" style="color: #60a5fa;">[ _ _ _ ]</span>
+        </div>
+        <div class="keypad-grid">
+          <button class="kp-btn" onclick="pressClassicKey('1')">1</button>
+          <button class="kp-btn" onclick="pressClassicKey('2')">2</button>
+          <button class="kp-btn" onclick="pressClassicKey('3')">3</button>
+          <button class="kp-btn" onclick="pressClassicKey('4')">4</button>
+          <button class="kp-btn" onclick="pressClassicKey('5')">5</button>
+          <button class="kp-btn" onclick="pressClassicKey('6')">6</button>
+          <button class="kp-btn" onclick="pressClassicKey('7')">7</button>
+          <button class="kp-btn" onclick="pressClassicKey('8')">8</button>
+          <button class="kp-btn" onclick="pressClassicKey('9')">9</button>
+          <button class="kp-btn kp-btn-yellow" id="btnYellow" onclick="pressClassicKey('CLEAR_MODES')">CLEAR</button>
+          <button class="kp-btn" onclick="pressClassicKey('0')">0</button>
+          <button class="kp-btn kp-btn-red" id="btnRed" onclick="pressClassicKey('HOLD_STOP')">STOP</button>
+        </div>
+        <div class="sim-controls">
+          <button class="sim-action-btn" onclick="playClassicSequence()">
+            <span class="material-symbols-rounded" style="font-size:16px;">play_arrow</span> Auto-Play Sequence
+          </button>
+          <button class="sim-action-btn" onclick="resetClassicKeypad()">
+            <span class="material-symbols-rounded" style="font-size:16px;">refresh</span> Reset
+          </button>
+        </div>
       </div>
-      <div class="sp-inner-box">
-        <h3>Smart Operation Panel (SOP) - MP Cxx04 & IM / IM C Series</h3>
-        <pre>Method 1 (Keypad Code):
-1. Go to Home -> open [Copier] application.
-2. Open on-screen virtual keypad -> press [Reset].
-3. Type 8 - 0 - 6 - 1 - 8 - 2.
-4. Press and HOLD the [C] (Clear) key for 3-5 sec.
-5. Tap [System SP].
 
-Method 2 (Check Status):
-1. Press [Check Status] -> touch blank area in title.
-2. Press Stop -> 0 -> 0 -> 1 -> 0 -> 7 -> Start.
-3. Select [System SP] -> SP 5-810-001 -> [Execute] -> Reboot.</pre>
+      <!-- Smart Operation Panel (SOP) Keypad Simulator -->
+      <div class="simulator-panel">
+        <div class="sim-title">
+          <h3>Smart Operation Panel (IM & IM C Series)</h3>
+          <span style="font-size: 0.75rem; color: var(--ios-blue); font-weight: 600;">SOP Virtual Keypad</span>
+        </div>
+        <div class="sim-screen" id="sopScreen">
+          <span id="sopStatus">READY: TAP RESET</span>
+          <span id="sopSeq" style="color: #a78bfa;">[ 806182 ]</span>
+        </div>
+        <div class="keypad-grid">
+          <button class="kp-btn" onclick="pressSopKey('8')">8</button>
+          <button class="kp-btn" onclick="pressSopKey('0')">0</button>
+          <button class="kp-btn" onclick="pressSopKey('6')">6</button>
+          <button class="kp-btn" onclick="pressSopKey('1')">1</button>
+          <button class="kp-btn" onclick="pressSopKey('8')">8</button>
+          <button class="kp-btn" onclick="pressSopKey('2')">2</button>
+          <button class="kp-btn kp-btn-yellow" id="btnSopReset" onclick="pressSopKey('RESET')">RESET</button>
+          <button class="kp-btn" onclick="pressSopKey('#')">#</button>
+          <button class="kp-btn kp-btn-red" id="btnSopC" onclick="pressSopKey('HOLD_C')">HOLD C</button>
+        </div>
+        <div class="sim-controls">
+          <button class="sim-action-btn" onclick="playSopSequence()">
+            <span class="material-symbols-rounded" style="font-size:16px;">play_arrow</span> Auto-Play Sequence
+          </button>
+          <button class="sim-action-btn" onclick="resetSopKeypad()">
+            <span class="material-symbols-rounded" style="font-size:16px;">refresh</span> Reset
+          </button>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Status Row -->
+  <!-- Status Bar -->
   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 0.85rem; color: var(--text-tertiary);">
     <span id="resultsCount">Loading error codes...</span>
-    <span>iOS Glassmorphism Interface</span>
+    <span>iOS Glass Interface · PWA Ready</span>
   </div>
 
   <!-- Glass Cards Grid -->
   <div class="cards-grid" id="cardsGrid"></div>
 </main>
+
+<!-- Printable Service Ticket Modal (Option 5) -->
+<div class="modal-backdrop" id="ticketModal" onclick="closeTicketOnBackdrop(event)">
+  <div class="ticket-card" id="ticketCard">
+    <div class="ticket-header">
+      <div>
+        <div class="ticket-badge">RICOH MFP SERVICE TICKET</div>
+        <div class="ticket-title" id="tktCodeTitle" style="margin-top:6px;">SC542 - Warm-up Timeout</div>
+      </div>
+      <div style="text-align:right; font-size:0.75rem; color:#6b7280;">
+        <div id="tktDate">Date: 2026-10-21</div>
+        <div id="tktNum" style="font-family:'JetBrains Mono'; font-weight:700;">#RST-542-8821</div>
+      </div>
+    </div>
+
+    <div class="ticket-grid">
+      <div><strong>Severity Level:</strong> <span id="tktLevel">Level A (Reset Required)</span></div>
+      <div><strong>Reset SP Code:</strong> <span id="tktSP">SP 5-810-001</span></div>
+      <div style="grid-column: span 2;"><strong>Target Models:</strong> <span id="tktModels">M, MP, MP C, IM, IM C series</span></div>
+    </div>
+
+    <div class="ticket-section-title">Detected Symptom</div>
+    <p id="tktSymptom" style="font-size:0.88rem; background:#f3f4f6; padding:8px 12px; border-radius:6px; margin-bottom:12px;"></p>
+
+    <div class="ticket-section-title">Probable Root Causes</div>
+    <ul class="ticket-list" id="tktCauses"></ul>
+
+    <div class="ticket-section-title" style="margin-top:14px;">Technician Action Checklist</div>
+    <ul class="ticket-list" id="tktSolutions"></ul>
+
+    <div class="ticket-sign-block">
+      <div>
+        <div class="sign-line"></div>
+        <div>Field Service Technician Signature</div>
+      </div>
+      <div>
+        <div class="sign-line"></div>
+        <div>Customer / Clerk Sign-Off</div>
+      </div>
+    </div>
+
+    <div class="ticket-actions">
+      <button class="btn-close" onclick="closeTicket()">Close</button>
+      <button class="btn-print" onclick="window.print()">
+        <span class="material-symbols-rounded" style="font-size:16px; vertical-align:middle; margin-right:4px;">print</span> Print / Save PDF
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- Dynamic Island Toast -->
 <div class="ios-toast" id="toast">
@@ -706,7 +1115,41 @@ Method 2 (Check Status):
 <script>
 const scData = {codes_json};
 let currentCategory = 'ALL';
+let currentModelFilter = 'ALL';
 let filterOnlyLevelA = false;
+
+// Register PWA Service Worker
+if ('serviceWorker' in navigator) {{
+  window.addEventListener('load', () => {{
+    navigator.serviceWorker.register('./sw.js').then((reg) => {{
+      console.log('PWA ServiceWorker registered:', reg.scope);
+    }}).catch((err) => {{
+      console.log('ServiceWorker error:', err);
+    }});
+  }});
+}}
+
+// Handle PWA Install Prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {{
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('installBtn').style.display = 'flex';
+}});
+
+function installPWA() {{
+  if (deferredPrompt) {{
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choice) => {{
+      if (choice.outcome === 'accepted') {{
+        document.getElementById('installBtn').style.display = 'none';
+      }}
+      deferredPrompt = null;
+    }});
+  }} else {{
+    showToast('Add to Home Screen from browser menu');
+  }}
+}}
 
 function toggleTheme() {{
   const html = document.documentElement;
@@ -740,6 +1183,153 @@ function copyFix(code, title, solutions) {{
   }});
 }}
 
+// Service Ticket / PDF Modal (Option 5)
+function openServiceTicket(item) {{
+  document.getElementById('tktCodeTitle').textContent = `${{item.code}} - ${{item.title}}`;
+  document.getElementById('tktLevel').textContent = `Level ${{item.level}} ${{item.sp_reset_required ? '(Reset Required)' : '(Auto Reset)'}}`;
+  document.getElementById('tktSP').textContent = item.sp_reset_required ? 'SP 5-810-001' : 'None (Cycle Power)';
+  document.getElementById('tktModels').textContent = item.models;
+  document.getElementById('tktSymptom').textContent = item.symptom;
+  
+  const today = new Date().toISOString().slice(0, 10);
+  const randNum = Math.floor(1000 + Math.random() * 9000);
+  document.getElementById('tktDate').textContent = `Date: ${{today}}`;
+  document.getElementById('tktNum').textContent = `#RST-${{item.code.replace('SC','')}}-${{randNum}}`;
+
+  document.getElementById('tktCauses').innerHTML = item.causes.map(c => `<li>${{c}}</li>`).join('');
+  document.getElementById('tktSolutions').innerHTML = item.solutions.map(s => `<li>[  ] ${{s}}</li>`).join('');
+
+  document.getElementById('ticketModal').classList.add('open');
+}}
+
+function closeTicket() {{
+  document.getElementById('ticketModal').classList.remove('open');
+}}
+
+function closeTicketOnBackdrop(e) {{
+  if (e.target.id === 'ticketModal') {{
+    closeTicket();
+  }}
+}}
+
+// Keypad Simulator Logic (Option 6)
+let classicStep = 0;
+function pressClassicKey(key) {{
+  const status = document.getElementById('classicStatus');
+  const seq = document.getElementById('classicSeq');
+
+  if (key === 'CLEAR_MODES') {{
+    classicStep = 1;
+    status.textContent = 'ENTER 1-0-7';
+    seq.textContent = '[ C ]';
+  }} else if (classicStep === 1 && key === '1') {{
+    classicStep = 2;
+    seq.textContent = '[ C 1 ]';
+  }} else if (classicStep === 2 && key === '0') {{
+    classicStep = 3;
+    seq.textContent = '[ C 1 0 ]';
+  }} else if (classicStep === 3 && key === '7') {{
+    classicStep = 4;
+    status.textContent = 'NOW HOLD STOP KEY (3s)';
+    seq.textContent = '[ C 1 0 7 ]';
+  }} else if (classicStep === 4 && key === 'HOLD_STOP') {{
+    classicStep = 5;
+    status.textContent = 'ACCESS GRANTED: SYSTEM SP';
+    status.style.color = '#38bdf8';
+    seq.textContent = 'SUCCESS: SP 5-810 UNLOCKED';
+    showToast('SP Mode Unlocked!');
+  }} else {{
+    status.textContent = 'SEQUENCE MISMATCH. TAP CLEAR';
+    seq.textContent = '[ ERROR ]';
+    classicStep = 0;
+  }}
+}}
+
+function resetClassicKeypad() {{
+  classicStep = 0;
+  const status = document.getElementById('classicStatus');
+  status.textContent = 'READY. PRESS YELLOW KEY';
+  status.style.color = '#30d158';
+  document.getElementById('classicSeq').textContent = '[ _ _ _ ]';
+}}
+
+function playClassicSequence() {{
+  resetClassicKeypad();
+  const steps = [
+    () => pressClassicKey('CLEAR_MODES'),
+    () => pressClassicKey('1'),
+    () => pressClassicKey('0'),
+    () => pressClassicKey('7'),
+    () => pressClassicKey('HOLD_STOP')
+  ];
+  steps.forEach((fn, idx) => {{
+    setTimeout(fn, (idx + 1) * 600);
+  }});
+}}
+
+// SOP Keypad Simulator
+let sopStep = 0;
+function pressSopKey(key) {{
+  const status = document.getElementById('sopStatus');
+  const seq = document.getElementById('sopSeq');
+
+  if (key === 'RESET') {{
+    sopStep = 1;
+    status.textContent = 'ENTER 806182';
+    seq.textContent = '[ RESET ]';
+  }} else if (sopStep === 1 && key === '8') {{
+    sopStep = 2;
+    seq.textContent = '[ 8 ]';
+  }} else if (sopStep === 2 && key === '0') {{
+    sopStep = 3;
+    seq.textContent = '[ 80 ]';
+  }} else if (sopStep === 3 && key === '6') {{
+    sopStep = 4;
+    seq.textContent = '[ 806 ]';
+  }} else if (sopStep === 4 && key === '1') {{
+    sopStep = 5;
+    seq.textContent = '[ 8061 ]';
+  }} else if (sopStep === 5 && key === '8') {{
+    sopStep = 6;
+    seq.textContent = '[ 80618 ]';
+  }} else if (sopStep === 6 && key === '2') {{
+    sopStep = 7;
+    status.textContent = 'NOW HOLD [C] KEY (3s)';
+    seq.textContent = '[ 806182 ]';
+  }} else if (sopStep === 7 && key === 'HOLD_C') {{
+    sopStep = 8;
+    status.textContent = 'ACCESS GRANTED: SYSTEM SP';
+    status.style.color = '#38bdf8';
+    seq.textContent = 'SOP UNLOCKED';
+    showToast('SOP Mode Unlocked!');
+  }}
+}}
+
+function resetSopKeypad() {{
+  sopStep = 0;
+  const status = document.getElementById('sopStatus');
+  status.textContent = 'READY: TAP RESET';
+  status.style.color = '#30d158';
+  document.getElementById('sopSeq').textContent = '[ 806182 ]';
+}}
+
+function playSopSequence() {{
+  resetSopKeypad();
+  const steps = [
+    () => pressSopKey('RESET'),
+    () => pressSopKey('8'),
+    () => pressSopKey('0'),
+    () => pressSopKey('6'),
+    () => pressSopKey('1'),
+    () => pressSopKey('8'),
+    () => pressSopKey('2'),
+    () => pressSopKey('HOLD_C')
+  ];
+  steps.forEach((fn, idx) => {{
+    setTimeout(fn, (idx + 1) * 500);
+  }});
+}}
+
 function renderCards(items) {{
   const grid = document.getElementById('cardsGrid');
   const count = document.getElementById('resultsCount');
@@ -751,7 +1341,7 @@ function renderCards(items) {{
       <div class="empty-state">
         <span class="material-symbols-rounded">search_off</span>
         <h3 style="margin-top: 12px; color: var(--text-primary);">No matching SC codes found</h3>
-        <p style="margin-top: 4px;">Search by number (542, 672) or keyword (fuser, laser, motor).</p>
+        <p style="margin-top: 4px;">Try adjusting the Model Filter or searching by keyword.</p>
       </div>
     `;
     return;
@@ -775,11 +1365,14 @@ function renderCards(items) {{
           <span class="sc-code-badge">${{item.code}}</span>
           <span class="sc-title">${{item.title}}</span>
         </div>
-        <div style="display:flex; gap:8px; align-items:center;">
+        <div class="card-actions">
           <span class="glass-badge ${{badgeClass}}">Level ${{item.level}}</span>
           ${{item.sp_reset_required ? '<span class="glass-badge glass-badge-reset">SP 5-810 Reset</span>' : ''}}
-          <button class="card-copy-btn" onclick='copyFix("${{item.code}}", "${{item.title.replace(/"/g, '&quot;')}}", ${{JSON.stringify(item.solutions)}})'>
-            <span class="material-symbols-rounded" style="font-size:16px;">ios_share</span> Copy
+          <button class="card-action-btn card-action-ticket" onclick='openServiceTicket(${{JSON.stringify(item)}})'>
+            <span class="material-symbols-rounded" style="font-size:15px;">receipt_long</span> Ticket / PDF
+          </button>
+          <button class="card-action-btn" onclick='copyFix("${{item.code}}", "${{item.title.replace(/"/g, '&quot;')}}", ${{JSON.stringify(item.solutions)}})'>
+            <span class="material-symbols-rounded" style="font-size:15px;">ios_share</span> Copy
           </button>
         </div>
       </div>
@@ -794,7 +1387,7 @@ function renderCards(items) {{
       <div class="section-label">Probable Causes</div>
       <ul class="glass-list">${{causesHtml}}</ul>
 
-      <div class="section-label">Troubleshooting & Repair</div>
+      <div class="section-label">Troubleshooting & Repair Sequence</div>
       <ol class="glass-list">${{solutionsHtml}}</ol>
 
       ${{item.sp_reset_required ? `
@@ -815,9 +1408,10 @@ function applyFilter() {{
 
   const filtered = scData.filter(item => {{
     const matchesCategory = currentCategory === 'ALL' || item.category.startsWith(currentCategory);
+    const matchesModel = currentModelFilter === 'ALL' || item.models.toLowerCase().includes(currentModelFilter.toLowerCase());
     const matchesLevel = !filterOnlyLevelA || item.sp_reset_required || item.level === 'A';
     
-    if (!matchesCategory || !matchesLevel) return false;
+    if (!matchesCategory || !matchesModel || !matchesLevel) return false;
     if (!query) return true;
 
     const haystack = [
@@ -844,7 +1438,14 @@ function clearSearch() {{
 function setCategory(cat) {{
   currentCategory = cat;
   filterOnlyLevelA = false;
-  document.querySelectorAll('.ios-pill').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.segmented-scroll:nth-of-type(2) .ios-pill').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  applyFilter();
+}}
+
+function setModelFilter(model) {{
+  currentModelFilter = model;
+  document.querySelectorAll('.ios-pill-model').forEach(btn => btn.classList.remove('active'));
   event.target.classList.add('active');
   applyFilter();
 }}
@@ -852,7 +1453,7 @@ function setCategory(cat) {{
 function filterLevelA() {{
   filterOnlyLevelA = true;
   currentCategory = 'ALL';
-  document.querySelectorAll('.ios-pill').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.segmented-scroll:nth-of-type(2) .ios-pill').forEach(btn => btn.classList.remove('active'));
   event.currentTarget.classList.add('active');
   applyFilter();
 }}
@@ -867,7 +1468,7 @@ renderCards(scData);
 """
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(html_content)
-    print(f"Generated iOS Glassy HTML guide at: {output_path}")
+    print(f"Generated Enhanced iOS Glassy HTML guide at: {output_path}")
 
 if __name__ == "__main__":
     generate_html_file()
