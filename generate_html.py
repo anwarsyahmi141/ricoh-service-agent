@@ -29,71 +29,72 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 <style>
-  /* ================= iOS Glassmorphism Design Tokens ================= */
+  /* ================= Pure Coffee Color Scheme ================= */
+  /* Palette: #6E4E36 (Coffee), #F0E3B4 (Cream), #724444 (Mocha), #603B39 (Roast), #482B29 (Dark Roast), #2C2323 (Espresso) */
   :root[data-theme="dark"] {{
-    --bg-base: #060810;
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
-    --text-tertiary: rgba(255, 255, 255, 0.45);
+    --bg-base: #1e1717;
+    --text-primary: #F0E3B4;
+    --text-secondary: rgba(240, 227, 180, 0.76);
+    --text-tertiary: rgba(240, 227, 180, 0.48);
     
-    --glass-bg: rgba(25, 30, 48, 0.42);
-    --glass-bg-hover: rgba(35, 42, 66, 0.6);
-    --glass-card: rgba(20, 25, 40, 0.52);
-    --glass-border: rgba(255, 255, 255, 0.12);
-    --glass-border-highlight: rgba(255, 255, 255, 0.25);
-    --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.22);
+    --glass-bg: rgba(44, 35, 35, 0.58);
+    --glass-bg-hover: rgba(72, 43, 41, 0.75);
+    --glass-card: rgba(44, 35, 35, 0.68);
+    --glass-border: rgba(240, 227, 180, 0.14);
+    --glass-border-highlight: rgba(240, 227, 180, 0.32);
+    --glass-specular: inset 0 1px 1px 0 rgba(240, 227, 180, 0.22);
     --glass-blur: blur(28px) saturate(190%);
     
-    --ios-blue: #0a84ff;
-    --ios-blue-glass: rgba(10, 132, 255, 0.22);
-    --ios-blue-border: rgba(10, 132, 255, 0.45);
+    --ios-blue: #F0E3B4;
+    --ios-blue-glass: rgba(240, 227, 180, 0.18);
+    --ios-blue-border: rgba(240, 227, 180, 0.45);
     
-    --ios-red: #ff453a;
-    --ios-red-glass: rgba(255, 69, 58, 0.22);
-    --ios-red-border: rgba(255, 69, 58, 0.45);
+    --ios-red: #e05353;
+    --ios-red-glass: rgba(224, 83, 83, 0.22);
+    --ios-red-border: rgba(224, 83, 83, 0.5);
 
-    --ios-amber: #ff9f0a;
-    --ios-amber-glass: rgba(255, 159, 10, 0.22);
-    --ios-amber-border: rgba(255, 159, 10, 0.4);
+    --ios-amber: #e8a355;
+    --ios-amber-glass: rgba(232, 163, 85, 0.22);
+    --ios-amber-border: rgba(232, 163, 85, 0.45);
 
-    --ios-green: #30d158;
-    --segmented-bg: rgba(255, 255, 255, 0.08);
-    --orb-1: radial-gradient(circle at 15% 20%, rgba(10, 132, 255, 0.25) 0%, transparent 45%);
-    --orb-2: radial-gradient(circle at 85% 15%, rgba(191, 90, 242, 0.22) 0%, transparent 45%);
-    --orb-3: radial-gradient(circle at 50% 80%, rgba(48, 209, 88, 0.15) 0%, transparent 50%);
+    --ios-green: #59b87a;
+    --segmented-bg: rgba(240, 227, 180, 0.08);
+    --orb-1: radial-gradient(circle at 15% 20%, rgba(110, 78, 54, 0.4) 0%, transparent 45%);
+    --orb-2: radial-gradient(circle at 85% 15%, rgba(114, 68, 68, 0.38) 0%, transparent 45%);
+    --orb-3: radial-gradient(circle at 50% 80%, rgba(240, 227, 180, 0.16) 0%, transparent 50%);
   }}
 
   :root[data-theme="light"] {{
-    --bg-base: #f2f4f8;
-    --text-primary: #1c1c1e;
-    --text-secondary: rgba(60, 60, 67, 0.75);
-    --text-tertiary: rgba(60, 60, 67, 0.45);
+    --bg-base: #f9f6f0;
+    --text-primary: #2C2323;
+    --text-secondary: #603B39;
+    --text-tertiary: #6E4E36;
 
-    --glass-bg: rgba(255, 255, 255, 0.72);
-    --glass-bg-hover: rgba(255, 255, 255, 0.88);
-    --glass-card: rgba(255, 255, 255, 0.78);
-    --glass-border: rgba(255, 255, 255, 0.65);
-    --glass-border-highlight: rgba(255, 255, 255, 0.95);
-    --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
+    --glass-bg: rgba(240, 227, 180, 0.55);
+    --glass-bg-hover: rgba(240, 227, 180, 0.85);
+    --glass-card: rgba(255, 255, 255, 0.76);
+    --glass-border: rgba(110, 78, 54, 0.18);
+    --glass-border-highlight: rgba(110, 78, 54, 0.38);
+    --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
     --glass-blur: blur(28px) saturate(180%);
 
-    --ios-blue: #007aff;
-    --ios-blue-glass: rgba(0, 122, 255, 0.15);
-    --ios-blue-border: rgba(0, 122, 255, 0.35);
+    --ios-blue: #6E4E36;
+    --ios-blue-glass: rgba(110, 78, 54, 0.15);
+    --ios-blue-border: rgba(110, 78, 54, 0.35);
 
-    --ios-red: #ff3b30;
-    --ios-red-glass: rgba(255, 59, 48, 0.15);
-    --ios-red-border: rgba(255, 59, 48, 0.35);
+    --ios-red: #c93434;
+    --ios-red-glass: rgba(201, 52, 52, 0.14);
+    --ios-red-border: rgba(201, 52, 52, 0.35);
 
-    --ios-amber: #ff9500;
-    --ios-amber-glass: rgba(255, 149, 0, 0.15);
-    --ios-amber-border: rgba(255, 149, 0, 0.35);
+    --ios-amber: #b86e1e;
+    --ios-amber-glass: rgba(184, 110, 30, 0.14);
+    --ios-amber-border: rgba(184, 110, 30, 0.35);
 
-    --ios-green: #34c759;
-    --segmented-bg: rgba(0, 0, 0, 0.06);
-    --orb-1: radial-gradient(circle at 10% 20%, rgba(0, 122, 255, 0.2) 0%, transparent 45%);
-    --orb-2: radial-gradient(circle at 85% 20%, rgba(175, 82, 222, 0.18) 0%, transparent 45%);
-    --orb-3: radial-gradient(circle at 50% 85%, rgba(52, 199, 89, 0.15) 0%, transparent 50%);
+    --ios-green: #2d8a4e;
+    --segmented-bg: rgba(44, 35, 35, 0.06);
+    --orb-1: radial-gradient(circle at 10% 20%, rgba(240, 227, 180, 0.55) 0%, transparent 45%);
+    --orb-2: radial-gradient(circle at 85% 20%, rgba(114, 68, 68, 0.18) 0%, transparent 45%);
+    --orb-3: radial-gradient(circle at 50% 85%, rgba(110, 78, 54, 0.18) 0%, transparent 50%);
   }}
 
   * {{ box-sizing: border-box; margin: 0; padding: 0; }}
@@ -167,14 +168,14 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
     width: 42px;
     height: 42px;
     border-radius: 12px;
-    background: linear-gradient(145deg, #e11d48, #be123c);
+    background: linear-gradient(145deg, #6E4E36, #482B29);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: #F0E3B4;
     font-weight: 800;
     font-size: 1.15rem;
-    box-shadow: 0 8px 16px rgba(225, 29, 72, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 16px rgba(44, 35, 35, 0.45), inset 0 1px 1px rgba(240, 227, 180, 0.5);
     letter-spacing: -0.05em;
   }}
 
@@ -337,24 +338,24 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   }}
 
   .ios-pill.active {{
-    background: var(--ios-blue);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 14px rgba(10, 132, 255, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    background: #6E4E36;
+    color: #F0E3B4;
+    border-color: rgba(240, 227, 180, 0.45);
+    box-shadow: 0 4px 14px rgba(110, 78, 54, 0.45), inset 0 1px 1px rgba(240, 227, 180, 0.4);
   }}
 
   .ios-pill-model.active {{
-    background: #5856d6;
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 14px rgba(88, 86, 214, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    background: #724444;
+    color: #F0E3B4;
+    border-color: rgba(240, 227, 180, 0.45);
+    box-shadow: 0 4px 14px rgba(114, 68, 68, 0.45), inset 0 1px 1px rgba(240, 227, 180, 0.4);
   }}
 
   .ios-pill-danger.active {{
-    background: var(--ios-red);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 14px rgba(255, 69, 58, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    background: #603B39;
+    color: #F0E3B4;
+    border-color: rgba(240, 227, 180, 0.45);
+    box-shadow: 0 4px 14px rgba(96, 59, 57, 0.45), inset 0 1px 1px rgba(240, 227, 180, 0.4);
   }}
 
   /* SP Mode Keypad Simulator Section */
@@ -609,14 +610,14 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
 
   .glass-badge-d {{
     background: var(--ios-blue-glass);
-    color: #5ac8fa;
+    color: var(--text-primary);
     border: 1px solid var(--ios-blue-border);
   }}
 
   .glass-badge-reset {{
-    background: rgba(225, 29, 72, 0.25);
-    color: #ff7597;
-    border: 1px solid rgba(225, 29, 72, 0.5);
+    background: rgba(114, 68, 68, 0.4);
+    color: #ffd4d4;
+    border: 1px solid rgba(114, 68, 68, 0.7);
   }}
 
   .card-action-btn {{
@@ -640,9 +641,9 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   }}
 
   .card-action-ticket {{
-    background: rgba(10, 132, 255, 0.18);
-    border-color: rgba(10, 132, 255, 0.4);
-    color: #70b7ff;
+    background: rgba(110, 78, 54, 0.25);
+    border-color: rgba(110, 78, 54, 0.5);
+    color: var(--text-primary);
   }}
 
   .models-row {{
@@ -783,8 +784,8 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   }}
 
   .ticket-badge {{
-    background: #e11d48;
-    color: white;
+    background: #6E4E36;
+    color: #F0E3B4;
     font-weight: 800;
     font-size: 0.75rem;
     padding: 4px 10px;
@@ -847,8 +848,8 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   }}
 
   .btn-print {{
-    background: #0a84ff;
-    color: white;
+    background: #6E4E36;
+    color: #F0E3B4;
     border: none;
     border-radius: 10px;
     padding: 10px 20px;
