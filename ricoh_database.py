@@ -1,0 +1,1625 @@
+"""
+Ricoh MFP SC (Service Call) Error Code Database
+Applicable to:
+- M Series (e.g., M 320, M C250, M C251, M C2000, etc.)
+- MP Series (Monochrome: MP 2014, MP 2501, MP 2554, MP 3054, MP 5055, etc.)
+- MP C Series (Color: MP C2003, MP C2503, MP C3003, MP C3503, MP C4504, MP C6004, etc.)
+- IM Series (Smart Monochrome: IM 2500, IM 3500, IM 4000, IM 6000, etc.)
+- IM C Series (Smart Color: IM C2000, IM C2500, IM C3000, IM C3500, IM C4500, IM C6000, etc.)
+"""
+
+SC_CODES = [
+    # ==================== SC100: SCANNING / OPTICS / ADF ====================
+    {
+        "code": "SC101",
+        "category": "SC100 - Scanning & Optics",
+        "level": "B",
+        "title": "Exposure Lamp Error",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "The exposure lamp does not turn ON or white peak cannot be detected during shading measurement after warming up.",
+        "causes": [
+            "Exposure lamp defective or harness disconnected",
+            "Scanner Drive Board (SDB) or BICU/IPU board defective",
+            "Standard white plate dirty, scratched, or out of position",
+            "Scanner mirror dirty, misaligned, or condensation on optical glasses"
+        ],
+        "solutions": [
+            "Inspect and clean the standard white plate under the left side of the exposure glass.",
+            "Inspect the scanner mirrors and lens block; clean dust or toner haze with optical cloth.",
+            "Check harness and connectors between the LED/Xenon lamp and the Scanner Inverter/SDB board.",
+            "Measure lamp input voltage from the power supply board.",
+            "Replace the LED exposure lamp assembly or Scanner Drive Board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power OFF and ON after fixing hardware."
+    },
+    {
+        "code": "SC120",
+        "category": "SC100 - Scanning & Optics",
+        "level": "B",
+        "title": "Scanner Home Position (HP) Error 1 (Return)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Scanner carriage does not return to the home position after scanning.",
+        "causes": [
+            "Scanner HP sensor defective, dirty, or connector disconnected",
+            "Scanner drive motor defective or stalled",
+            "Scanner drive belt off-track, loose, or broken",
+            "Mechanical obstruction / foreign object in scanner guide rail",
+            "SDB or BICU board defective"
+        ],
+        "solutions": [
+            "Turn power OFF and gently slide the scanner carriage manually to inspect for mechanical friction or foreign items.",
+            "Check the scanner drive wire/timing belt tension.",
+            "Inspect the Scanner HP sensor: clean dust/toner from sensor phototransistor; check SP 5-803 (Input Check) to verify sensor toggles.",
+            "Verify harness between scanner motor and SDB / BICU.",
+            "Replace Scanner HP sensor or Scanner Drive Motor."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power OFF and ON."
+    },
+    {
+        "code": "SC121",
+        "category": "SC100 - Scanning & Optics",
+        "level": "B",
+        "title": "Scanner Home Position (HP) Error 2 (Leaving)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "The scanner HP sensor does not de-activate (remains ON) when the carriage moves away from home position.",
+        "causes": [
+            "Scanner HP sensor actuator stuck or broken",
+            "Scanner HP sensor defective (shorted photodiode)",
+            "Scanner motor not rotating (stepper driver fault)",
+            "Scanner wire/belt slipped off pulley"
+        ],
+        "solutions": [
+            "Check if scanner transport carriage is stuck on the home bracket.",
+            "Inspect HP sensor actuator flag for deformation.",
+            "Test scanner motor rotation in SP mode output test (SP 5-804).",
+            "Replace HP sensor or motor."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power OFF and ON."
+    },
+    {
+        "code": "SC141",
+        "category": "SC100 - Scanning & Optics",
+        "level": "B",
+        "title": "Black Level Detection Error",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Black level voltage out of target range during scanner self-calibration.",
+        "causes": [
+            "SBU (Sensor Board Unit) or CIS (Contact Image Sensor) defective",
+            "Harness between SBU and IPU / Controller damaged or loose",
+            "IPU board defective"
+        ],
+        "solutions": [
+            "Reseat the flat flexible cable (FFC) connecting SBU/CIS to the IPU board.",
+            "Check ground wire connections on scanner carriage.",
+            "Replace SBU unit or CIS scanner block.",
+            "Replace IPU / Engine control board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power OFF/ON."
+    },
+    {
+        "code": "SC142",
+        "category": "SC100 - Scanning & Optics",
+        "level": "B",
+        "title": "White Level Detection / Auto Shading Error",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "White level peak voltage cannot reach specified target when reading the standard white calibration plate.",
+        "causes": [
+            "Standard white plate dirty or missing",
+            "Exposure lamp dim or burnt out",
+            "First mirror, second mirror, or lens dusty or out of focus",
+            "SBU / CIS defective",
+            "Scanner power pack or BICU defective"
+        ],
+        "solutions": [
+            "Clean the white reference plate thoroughly using alcohol or mild glass cleaner.",
+            "Clean all optical mirrors and scanner glass surface (especially the narrow slit glass for ADF).",
+            "Check LED lamp output intensity; check if lamp turns on with normal brightness during boot.",
+            "Replace the SBU / CIS unit."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power OFF/ON."
+    },
+    {
+        "code": "SC144",
+        "category": "SC100 - Scanning & Optics",
+        "level": "B",
+        "title": "SBU Communication Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Controller or IPU cannot communicate with SBU (Sensor Board Unit).",
+        "causes": [
+            "Disconnected or damaged flat flex cable (FFC) between SBU and IPU/BICU",
+            "SBU board DC power supply missing (+5V / +12V)",
+            "SBU defective or IPU defective"
+        ],
+        "solutions": [
+            "Turn OFF power, inspect FFC ribbon cable for bent pins, tears, or crooked insertion.",
+            "Reseat both ends of the SBU harness.",
+            "Check 5V rail on the IPU/BICU power supply.",
+            "Replace SBU board or IPU board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power."
+    },
+    {
+        "code": "SC161",
+        "category": "SC100 - Scanning & Optics",
+        "level": "B",
+        "title": "IPU (Image Processing Unit) / ASIC Communication Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Communication between Controller and IPU ASIC failed during initialization.",
+        "causes": [
+            "IPU defective or ASIC solder crack",
+            "Controller board defective or loose memory/PHY connection",
+            "Firmware corruption"
+        ],
+        "solutions": [
+            "Update System/Copy/Engine firmware via SD card or USB / RFU.",
+            "Reseat Controller board and IPU board interconnections.",
+            "Replace IPU board or Controller board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power."
+    },
+    {
+        "code": "SC195",
+        "category": "SC100 - Scanning & Optics",
+        "level": "A",
+        "title": "Machine Serial Number Mismatch",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Machine serial number stored in NVRAM does not match the serial number in Controller / Engine board.",
+        "causes": [
+            "NVRAM or Controller board replaced without serial number migration",
+            "Corrupt NVRAM data",
+            "Firmware downgrade / incorrect region firmware"
+        ],
+        "solutions": [
+            "Enter SP Mode (System SP).",
+            "Access SP 5-811-001 (Machine Serial Number Input) and input the correct 11-digit serial number found on the machine backplate label.",
+            "Access SP 5-811-002 (Engine Serial Number) and verify consistency.",
+            "Reboot the machine completely."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Re-enter serial number via SP 5-811-001, then reboot machine."
+    },
+
+    # ==================== SC200: LASER / IMAGE WRITING / POLYGON ====================
+    {
+        "code": "SC202",
+        "category": "SC200 - Laser & Image Writing",
+        "level": "B",
+        "title": "Polygon Mirror Motor On-Timeout Error",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "The polygon mirror motor does not reach normal operating speed within the specified time after receiving the drive signal.",
+        "causes": [
+            "Polygon motor harness loose, pinched, or disconnected",
+            "Polygon mirror motor bearing seized or defective motor board",
+            "Laser writing unit defective",
+            "IPU / BICU board motor drive circuitry defective"
+        ],
+        "solutions": [
+            "Check harness between Laser Diode (LD) unit / Polygon motor and BICU / IPU.",
+            "Listen for high-pitched polygon motor whine when starting; if dead silent or grinding, bearing is locked.",
+            "Check +24V power supply line to the laser housing.",
+            "Replace the Polygon Mirror Motor or entire Laser Diode Unit."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power OFF and ON."
+    },
+    {
+        "code": "SC204",
+        "category": "SC200 - Laser & Image Writing",
+        "level": "B",
+        "title": "Polygon Mirror Motor Unstable Signal Error",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "The polygon motor speed signal (XSCRDY) goes inactive during continuous rotation.",
+        "causes": [
+            "Polygon motor driver IC overheating or failing",
+            "Motor harness contact resistance / loose connector",
+            "Power supply voltage fluctuation on 24V line"
+        ],
+        "solutions": [
+            "Reseat polygon motor interface harness.",
+            "Check PSU 24V rail stability.",
+            "Replace polygon motor or laser unit assembly."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power."
+    },
+    {
+        "code": "SC220",
+        "category": "SC200 - Laser & Image Writing",
+        "level": "B",
+        "title": "Laser Synchronization Detection Error (Start Position)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "The laser sync detector does not detect the laser beam start-of-line signal for more than 5 consecutive rotations.",
+        "causes": [
+            "Laser beam path shutter closed or mechanical lever not pushed by door",
+            "Laser sync detection sensor board dirty, defective, or harness disconnected",
+            "Laser Diode (LD) unit defective or laser output too weak",
+            "BICU / IPU board sync signal detection circuit defective"
+        ],
+        "solutions": [
+            "Inspect the laser safety shutter: ensure the front/inner door tabs push the mechanical shutter open completely.",
+            "Clean the dust shield glass (laser beam slit glass) using the dedicated cleaning wand or optical lint-free cloth.",
+            "Check harness connection between LD unit / Sync detector and BICU.",
+            "Replace Laser Synchronization Detector board or Laser Unit."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power."
+    },
+    {
+        "code": "SC230",
+        "category": "SC200 - Laser & Image Writing",
+        "level": "B",
+        "title": "FGATE Assertion Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "The FGATE signal (writing gate signal) was not asserted within the required window from the sub-scan start position.",
+        "causes": [
+            "Communication synchronization fault between Controller and BICU/IPU",
+            "Corrupt image memory or ASIC processing error",
+            "Firmware timing glitch"
+        ],
+        "solutions": [
+            "Reseat RAM module on the Controller board.",
+            "Update Engine and Controller firmware to latest release.",
+            "Replace BICU or Controller board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power."
+    },
+    {
+        "code": "SC240",
+        "category": "SC200 - Laser & Image Writing",
+        "level": "B",
+        "title": "LD Safety Circuit Error",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "A discrepancy is detected between the LD safety switch state and the laser drive signal.",
+        "causes": [
+            "Interlock door switch defective or contact bounced",
+            "Interlock switch harness disconnected",
+            "Laser unit safety circuit blown"
+        ],
+        "solutions": [
+            "Inspect front door and right/left cover interlock switches; check for damaged microswitches.",
+            "Reseat interlock switch harnesses to BICU / PSU.",
+            "Replace interlock switch or Laser Unit."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power."
+    },
+    {
+        "code": "SC285",
+        "category": "SC200 - Laser & Image Writing",
+        "level": "B",
+        "title": "Music (Line Position) Sensor Calibration Error",
+        "models": "MP C, IM C series (Color models)",
+        "symptom": "The color registration sensor (MUSIC sensor) fails to detect or align color patterns (C, M, Y, K) on the transfer belt.",
+        "causes": [
+            "MUSIC / Line Position / ID sensors dirty with toner dust",
+            "Pattern shutter mechanism stuck closed",
+            "Toner density too faint for sensor reading",
+            "Intermediate Transfer Belt (ITB) scratched or severely worn"
+        ],
+        "solutions": [
+            "Pull out the transfer belt unit and clean the ID / MUSIC sensors located underneath or on the sensor rail.",
+            "Check that the sensor shutter opens and closes freely.",
+            "Run forced toner refresh / check developer concentration if images are faint.",
+            "Perform Line Position Adjustment manually via SP 2-111-001 (Color Line Position Mode: Forced Execution).",
+            "Replace ID/MUSIC sensor array."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power or run SP 2-111-001."
+    },
+
+    # ==================== SC300: DRUM, CHARGE & DEVELOPMENT ====================
+    {
+        "code": "SC300",
+        "category": "SC300 - Drum & Charge",
+        "level": "B",
+        "title": "Charge Corona / Charge Roller High Voltage Leak (Black)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "A high-voltage leak is detected at the charge roller / charge corona wire for the Black (K) drum unit.",
+        "causes": [
+            "Charge roller contaminated with toner clumps, conductive dust, or foreign matter",
+            "Damaged OPC drum surface (pinhole / scratch through dielectric layer)",
+            "High Voltage Power Supply (HVPS) board defective",
+            "High voltage terminal contact spring bent or dirty"
+        ],
+        "solutions": [
+            "Remove PCU (Photoconductor Unit / Drum Unit) and inspect the charge roller.",
+            "Inspect OPC drum surface for deep scratches or black burn pinholes; replace drum/PCU if damaged.",
+            "Clean high voltage bias leaf springs inside machine frame with dry microfiber cloth.",
+            "Replace the Charge Roller or entire Drum / PCU unit.",
+            "Replace HVPS (High Voltage Power Supply) board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power OFF/ON."
+    },
+    {
+        "code": "SC301",
+        "category": "SC300 - Drum & Charge",
+        "level": "B",
+        "title": "Charge Corona / Roller Leak (Cyan)",
+        "models": "MP C, IM C series",
+        "symptom": "High voltage leakage detected at the Cyan (C) charge roller or drum terminal.",
+        "causes": [
+            "Cyan charge roller dirty or shorted",
+            "Pinhole in Cyan OPC drum",
+            "HVPS terminal contact bent or corroded"
+        ],
+        "solutions": [
+            "Inspect and clean Cyan Drum Unit / Charge roller.",
+            "Check Cyan drum surface for scratches or pinholes.",
+            "Clean bias contact terminals in machine rear.",
+            "Replace Cyan Drum Unit (PCU) or HVPS board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power OFF/ON."
+    },
+    {
+        "code": "SC302",
+        "category": "SC300 - Drum & Charge",
+        "level": "B",
+        "title": "Charge Corona / Roller Leak (Magenta)",
+        "models": "MP C, IM C series",
+        "symptom": "High voltage leakage detected at the Magenta (M) charge roller or drum terminal.",
+        "causes": [
+            "Magenta charge roller or drum defective",
+            "HVPS leak to chassis ground"
+        ],
+        "solutions": [
+            "Inspect and clean Magenta PCU / Drum unit.",
+            "Replace Magenta Drum Unit (PCU) or HVPS board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC304",
+        "category": "SC300 - Drum & Charge",
+        "level": "B",
+        "title": "Charge Corona / Roller Leak (Yellow)",
+        "models": "MP C, IM C series",
+        "symptom": "High voltage leakage detected at the Yellow (Y) charge roller or drum terminal.",
+        "causes": [
+            "Yellow charge roller or drum damaged",
+            "HVPS leak"
+        ],
+        "solutions": [
+            "Inspect Yellow Drum unit and clean high voltage contacts.",
+            "Replace Yellow Drum Unit (PCU)."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC320",
+        "category": "SC300 - Drum & Charge",
+        "level": "B",
+        "title": "Development Motor Error / Lock",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Development motor fails to rotate or rotational lock signal is detected for > 2 seconds.",
+        "causes": [
+            "Development unit locked or seized (developer caked or gear tooth broken)",
+            "Development motor harness disconnected",
+            "Development drive clutch defective or locked",
+            "Development motor defective"
+        ],
+        "solutions": [
+            "Remove development unit and rotate drive coupling by hand; check if gears turn smoothly without binding.",
+            "If unit is seized: replace developer material or entire development unit assembly.",
+            "Check drive train gears in machine chassis for missing teeth or paper fragments.",
+            "Test Development Motor rotation via SP 5-804.",
+            "Replace Development Motor or Drive Board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power OFF/ON."
+    },
+    {
+        "code": "SC324",
+        "category": "SC300 - Drum & Charge",
+        "level": "B",
+        "title": "Development Motor Lock (Color / Sub-drive)",
+        "models": "MP C, IM C series",
+        "symptom": "Color development unit drive motor lock detected.",
+        "causes": [
+            "Color development unit (C, M, Y) mechanical overload",
+            "Toner supply auger blocked",
+            "Development motor defective"
+        ],
+        "solutions": [
+            "Check individual C, M, Y development units for binding.",
+            "Vacuum out any compacted toner in toner feed pipes.",
+            "Replace defective Development Unit or Development Motor."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC350",
+        "category": "SC300 - Drum & Charge",
+        "level": "B",
+        "title": "ID Sensor Pattern Calibration Error",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Vsg (ID sensor output voltage on bare drum or belt) cannot be calibrated within 4.0V ± 0.2V.",
+        "causes": [
+            "ID sensor lens dirty with toner or paper dust",
+            "ID sensor harness disconnected or defective",
+            "OPC drum surface worn or scarred at ID sensor patch track",
+            "ID sensor shutter stuck closed"
+        ],
+        "solutions": [
+            "Pull out drum/transfer assembly and locate ID sensor cluster; clean optical window with clean swab/lint-free cloth.",
+            "Check that ID sensor shutter mechanical linkage is working smoothly.",
+            "Check ID sensor reading in SP 3-001 / SP 3-100.",
+            "Replace ID Sensor assembly."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC360",
+        "category": "SC300 - Drum & Charge",
+        "level": "B",
+        "title": "TD (Toner Density) Sensor Error (Black)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Black TD sensor output voltage Vt is out of allowable specification (below 0.5V or above 4.5V).",
+        "causes": [
+            "Black TD sensor connector disconnected or dirty contact",
+            "TD sensor defective",
+            "Developer exhausted, contaminated, or leaked out",
+            "Toner hopper empty or toner supply pump failure"
+        ],
+        "solutions": [
+            "Inspect Black Development Unit connector at the rear.",
+            "Check developer level inside the development unit. If developer volume is depleted, refill with OEM developer and perform SP 2-801 (Developer Initialization).",
+            "Verify TD sensor output voltage in SP 2-220.",
+            "Replace TD sensor or Black Development Unit."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC361",
+        "category": "SC300 - Drum & Charge",
+        "level": "B",
+        "title": "TD Sensor Error (Cyan)",
+        "models": "MP C, IM C series",
+        "symptom": "Cyan TD sensor output voltage Vt out of range.",
+        "causes": [
+            "Cyan TD sensor defective or disconnected",
+            "Cyan developer ratio depleted",
+            "Cyan toner feed mechanism clogged"
+        ],
+        "solutions": [
+            "Check Cyan development unit harness.",
+            "Refill Cyan developer and run SP 2-801-002 (Cyan Initial Setup).",
+            "Replace Cyan TD sensor or Cyan Development Unit."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC362",
+        "category": "SC300 - Drum & Charge",
+        "level": "B",
+        "title": "TD Sensor Error (Magenta)",
+        "models": "MP C, IM C series",
+        "symptom": "Magenta TD sensor output voltage Vt out of range.",
+        "causes": [
+            "Magenta TD sensor defective or disconnected",
+            "Magenta developer depleted"
+        ],
+        "solutions": [
+            "Inspect Magenta development unit.",
+            "Initialize developer via SP 2-801-003.",
+            "Replace Magenta TD sensor or Development Unit."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC363",
+        "category": "SC300 - Drum & Charge",
+        "level": "B",
+        "title": "TD Sensor Error (Yellow)",
+        "models": "MP C, IM C series",
+        "symptom": "Yellow TD sensor output voltage Vt out of range.",
+        "causes": [
+            "Yellow TD sensor defective or disconnected",
+            "Yellow developer depleted"
+        ],
+        "solutions": [
+            "Inspect Yellow development unit.",
+            "Initialize developer via SP 2-801-004.",
+            "Replace Yellow TD sensor or Development Unit."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+
+    # ==================== SC400: TRANSFER, BELT & SEPARATION ====================
+    {
+        "code": "SC400",
+        "category": "SC400 - Transfer & Separation",
+        "level": "B",
+        "title": "ID Sensor / Transfer Current Abnormality",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "ID sensor light intensity adjustment value reaches lower or upper limit during self-check.",
+        "causes": [
+            "ID sensor surface dirty or stained with toner",
+            "Transfer belt dirty, damaged, or unseated",
+            "ID sensor defective"
+        ],
+        "solutions": [
+            "Clean the ID sensor array using dry lint-free cloth.",
+            "Inspect Intermediate Transfer Belt (ITB); clean transfer belt cleaning blade if belt is covered in toner haze.",
+            "Replace ID sensor unit."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power."
+    },
+    {
+        "code": "SC440",
+        "category": "SC400 - Transfer & Separation",
+        "level": "B",
+        "title": "Transfer Belt Drive Motor Error",
+        "models": "MP C, IM C series",
+        "symptom": "Transfer belt drive motor lock signal detected continuously during rotation.",
+        "causes": [
+            "Intermediate Transfer Belt (ITB) mechanical lock / binding",
+            "ITB cleaning blade jammed or flipped onto belt",
+            "Transfer belt drive motor harness disconnected",
+            "Drive motor or motor driver board defective"
+        ],
+        "solutions": [
+            "Remove ITB unit and rotate drive roller by hand to check for resistance.",
+            "Inspect ITB cleaning blade; replace if flipped or sticky.",
+            "Inspect ITB belt tension and guide ribs for walking off edges.",
+            "Test Transfer Belt Motor in SP 5-804.",
+            "Replace ITB Unit or Transfer Belt Drive Motor."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC441",
+        "category": "SC400 - Transfer & Separation",
+        "level": "B",
+        "title": "Development / Drum Lift Mechanism Error",
+        "models": "MP C, IM C series",
+        "symptom": "Transfer belt contact / separation HP sensor does not detect home position when switching between B&W and Full Color modes.",
+        "causes": [
+            "Transfer contact/separation sensor dirty or defective",
+            "Transfer lift motor defective or drive gear cracked",
+            "Transfer belt lift cam stuck"
+        ],
+        "solutions": [
+            "Inspect the transfer belt lift mechanism and position sensor.",
+            "Clean sensor flag and sensor optic.",
+            "Check drive gear and cam for mechanical binding.",
+            "Replace transfer contact/separation sensor or lift motor."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC442",
+        "category": "SC400 - Transfer & Separation",
+        "level": "B",
+        "title": "ITB Cleaning Contact / Separation Error",
+        "models": "MP C, IM C series",
+        "symptom": "ITB cleaning blade contact/separation sensor does not detect HP.",
+        "causes": [
+            "Cleaning blade contact cam stuck",
+            "Contact sensor defective",
+            "Cleaning unit motor defective"
+        ],
+        "solutions": [
+            "Inspect ITB cleaning unit.",
+            "Check sensor operation in SP 5-803.",
+            "Replace ITB cleaning unit or sensor."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC491",
+        "category": "SC400 - Transfer & Separation",
+        "level": "B",
+        "title": "High Voltage Power Pack (Bias) Error",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Output current / voltage leak detected from the High Voltage Power Supply (Transfer/Separation).",
+        "causes": [
+            "Transfer roller contact spring dirty or touching chassis",
+            "Paper transfer roller saturated with conductive toner or moisture",
+            "HVPS power pack defective"
+        ],
+        "solutions": [
+            "Remove paper transfer roller unit and clean high-voltage metal bias contacts.",
+            "Replace paper transfer roller if worn, soaked in toner, or damaged.",
+            "Replace HVPS Power Pack."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC495",
+        "category": "SC400 - Transfer & Separation",
+        "level": "B",
+        "title": "Waste Toner Bottle / Transport Motor Error",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Waste toner transport pipe sensor detects abnormal motor rotation or waste toner clog.",
+        "causes": [
+            "Waste toner transport auger clogged with compacted toner",
+            "Waste toner collection bottle full or missing",
+            "Toner overflow sensor dirty or defective",
+            "Toner transport motor defective"
+        ],
+        "solutions": [
+            "Inspect waste toner bottle; replace if completely filled.",
+            "Check waste toner transport duct; clean out compacted toner using a vacuum.",
+            "Check if waste toner transport motor rotates freely.",
+            "Replace waste toner collection unit or transport motor."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+
+    # ==================== SC500: FUSING & PAPER DELIVERY (SAFETY LOCKOUTS) ====================
+    {
+        "code": "SC541",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "Fusing Thermistor Open (Center)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Fusing center thermistor does not detect temperature rise, or reads below 0°C (circuit open) for > 15 seconds after warming up starts.",
+        "causes": [
+            "Center thermistor harness disconnected or pinched",
+            "Thermistor dirty with melted toner coating, isolating heat sensing contact",
+            "Thermistor burned out or open circuit",
+            "Thermostat / Thermal Fuse tripped open (open circuit protection)",
+            "Fuser connector not fully seated in machine rear"
+        ],
+        "solutions": [
+            "IMPORTANT: This is a Level A safety error. You MUST repair the hardware first, then execute SP 5-810-001 reset.",
+            "Remove the Fusing Unit from machine.",
+            "Inspect center thermistor: clean off baked-on toner gently using a soft cloth and isopropyl alcohol (do not scratch the surface).",
+            "Measure resistance across thermistor terminals with a digital multimeter (should typically read 200k Ohm - 400k Ohm at room temperature; 0 Ohm = short, infinite = open).",
+            "Check continuity of thermal switches / thermostats. If thermostat is tripped (open), replace the thermostat assembly.",
+            "Reinstall fuser firmly and ensure rear drawer connector mates properly.",
+            "Enter SP Mode (see SP mode cheatsheet) -> navigate to SP 5-810-001 (SC Code Reset) -> press [Execute] -> turn Main Power OFF for 15s -> turn ON."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> Select SP 5-810-001 -> Press [Execute] -> Turn Main Power OFF, wait 15 seconds, turn ON."
+    },
+    {
+        "code": "SC542",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "Fusing Temperature Warm-Up Error (Center)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Fuser does not reach target warm-up temperature (approx. 100°C) within the designated warm-up cycle time (typically 20-40 seconds).",
+        "causes": [
+            "Fuser halogen heater lamp burned out / broken filament",
+            "IH (Induction Heating) coil or inverter defective (in IM C high-speed models)",
+            "Fusing center thermistor out of position or defective",
+            "Fusing thermostat / thermo-switch open",
+            "AC drive board / Power Supply Unit (PSU) relay defective",
+            "Low input mains voltage from wall outlet"
+        ],
+        "solutions": [
+            "IMPORTANT: Hardware fix required before executing SP 5-810 reset.",
+            "Remove Fusing Unit.",
+            "Test Fuser Lamp continuity with multimeter across lamp pins. If open circuit (infinite resistance), replace the halogen lamp / fusing sleeve unit.",
+            "Test thermostats for continuity. If any thermostat popped open, replace thermostat or fuser assembly.",
+            "Inspect thermistor position: ensure sensing head is in light spring contact with the fusing belt or heat roller.",
+            "Reinstall fuser securely.",
+            "Enter SP Mode -> SP 5-810-001 (SC Code Reset) -> [Execute] -> Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> SP 5-810-001 -> [Execute] -> Power OFF/ON."
+    },
+    {
+        "code": "SC543",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "Fusing Overheat Error (Software Detection)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Center thermistor detected fusing temperature exceeding software safety threshold (typically > 230°C - 240°C) for > 1 second.",
+        "causes": [
+            "Triac on AC drive board / PSU shorted (keeps lamp continuously powered)",
+            "Thermistor defective (erratic voltage fluctuation)",
+            "Engine board / BICU defective"
+        ],
+        "solutions": [
+            "DANGER: Overheating fire hazard. Inspect fusing roller/belt for melted plastic, smoke odor, or warping.",
+            "Check AC drive board / PSU: test if triac is short-circuited (continuous AC voltage supplied to fuser lamp pins even in standby).",
+            "If triac is shorted, replace AC Drive Board / Power Supply Unit.",
+            "Inspect and test center thermistor resistance.",
+            "Execute SP 5-810-001 reset after hardware is safe -> Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> SP 5-810-001 -> [Execute] -> Power OFF/ON."
+    },
+    {
+        "code": "SC544",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "Fusing Overheat Error (Hardware Detection)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Hardware comparator circuit detected fusing temperature exceeding hardware cutoff limit.",
+        "causes": [
+            "Hardware over-temperature detection circuit tripped",
+            "AC Drive board failure",
+            "Thermistor short circuit"
+        ],
+        "solutions": [
+            "Inspect fuser roller and sleeve condition.",
+            "Replace AC Drive Board and Fusing Thermistor.",
+            "Execute SP 5-810-001 reset -> Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> SP 5-810-001 -> [Execute] -> Power OFF/ON."
+    },
+    {
+        "code": "SC545",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "Fusing Lamp Consecutive Full-Power Timeout",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "The fusing lamp remained ON at 100% full power for longer than the maximum allowed timeout period without reaching standby target temperature.",
+        "causes": [
+            "Thermistor disconnected or shifted away from the roller surface",
+            "Severe draft / extremely cold room environment",
+            "Weak fuser lamp or low AC line voltage",
+            "Heater lamp connector corroded or loose"
+        ],
+        "solutions": [
+            "Check thermistor contact against heat roller/sleeve.",
+            "Check wall AC line voltage (must be stable ±10% rated voltage, avoid long extension cords).",
+            "Clean thermistor sensing head.",
+            "Perform SP 5-810-001 reset -> Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> SP 5-810-001 -> [Execute] -> Power OFF/ON."
+    },
+    {
+        "code": "SC547",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "B",
+        "title": "Zero Cross Signal Detection Error",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Engine board / BICU does not detect the AC zero-cross waveform signal for > 3 seconds, or frequency is outside 45Hz - 65Hz.",
+        "causes": [
+            "Unstable AC mains power / heavy electrical noise on electrical line / generator power",
+            "PSU (Power Supply Unit) zero-cross generator circuit defective",
+            "BICU / Engine controller board defective"
+        ],
+        "solutions": [
+            "Check building power outlet: verify AC frequency and voltage stability.",
+            "If machine is connected to an overloaded power strip, UPS, or portable generator, plug directly into a dedicated wall outlet.",
+            "Replace Power Supply Unit (PSU).",
+            "Replace BICU / Engine Board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power OFF/ON after verifying stable AC power."
+    },
+    {
+        "code": "SC548",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "Fusing Roller Rotation Error",
+        "models": "MP C, IM C series",
+        "symptom": "The fusing pressure roller or fusing belt does not rotate during fuser drive.",
+        "causes": [
+            "Fuser drive motor defective or drive gears stripped",
+            "Fuser rotation sensor flag broken or dirty sensor",
+            "Fusing unit mechanically seized or paper wrap-around fuser roller"
+        ],
+        "solutions": [
+            "Open fuser unit: check for wrapped jammed paper around heat roller or pressure roller.",
+            "Turn fuser gears by hand; check for broken teeth or seized bushings.",
+            "Clean or replace fuser rotation sensor.",
+            "Execute SP 5-810-001 reset -> Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> SP 5-810-001 -> [Execute] -> Power OFF/ON."
+    },
+    {
+        "code": "SC551",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "Fusing Thermistor Open (End / Edge)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "The end/edge fusing thermistor did not detect temperature rise or reads circuit open.",
+        "causes": [
+            "Edge thermistor disconnected or burnt out",
+            "Thermostat / thermal fuse open",
+            "Loose fuser drawer connector"
+        ],
+        "solutions": [
+            "Inspect edge/end thermistor and check continuity.",
+            "Check end thermostats for continuity.",
+            "Execute SP 5-810-001 reset -> Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> SP 5-810-001 -> [Execute] -> Power OFF/ON."
+    },
+    {
+        "code": "SC552",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "Fusing Temperature Warm-Up Error (End / Edge)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "End/edge thermistor did not reach specified operating temperature within warm-up time.",
+        "causes": [
+            "End heating lamp broken filament",
+            "Edge thermistor shifted or dirty",
+            "AC drive board triac open"
+        ],
+        "solutions": [
+            "Check continuity of end halogen lamp; replace if open.",
+            "Clean edge thermistor surface.",
+            "Execute SP 5-810-001 reset -> Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> SP 5-810-001 -> [Execute] -> Power OFF/ON."
+    },
+    {
+        "code": "SC553",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "Fusing Overheat Error (End - Software)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "End thermistor detects temperature above software safety threshold.",
+        "causes": [
+            "End lamp triac shorted",
+            "End thermistor defect"
+        ],
+        "solutions": [
+            "Check AC drive board triac for end lamp.",
+            "Replace Fuser Thermistor assembly or AC Drive Board.",
+            "Execute SP 5-810-001 reset -> Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> SP 5-810-001 -> [Execute] -> Power OFF/ON."
+    },
+    {
+        "code": "SC554",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "Fusing Overheat Error (End - Hardware)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Hardware comparator detects end thermistor temperature over safe limit.",
+        "causes": [
+            "Hardware circuit trip / AC drive failure",
+            "Thermistor shorted"
+        ],
+        "solutions": [
+            "Inspect fuser roller and end thermistor.",
+            "Replace AC Drive Board and thermistor.",
+            "Execute SP 5-810-001 reset -> Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> SP 5-810-001 -> [Execute] -> Power OFF/ON."
+    },
+    {
+        "code": "SC555",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "Fusing Lamp Consecutive Full-Power (End Lamp)",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "End lamp full power timeout exceeded without temperature stabilization.",
+        "causes": [
+            "End thermistor shifted or detached",
+            "Low line voltage"
+        ],
+        "solutions": [
+            "Inspect edge thermistor seating.",
+            "Verify AC line voltage.",
+            "Execute SP 5-810-001 reset -> Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> SP 5-810-001 -> [Execute] -> Power OFF/ON."
+    },
+    {
+        "code": "SC557",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "C",
+        "title": "Zero-Cross Frequency Noise Error",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Zero-cross signal frequency fluctuates excessively due to harmonic noise.",
+        "causes": [
+            "Power supply electrical noise from nearby high-draw equipment (air conditioner, heater, elevator)",
+            "Defective noise filter on PSU"
+        ],
+        "solutions": [
+            "Move machine to a clean, isolated circuit.",
+            "Install an AC line filter / power conditioner.",
+            "Replace PSU noise filter board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC559",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "Fusing Paper Jam Consecutive Count Exceeded",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Paper jammed 3 consecutive times in the fusing unit without a single sheet passing successfully. Device locks out to prevent paper wrapping around heat roller and igniting.",
+        "causes": [
+            "Fuser exit sensor actuator stuck or broken",
+            "Paper accordion jammed or accordion wrapped around fuser roller",
+            "Worn fuser stripper fingers (pawls) causing paper curl / hangup",
+            "Moist / curled paper stock"
+        ],
+        "solutions": [
+            "Open fuser unit door and thoroughly clear all residual paper fragments.",
+            "Inspect fuser stripper pawls: ensure points are sharp and spring tension keeps them riding lightly against the roller.",
+            "Inspect and clean fuser exit sensor: verify flag moves smoothly and is not stuck in jammed position.",
+            "Load fresh, dry paper from a sealed ream.",
+            "Execute SP 5-810-001 reset (or toggle SP 1-150 / SP 5-150 depending on model) -> Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> SP 5-810-001 -> [Execute] -> Power OFF/ON."
+    },
+    {
+        "code": "SC569",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "B",
+        "title": "Fusing Pressure Roller Release Mechanism Error",
+        "models": "MP C, IM C series",
+        "symptom": "The fusing pressure roller HP sensor does not detect position when the pressure roller retracts or engages.",
+        "causes": [
+            "Pressure roller release motor defective",
+            "Pressure release HP sensor dirty or disconnected",
+            "Drive cam broken or pressure release springs detached"
+        ],
+        "solutions": [
+            "Inspect the pressure roller contact/release motor and cam gear on the side of the fusing unit.",
+            "Clean or replace the pressure release HP sensor.",
+            "Replace Pressure Release Motor or Fusing Unit."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC581",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "IH (Induction Heating) Inverter Error",
+        "models": "MP C (High speed), IM C (High speed)",
+        "symptom": "IH inverter detects over-current, IGBT thermal error, or coil resonance failure.",
+        "causes": [
+            "IH inverter board defective",
+            "IH coil short circuit or insulation breakdown",
+            "IH cooling fan stopped or air filter clogged"
+        ],
+        "solutions": [
+            "Clean the IH cooling fan and intake air filter.",
+            "Check IH coil harness and measure coil resistance.",
+            "Replace IH Inverter Board or IH Coil Unit.",
+            "Execute SP 5-810-001 reset -> Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> SP 5-810-001 -> [Execute] -> Power OFF/ON."
+    },
+    {
+        "code": "SC582",
+        "category": "SC500 - Fusing & Paper Delivery",
+        "level": "A",
+        "title": "IH Coil Overheat / Coil Sensor Error",
+        "models": "MP C, IM C series",
+        "symptom": "IH coil thermistor detected abnormal coil temperature.",
+        "causes": [
+            "IH cooling fan defective",
+            "IH coil thermistor defective",
+            "Blocked air exhaust duct"
+        ],
+        "solutions": [
+            "Verify IH cooling fan runs during warm-up.",
+            "Clean ventilation paths.",
+            "Replace IH coil assembly.",
+            "Execute SP 5-810-001 reset -> Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Enter SP Mode -> SP 5-810-001 -> [Execute] -> Power OFF/ON."
+    },
+
+    # ==================== SC600: COMMUNICATION & DATA TRANSFER ====================
+    {
+        "code": "SC620",
+        "category": "SC600 - Communication",
+        "level": "B",
+        "title": "ARDF / SPDF Communication Error",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Communication signal between document feeder (ARDF/SPDF) and Controller / Engine board breaks down.",
+        "causes": [
+            "ARDF / SPDF interface cable loose, pinched, or damaged at hinge pivot",
+            "ADF control board defective",
+            "Engine board / BICU defective"
+        ],
+        "solutions": [
+            "Inspect the external communication cable connecting the back of the ADF to the machine body; reseat connectors firmly.",
+            "Inspect cable jacket near document feeder hinge for pinched or severed internal conductors.",
+            "Replace ADF interface cable or ADF Main Board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC670",
+        "category": "SC600 - Communication",
+        "level": "D",
+        "title": "Engine Startup Error",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "The Engine board (BICU) does not respond to the Controller board within 30 seconds after power-on.",
+        "causes": [
+            "Engine board (BICU) DC power line missing (+5V / +12V / +24V)",
+            "Engine board firmware corrupted",
+            "Communication harness between Controller and BICU disconnected",
+            "Defective BICU or Controller board"
+        ],
+        "solutions": [
+            "Check DC power fuses on the PSU and BICU.",
+            "Turn power OFF; reseat all ribbon cables and harnesses between the Controller board and BICU/Engine board.",
+            "Reflash Engine firmware using SD card / USB recovery method.",
+            "Replace BICU or Controller board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power."
+    },
+    {
+        "code": "SC672",
+        "category": "SC600 - Communication",
+        "level": "D",
+        "title": "Controller-to-Operation Panel Communication Error",
+        "models": "M, MP, MP C, IM, IM C series (Extremely Common)",
+        "symptom": "The Operation Panel turns ON but displays 'Please wait' continuously or 'Cannot communicate with Controller', and then SC672 pops up.",
+        "causes": [
+            "Controller board crashed, hung during Linux boot, or failed to start",
+            "Controller RAM (DIMM) dirty contact or defective memory",
+            "USB / LVDS communication cable between Controller and Smart Operation Panel (SOP) loose or disconnected",
+            "Corrupt Controller firmware or dead HDD preventing controller boot",
+            "Smart Operation Panel (SOP) Android OS board defective"
+        ],
+        "solutions": [
+            "Turn machine power OFF completely. Wait 30 seconds.",
+            "Remove rear controller cover. Unseat the Controller RAM DIMM(s), clean gold contacts with an eraser / isopropyl alcohol, and reseat firmly.",
+            "Unplug the HDD SATA and power cables, then power ON. If machine boots (displays SC860 HDD error instead of SC672), the HDD was locking up the controller bus.",
+            "Inspect the USB cable running from Controller to the Smart Operation Panel (check connector on both ends).",
+            "Disconnect any third-party USB options, IC card readers, or external print servers.",
+            "Update Controller and SOP firmware to latest versions.",
+            "Replace Controller Board or Smart Operation Panel."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power."
+    },
+    {
+        "code": "SC681",
+        "category": "SC600 - Communication",
+        "level": "B",
+        "title": "Toner Cartridge ID Chip Communication Error (RFID / CRUM)",
+        "models": "MP C, IM, IM C series",
+        "symptom": "Machine cannot read or write to the memory chip (RFID/CRUM) on toner cartridge (SC681-01: Black, -02: Cyan, -03: Magenta, -04: Yellow).",
+        "causes": [
+            "Toner cartridge chip dirty, covered in toner, or missing",
+            "Non-genuine, counterfeit, or defective aftermarket toner chip",
+            "Toner hopper antenna / contact pins bent or broken inside machine",
+            "RFID reader board defective"
+        ],
+        "solutions": [
+            "Identify affected color based on suffix (-01: K, -02: C, -03: M, -04: Y).",
+            "Remove toner cartridge and inspect the chip on the end of the cartridge; clean metal contact pads / RFID face.",
+            "Shine a flashlight into the toner hopper cavity and inspect the contact springs/antenna pins for bent fingers.",
+            "Test with an original OEM Ricoh toner cartridge.",
+            "Replace Toner RFID Reader board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power or reinsert toner cartridge."
+    },
+    {
+        "code": "SC682",
+        "category": "SC600 - Communication",
+        "level": "B",
+        "title": "PCU / Drum Unit ID Chip Communication Error",
+        "models": "MP C, IM C series",
+        "symptom": "Communication error with PCU / Drum chip (SC682-01: K, -02: C, -03: M, -04: Y).",
+        "causes": [
+            "Drum unit chip contact bent, dirty, or misaligned",
+            "Defective drum unit chip",
+            "Machine frame mating connector damaged"
+        ],
+        "solutions": [
+            "Pull out the affected drum unit (PCU) and clean the chip contact pins.",
+            "Inspect internal mating connector springs.",
+            "Replace drum unit (PCU) or chip."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC687",
+        "category": "SC600 - Communication",
+        "level": "D",
+        "title": "Memory Address Command Error (PER Error)",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Controller failed to transmit write command to BICU within designated clock cycles.",
+        "causes": [
+            "Loose Controller board connection",
+            "Controller board or BICU defective",
+            "Firmware mismatch between Controller and Engine"
+        ],
+        "solutions": [
+            "Reseat Controller board.",
+            "Update all firmware modules to matching package versions.",
+            "Replace Controller or BICU."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+
+    # ==================== SC700: PERIPHERALS (FINISHER, PUNCH, ADF) ====================
+    {
+        "code": "SC720",
+        "category": "SC700 - Peripherals",
+        "level": "B",
+        "title": "Finisher Communication Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Communication lost between machine controller and external booklet/staple finisher.",
+        "causes": [
+            "Finisher interface cable disconnected or damaged",
+            "Finisher main board power supply blown",
+            "Finisher safety switch opened"
+        ],
+        "solutions": [
+            "Check finisher communication cable plugged into machine rear; tighten thumb screws.",
+            "Ensure finisher is latched securely against machine body (interlock switch closed).",
+            "Check finisher power plug and internal fuses.",
+            "Replace Finisher Main Board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC724",
+        "category": "SC700 - Peripherals",
+        "level": "B",
+        "title": "Finisher Staple Hammer Motor Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Staple hammer does not return to home position after stapling.",
+        "causes": [
+            "Staple jam inside staple cartridge / anvil",
+            "Staple motor defective",
+            "Staple HP sensor defective"
+        ],
+        "solutions": [
+            "Pull out staple unit and clear any bent/jammed staples with needle-nose pliers.",
+            "Check staple hammer mechanism moves freely.",
+            "Replace staple cartridge or staple unit assembly."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC725",
+        "category": "SC700 - Peripherals",
+        "level": "B",
+        "title": "Finisher Shift Tray Motor Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Shift tray lift motor does not detect upper limit or lower limit sensor.",
+        "causes": [
+            "Paper pile on tray exceeds maximum height or mechanical obstruction",
+            "Shift tray sensor dirty or defective",
+            "Tray lift drive belt off pulley"
+        ],
+        "solutions": [
+            "Remove all paper from finisher tray.",
+            "Check tray path for foreign objects (pens, clips, paper shreds).",
+            "Check shift tray lift drive gears and belt.",
+            "Replace shift tray motor or height sensors."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+
+    # ==================== SC800: CONTROLLER, HDD, NVRAM, NETWORK & SOFTWARE ====================
+    {
+        "code": "SC816",
+        "category": "SC800 - Controller & System",
+        "level": "D",
+        "title": "Energy Saver I/O Sub-System Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Sub-CPU for energy saving control did not respond during wake-up from sleep mode.",
+        "causes": [
+            "Sub-CPU firmware hang",
+            "Controller board hardware fault",
+            "Power supply standby voltage rail drop"
+        ],
+        "solutions": [
+            "Power cycle machine completely.",
+            "Update Controller and System firmware.",
+            "Replace Controller board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC819",
+        "category": "SC800 - Controller & System",
+        "level": "D",
+        "title": "Fatal Kernel Error / OS Crash",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "The embedded Linux OS kernel crashed due to illegal instruction, memory panic, or hardware bus error.",
+        "causes": [
+            "Defective Controller RAM module",
+            "Corrupt HDD filesystem or bad sectors on HDD system partition",
+            "Firmware bug or corrupted flash ROM",
+            "Defective Controller board CPU/ASIC"
+        ],
+        "solutions": [
+            "Turn machine power OFF.",
+            "Remove and clean Controller RAM DIMM contacts; swap RAM slot or test with known good compatible RAM.",
+            "Disconnect HDD cables and boot machine to isolate HDD file system crash.",
+            "Format HDD via SP 5-832-001 (All Partition Format) if machine can reach SP mode (CAUTION: erases address book, print jobs, and document server).",
+            "Perform emergency firmware update via SD card slot 1.",
+            "Replace RAM, HDD, or Controller board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power."
+    },
+    {
+        "code": "SC820",
+        "category": "SC800 - Controller & System",
+        "level": "D",
+        "title": "Self-Diagnostic Error: CPU / ASIC",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Controller fails built-in CPU or ASIC diagnostic test during initialization.",
+        "causes": [
+            "ASIC failure or solder joint fracture",
+            "Controller board power circuit defect"
+        ],
+        "solutions": [
+            "Update Controller firmware.",
+            "Replace Controller board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC860",
+        "category": "SC800 - Controller & System",
+        "level": "D",
+        "title": "HDD Startup Error (Hard Disk Drive Connection)",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Controller detected that the HDD was not connected or did not spin up within 30 seconds at boot.",
+        "causes": [
+            "HDD SATA signal cable or DC power harness disconnected",
+            "HDD spun down or spindle motor dead",
+            "HDD circuit board burnt",
+            "Controller SATA controller interface blown"
+        ],
+        "solutions": [
+            "Turn power OFF. Reseat SATA data cable and power cable on both HDD and Controller board.",
+            "Power ON and place your hand on HDD to feel if disk spins up and vibrates slightly.",
+            "If HDD does not spin: replace HDD.",
+            "If new HDD is installed: execute SP 5-832-001 (HDD Format - All) to format partitions, then reboot.",
+            "If error persists with new HDD: replace Controller board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Reboot machine after HDD replacement and format (SP 5-832)."
+    },
+    {
+        "code": "SC863",
+        "category": "SC800 - Controller & System",
+        "level": "D",
+        "title": "HDD Read / Sector Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Controller failed to read data sector from HDD due to bad sectors.",
+        "causes": [
+            "Bad sectors or degrading magnetic platters in HDD",
+            "Sudden power cut during read/write operation"
+        ],
+        "solutions": [
+            "Execute SP 5-832-001 to format HDD partitions.",
+            "If format fails or SC863 returns quickly: replace HDD (standard 2.5\" or 3.5\" SATA drive depending on model).",
+            "Re-install HDD and format via SP 5-832-001."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Format HDD in SP 5-832-001 and power cycle."
+    },
+    {
+        "code": "SC865",
+        "category": "SC800 - Controller & System",
+        "level": "D",
+        "title": "HDD File System Access Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Controller cannot mount or access HDD logical partitions.",
+        "causes": [
+            "Corrupt logical partition table",
+            "Incomplete firmware update or ungraceful shutdown"
+        ],
+        "solutions": [
+            "Enter SP Mode -> run SP 5-832-001 (Format All) or specific partition (SP 5-832-002 for Document Server, SP 5-832-004 for Image Data).",
+            "Reboot machine.",
+            "If formatting fails, replace HDD."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Format partition via SP 5-832 and power cycle."
+    },
+    {
+        "code": "SC867",
+        "category": "SC800 - Controller & System",
+        "level": "D",
+        "title": "SD Card Error / Slot Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "SD card inserted into service slot cannot be recognized or is unreadable.",
+        "causes": [
+            "SD card dirty, corrupted, or unsupported filesystem format (must be FAT16 / FAT32)",
+            "SD card slot pins bent or damaged on Controller board"
+        ],
+        "solutions": [
+            "Remove SD card, clean gold contacts, and re-insert firmly.",
+            "Format SD card on PC with standard FAT32 / FAT format.",
+            "Check SD card slot for bent internal pins.",
+            "Try a different SD card (max 32GB SDHC, industrial Grade recommended)."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC870",
+        "category": "SC800 - Controller & System",
+        "level": "D",
+        "title": "Address Book Data Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Address book data in NVRAM / HDD is corrupted or cannot be read.",
+        "causes": [
+            "Corrupted address book database following sudden power loss",
+            "NVRAM data mismatch or bad HDD address partition"
+        ],
+        "solutions": [
+            "Format Address Book data via SP 5-832-006 (Format Address Book) or SP 5-846-046 (Clear Address Book).",
+            "Backup/restore address book via Web Image Monitor (WIM) browser interface if accessible.",
+            "If error persists, replace NVRAM or HDD."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Execute SP 5-846-046 / SP 5-832-006 and reboot."
+    },
+    {
+        "code": "SC876",
+        "category": "SC800 - Controller & System",
+        "level": "D",
+        "title": "Log Data Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "System log, access log, or job log partition damaged.",
+        "causes": [
+            "Damaged log sector on HDD"
+        ],
+        "solutions": [
+            "Format Log partition in SP mode: SP 5-832-005 (Format Log Data).",
+            "Reboot machine."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Execute SP 5-832-005 and reboot."
+    },
+    {
+        "code": "SC878",
+        "category": "SC800 - Controller & System",
+        "level": "D",
+        "title": "TPM (Trusted Platform Module) Electronic Signature Error",
+        "models": "IM, IM C series",
+        "symptom": "TPM chip electronic key verification failed during secure boot.",
+        "causes": [
+            "TPM chip defective",
+            "NVRAM or Controller swapped independently without TPM re-initialization"
+        ],
+        "solutions": [
+            "Verify NVRAM and Controller belong to the same unit.",
+            "Update TPM firmware / System firmware.",
+            "Replace Controller board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC899",
+        "category": "SC800 - Controller & System",
+        "level": "D",
+        "title": "Software Error / Corrupted Print Job Crash",
+        "models": "M, MP, MP C, IM, IM C series (Very Common)",
+        "symptom": "Machine crashes into SC899 shortly after connecting network cable or when receiving a specific web page / PDF print job.",
+        "causes": [
+            "Malicious, corrupt, or complex PCL/PostScript print stream sent from computer",
+            "Print job containing invalid characters or unrecognized font rendering instructions",
+            "Outdated Controller / PostScript / PCL firmware",
+            "Spooler daemon buffer overflow"
+        ],
+        "solutions": [
+            "IMMEDIATELY UNPLUG the network LAN cable from the machine body.",
+            "Power cycle the machine with network cable disconnected. If the machine boots normally to Ready screen, a corrupt print job on the network was causing the crash.",
+            "Go to all computers / print servers connected to this printer and PURGE/DELETE all pending print queues.",
+            "Disable WSD (Web Services for Devices) on network if spurious WSD probe packets cause crash.",
+            "Connect machine to network and IMMEDIATELY update Controller and System Firmware to the latest release (Ricoh issued firmware patches specifically hardening against SC899).",
+            "Ensure users are using the official Ricoh PCL6 or PostScript 3 driver, NOT generic Microsoft IPP / WSD drivers."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Disconnect network cable, reboot machine, purge print queues, update firmware."
+    },
+
+    # ==================== SC900: ENGINE & MISCELLANEOUS ====================
+    {
+        "code": "SC990",
+        "category": "SC900 - System & Firmware",
+        "level": "D",
+        "title": "Software Performance Error (Engine Software Crash)",
+        "models": "M, MP, MP C, IM, IM C series (Common)",
+        "symptom": "An unexpected software error or division-by-zero / pointer exception occurred in the Engine software.",
+        "causes": [
+            "Engine firmware bug during complex paper feed / duplex timing",
+            "Toner supply / process timing interrupt conflict",
+            "Corrupt engine firmware",
+            "Noise on 24V line causing timing glitch"
+        ],
+        "solutions": [
+            "Power cycle the machine.",
+            "Update Engine firmware to the newest revision.",
+            "Check paper path sensors: if a paper sensor is flickering or dirty, timing discrepancies trigger SC990.",
+            "If SC990 happens consistently during duplex printing: update Duplex / Engine firmware.",
+            "Replace BICU / Engine Board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle main power."
+    },
+    {
+        "code": "SC991",
+        "category": "SC900 - System & Firmware",
+        "level": "D",
+        "title": "Non-Fatal Continuous Service Call Log",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Internal software module had an unhandled exception but recovered.",
+        "causes": [
+            "Firmware timing anomaly",
+            "Occasional communication packet loss"
+        ],
+        "solutions": [
+            "Check error logs in SP 5-990 (SMC report printout).",
+            "Update System and Engine firmware.",
+            "No hardware replacement usually necessary unless persistent."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Clear log or power cycle."
+    },
+    {
+        "code": "SC992",
+        "category": "SC900 - System & Firmware",
+        "level": "D",
+        "title": "Undefined / Unexpected System Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "A hardware or software condition occurred that has no specific SC code mapped.",
+        "causes": [
+            "Defective Controller ASIC or Engine BICU",
+            "Firmware crash"
+        ],
+        "solutions": [
+            "Print SMC report via SP 5-990-004 to inspect the crash trace.",
+            "Update Controller, Engine, and System firmware.",
+            "Replace Controller Board."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC995",
+        "category": "SC900 - System & Firmware",
+        "level": "A",
+        "title": "Machine Type / Destination Information Mismatch",
+        "models": "M, MP, MP C, IM, IM C series",
+        "symptom": "Model identification data or country destination settings between NVRAM and Controller board do not match.",
+        "causes": [
+            "Controller board or NVRAM replaced from another model or region",
+            "NVRAM corrupted"
+        ],
+        "solutions": [
+            "Enter SP Mode.",
+            "Check SP 5-907 (Plug & Play name) and SP 5-807 (Area Selection: NA/EU/Asia).",
+            "Restore correct machine model type and serial number in SP 5-811.",
+            "Reboot machine."
+        ],
+        "sp_reset_required": True,
+        "sp_reset_guide": "Adjust SP 5-811 and SP 5-807 to match machine tag, then power cycle."
+    },
+    {
+        "code": "SC997",
+        "category": "SC900 - System & Firmware",
+        "level": "D",
+        "title": "Application Function Selection Error",
+        "models": "MP, MP C, IM, IM C series",
+        "symptom": "Selected software application (Copier, Scanner, Printer, Fax) failed to start.",
+        "causes": [
+            "RAM memory full or bad RAM stick",
+            "Option application SD card license conflict",
+            "Corrupt application module"
+        ],
+        "solutions": [
+            "Check Controller RAM capacity and reseat RAM module.",
+            "Remove optional SD cards and test starting stock applications.",
+            "Update System firmware."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Cycle power."
+    },
+    {
+        "code": "SC998",
+        "category": "SC900 - System & Firmware",
+        "level": "D",
+        "title": "Application Start Error (SOP / Smart Panel)",
+        "models": "MP C (04/05 series), IM, IM C series",
+        "symptom": "Smart Operation Panel failed to launch copier or printer application on Android layer.",
+        "causes": [
+            "Android Smart Operation Panel OS hung or memory full",
+            "Operation Panel firmware mismatch with Controller version",
+            "Internal micro-SD card in Operation Panel corrupted"
+        ],
+        "solutions": [
+            "Reboot Operation Panel: Press and hold panel power button on the left of SOP for 10 seconds to force Android restart.",
+            "Update Smart Operation Panel firmware package via SD card / USB.",
+            "Clear application cache in Android Settings -> Apps -> Copier / Quick Copy -> Clear Cache.",
+            "Replace Operation Panel board or assembly."
+        ],
+        "sp_reset_required": False,
+        "sp_reset_guide": "Reboot Operation Panel."
+    }
+]
+
+SP_MODE_PROCEDURES = {
+    "classic_mp_m_series": {
+        "title": "Classic MP Series & M Series (Physical Keypad Models)",
+        "models": "MP 2014, MP 2501, MP 2554, MP 3054, MP 3554, MP 4054, MP C2003, MP C2503, MP C3003, etc.",
+        "steps": [
+            "1. Press the yellow 'Clear Modes' (or Reset) key.",
+            "2. Type '1', '0', '7' on the 10-key numeric keypad.",
+            "3. Press and HOLD the red 'Clear/Stop' key for 3 to 5 seconds until the SP Mode menu appears.",
+            "4. Tap 'System SP' on the touchscreen display.",
+            "5. To clear fuser SC errors (SC541-SC559):",
+            "   - Type '5810' and press '#'.",
+            "   - Highlight SP 5-810-001 (SC Code Reset).",
+            "   - Tap 'Execute' on screen.",
+            "6. Turn the Main Power switch OFF, wait 15 seconds, and turn back ON."
+        ]
+    },
+    "sop_g1_g2_mp_c_im_c": {
+        "title": "Smart Operation Panel (SOP) - MP Cxx04 & IM / IM C Series",
+        "models": "MP C2004, MP C2504, MP C3004, MP C4504, IM 2500, IM 3500, IM C2000, IM C2500, IM C3000, IM C3500, IM C4500, IM C6000",
+        "steps": [
+            "METHOD A (Standard SOP Sequence):",
+            "1. Press the 'Home' icon to return to the Android Home screen.",
+            "2. Open the 'Copier' (or 'Printer') application so the active copy screen is displayed.",
+            "3. Open the virtual on-screen keypad (or swipe out the numeric keypad).",
+            "4. Press the 'Reset' (or Clear Modes) button.",
+            "5. Enter: '806182' on the keypad.",
+            "6. Press and HOLD the 'C' (Clear) button on the screen for 3 to 5 seconds until the screen changes.",
+            "7. Tap 'System SP' to enter the service menu.",
+            "",
+            "METHOD B (Alternative SOP Sequence / 'Check Status' Method):",
+            "1. Press the physical 'Check Status' button on the left edge of the panel.",
+            "2. On the screen, touch the blank area between the title and the machine graphic.",
+            "3. Press: Stop -> 0 -> 0 -> 1 -> 0 -> 7 -> Start (or #).",
+            "4. Select 'System SP'.",
+            "",
+            "HOW TO RESET SC CODES IN SOP:",
+            "1. In System SP, use the numeric keypad to type '5810' then press '#'.",
+            "2. Select sub-item 001 (SC Code Reset).",
+            "3. Tap 'Execute'. The screen will indicate 'Completed'.",
+            "4. Exit SP mode.",
+            "5. Flip the Main Power switch OFF completely (wait until panel LEDs go completely dark, approx 15s).",
+            "6. Turn the Main Power switch back ON."
+        ]
+    }
+}
