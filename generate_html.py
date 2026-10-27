@@ -152,7 +152,20 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   .header-actions {{
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
+  }}
+
+  .header-logo {{
+    height: 38px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
+    border-radius: 6px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }}
+
+  .header-logo:hover {{
+    transform: scale(1.04);
   }}
 
   .omarchy-badge {{
@@ -853,7 +866,7 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
       </div>
     </div>
     <div class="header-actions">
-      <span class="omarchy-badge">OMARCHY MATTE-BLACK</span>
+      <img src="ultimatelogo.png" alt="Company Logo" class="header-logo" />
       <button class="omarchy-btn" id="installBtn" style="display: none;" onclick="installPWA()">
         <span class="material-symbols-rounded" style="font-size: 16px;">download</span> Install App
       </button>
@@ -992,7 +1005,6 @@ def generate_html_file(output_path="C:\\Users\\kaze\\ricoh-service-agent\\ricoh_
   <!-- Status Bar -->
   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 0.8rem; color: var(--t-text-muted); font-family: var(--default-mono-font-family);">
     <span id="resultsCount">Loading error codes...</span>
-    <span>OMARCHY OS THEME · GEIST FONT</span>
   </div>
 
   <!-- Cards Grid -->
